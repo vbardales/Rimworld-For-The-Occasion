@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    Marks the game's ceremonial garments with FTO_Ceremonial, which is what the no-building path
+    looks for.
+
+    Patched by CRITERION, not by a list of defNames: every tag below is a real vanilla apparel
+    tag, so any modded garment already carrying one of them joins in with no patch of its own.
+    A census of every Apparel_*.xml in Core and the DLCs gives, for garments meant to be worn as
+    display rather than as protection:
+
+      Royal (9)            the royal wardrobe, plus Core's cape
+      RoyalRobe, Robe      the two robes
+      Cape                 shoulder capes
+      BestowerHood         the bestowing ceremony's own hood
+      HoraxianCeremonial   Anomaly's ceremonial garb - the name says it
+
+    Mod authors who want a garment to count only need to add <li>FTO_Ceremonial</li> to its
+    apparel tags. Nothing else in the mod reads a defName.
+
+    The two disjoint predicates are not needed here: selecting on apparel/tags/li guarantees the
+    tags node exists.
+  -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[apparel/tags/li="Royal" or apparel/tags/li="RoyalRobe" or apparel/tags/li="Robe" or apparel/tags/li="Cape" or apparel/tags/li="BestowerHood" or apparel/tags/li="HoraxianCeremonial"]/apparel/tags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[apparel/tags/li="Royal" or apparel/tags/li="RoyalRobe" or apparel/tags/li="Robe" or apparel/tags/li="Cape" or apparel/tags/li="BestowerHood" or apparel/tags/li="HoraxianCeremonial"]/apparel/tags</xpath>
+      <value>
+        <li>FTO_Ceremonial</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

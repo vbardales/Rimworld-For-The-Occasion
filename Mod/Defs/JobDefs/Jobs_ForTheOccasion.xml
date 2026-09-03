@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    One job for both directions. job.count carries the direction: 0 dress, 1 change back.
+
+    allowOpportunisticPrefix is left false: a wardrobe trip that picks up a haul on the way would
+    arrive at the stand carrying something, and the stand has no room for it.
+  -->
+  <JobDef>
+    <defName>FTO_PrepareForOccasion</defName>
+    <driverClass>ForTheOccasion.JobDriver_PrepareForOccasion</driverClass>
+    <reportString>getting ready for the occasion.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+    <suspendable>true</suspendable>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

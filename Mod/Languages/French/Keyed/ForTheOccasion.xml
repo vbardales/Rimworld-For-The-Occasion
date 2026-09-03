@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <FTO_ModTitle>Pour l'occasion</FTO_ModTitle>
+
+  <!-- Réglages -->
+  <FTO_QualityBudget>Budget de qualité : jusqu'à {0}</FTO_QualityBudget>
+  <FTO_QualityBudgetDesc>Ce que ce mod peut ajouter en tout à la qualité d'un rituel, offrandes et préparation réunies. RimWorld plafonne la qualité d'un rituel à 100 %, d'où un budget volontairement modeste : par défaut, un quart de l'échelle. À zéro, le comportement subsiste sans le bonus.</FTO_QualityBudgetDesc>
+
+  <FTO_Offerings>Les offrandes comptent dans la qualité du rituel</FTO_Offerings>
+  <FTO_OfferingsDesc>Ce qui est posé sur une table d'offrandes de la zone de rassemblement fait monter la qualité de la cérémonie, et disparaît à la fin. Désactivé, la table reste constructible mais inerte.</FTO_OfferingsDesc>
+
+  <FTO_Preparation>Les colons s'habillent pour l'occasion</FTO_Preparation>
+  <FTO_PreparationDesc>Les participants passent une tenue de cérémonie pour le rituel, et se rhabillent après.</FTO_PreparationDesc>
+
+  <FTO_PrepareOnObligation>Se préparer à l'annonce du rituel</FTO_PrepareOnObligation>
+  <FTO_PrepareOnObligationDesc>Quand une obligation apparaît — un décès, une date — les colons s'apprêtent dans les heures qui suivent. Rien n'a encore commencé : cela ne coûte aucune progression de rituel. C'est la façon prévue d'y jouer.</FTO_PrepareOnObligationDesc>
+
+  <FTO_ObligationWindow>Fenêtre après l'annonce : {0} h</FTO_ObligationWindow>
+  <FTO_ObligationWindowDesc>Une obligation vit jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai les colons se rechangent, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
+
+  <FTO_PrepareOnLaunch>Se préparer au lancement du rituel</FTO_PrepareOnLaunch>
+  <FTO_PrepareOnLaunchDesc>Les participants passent par la garde-robe à l'instant du départ. L'horloge du rituel ne s'arrête pas pour eux : on échange de la progression contre de l'apparat.</FTO_PrepareOnLaunchDesc>
+
+  <FTO_MaxDetour>Détour maximal : {0} cases</FTO_MaxDetour>
+  <FTO_MaxDetourDesc>Ne concerne que le changement de dernière minute. Au-delà, le trajet coûte plus de progression que la tenue ne rapporte, et le colon file droit à la cérémonie.</FTO_MaxDetourDesc>
+
+  <FTO_Tattoo>Peinture de visage pour l'occasion</FTO_Tattoo>
+  <FTO_TattooDesc>Les colons qui ne portent aucun tatouage d'habitude en reçoivent un, tiré du style de leur propre idéologie, effacé au moment où ils se rechangent. Ceux qui en portent déjà un ne sont pas touchés.</FTO_TattooDesc>
+
+  <!-- En jeu -->
+  <FTO_OfferingsFactor>Offrandes</FTO_OfferingsFactor>
+  <FTO_OfferingsTooltip>Nombre de sortes d'offrandes distinctes posées sur les tables d'offrandes de la zone de rassemblement. C'est la variété qui compte, pas la quantité. Elles sont consommées à la fin du rituel.</FTO_OfferingsTooltip>
+  <FTO_OfferingsConsumed>La cérémonie a consommé {0} offrandes.</FTO_OfferingsConsumed>
+
+  <FTO_PreparedFactor>Habillés pour l'occasion</FTO_PreparedFactor>
+  <FTO_PreparedTooltip>Participants en tenue de cérémonie, présents sur au moins la moitié du rituel. Le chiffre affiché ici est le nombre de ceux qui sont déjà prêts : un rituel lancé à froid part de zéro.</FTO_PreparedTooltip>
+
+  <FTO_SetCeremonialOwner>Attribuer la tenue de cérémonie</FTO_SetCeremonialOwner>
+  <FTO_SetCeremonialOwnerDesc>Fait de ce portant à vêtements la garde-robe de cérémonie d'un colon. Il enfilera ce qu'il contient pour les rituels, et récupérera ses habits ensuite — y compris les marqueurs de port forcé.</FTO_SetCeremonialOwnerDesc>
+  <FTO_CeremonialWardrobeOf>Garde-robe de cérémonie de {0}</FTO_CeremonialWardrobeOf>
+
+</LanguageData>

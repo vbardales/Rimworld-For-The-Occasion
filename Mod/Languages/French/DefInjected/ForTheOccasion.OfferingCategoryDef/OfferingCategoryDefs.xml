@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <FTO_Offering_Scent.label>parfum</FTO_Offering_Scent.label>
+  <FTO_Offering_Scent.description>Encens et parfums disposés pour la cérémonie.</FTO_Offering_Scent.description>
+
+  <FTO_Offering_Food.label>mets fins</FTO_Offering_Food.label>
+  <FTO_Offering_Food.description>De quoi manger qui vaut d'être présenté plutôt qu'avalé : repas fins et somptueux, ou une gourmandise.</FTO_Offering_Food.description>
+
+  <FTO_Offering_Drink.label>boisson</FTO_Offering_Drink.label>
+  <FTO_Offering_Drink.description>De quoi servir à l'assemblée.</FTO_Offering_Drink.description>
+
+  <FTO_Offering_Treasure.label>trésor</FTO_Offering_Treasure.label>
+  <FTO_Offering_Treasure.description>De la richesse exposée à la vue de tous. Contrairement au reste, elle n'est ni brûlée ni bue — mais elle est donnée, et elle ne revient pas.</FTO_Offering_Treasure.description>
+
+</LanguageData>

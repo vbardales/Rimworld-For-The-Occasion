@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <FTO_ModTitle>For the Occasion</FTO_ModTitle>
+
+  <!-- Settings -->
+  <FTO_QualityBudget>Quality budget: up to {0}</FTO_QualityBudget>
+  <FTO_QualityBudgetDesc>How much ritual quality this mod can add in total, offerings and preparation together. RimWorld caps a ritual's quality at 100%, so this is deliberately small: at the default it is a quarter of the scale. Set it to zero to keep the behaviour without the bonus.</FTO_QualityBudgetDesc>
+
+  <FTO_Offerings>Offerings count towards ritual quality</FTO_Offerings>
+  <FTO_OfferingsDesc>What is laid out on an offering table inside the gathering area raises the rite's quality, and is consumed when it ends. Turning this off leaves the table buildable but inert.</FTO_OfferingsDesc>
+
+  <FTO_Preparation>Colonists dress for the occasion</FTO_Preparation>
+  <FTO_PreparationDesc>Participants put on ceremonial clothes for a rite and change back afterwards.</FTO_PreparationDesc>
+
+  <FTO_PrepareOnObligation>Get ready when a ritual is announced</FTO_PrepareOnObligation>
+  <FTO_PrepareOnObligationDesc>When an obligation appears - a death, a date - colonists dress in the hours that follow. Nothing is running yet, so this costs no ritual progress. This is the intended way to play it.</FTO_PrepareOnObligationDesc>
+
+  <FTO_ObligationWindow>Window after the announcement: {0} h</FTO_ObligationWindow>
+  <FTO_ObligationWindowDesc>An obligation lives for up to nine days, but nobody stands around in evening dress that long. Past this window colonists change back, and a ritual launched later pays for a last-minute detour instead.</FTO_ObligationWindowDesc>
+
+  <FTO_PrepareOnLaunch>Get ready when a ritual is launched</FTO_PrepareOnLaunch>
+  <FTO_PrepareOnLaunchDesc>Participants divert to a wardrobe at the moment of departure. The ritual clock does not stop for them, so this trades progress for polish.</FTO_PrepareOnLaunchDesc>
+
+  <FTO_MaxDetour>Maximum detour: {0} cells</FTO_MaxDetour>
+  <FTO_MaxDetourDesc>Applies only to the last-minute change. Beyond this distance the walk costs more ritual progress than the outfit is worth, and the colonist goes straight to the ceremony.</FTO_MaxDetourDesc>
+
+  <FTO_Tattoo>Face paint for the occasion</FTO_Tattoo>
+  <FTO_TattooDesc>Colonists who normally wear no tattoo get one drawn from their own ideoligion's style, cleared when they change back. Anyone who already has a tattoo is left alone.</FTO_TattooDesc>
+
+  <!-- In game -->
+  <FTO_OfferingsFactor>Offerings</FTO_OfferingsFactor>
+  <FTO_OfferingsTooltip>Distinct kinds of offering laid out on offering tables in the gathering area. Variety is what counts, not quantity. They are consumed when the ritual ends.</FTO_OfferingsTooltip>
+  <FTO_OfferingsConsumed>The ceremony consumed {0} offerings.</FTO_OfferingsConsumed>
+
+  <FTO_PreparedFactor>Dressed for the occasion</FTO_PreparedFactor>
+  <FTO_PreparedTooltip>Participants in ceremonial clothes, present for at least half of the rite. Shown here is how many are already dressed: launching a ritual cold starts this at zero.</FTO_PreparedTooltip>
+
+  <FTO_SetCeremonialOwner>Set ceremonial owner</FTO_SetCeremonialOwner>
+  <FTO_SetCeremonialOwnerDesc>Make this outfit stand a colonist's ceremonial wardrobe. They will change into what it holds for rituals, and get their own clothes back afterwards - force-worn ones included.</FTO_SetCeremonialOwnerDesc>
+  <FTO_CeremonialWardrobeOf>Ceremonial wardrobe of {0}</FTO_CeremonialWardrobeOf>
+
+</LanguageData>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    Puts a "ceremonial wardrobe owner" comp on Odyssey's outfit stands.
+
+    MayRequire sits on the operations, not on a def: Building_OutfitStand's CLASS lives in
+    Assembly-CSharp like all DLC code, so the mod's C# can name the type whether or not Odyssey
+    is installed. Only the def is missing without it. That is what makes Odyssey a SOFT
+    dependency here - without it the mod simply falls back to the no-building path.
+
+    Two complementary operations rather than a match/nomatch pair. Patches run BEFORE def
+    inheritance is resolved, so at patch time neither stand def carries a <comps> node of its own
+    (they inherit one from OutfitStandBase). A single match/nomatch would only ever catch one
+    half of the two defs; two disjoint predicates catch both, and neither errors on an empty
+    match because each sits inside a PatchOperationConditional.
+
+    Adding a <comps> node to a def that inherits one is safe and is the intended way: XML
+    inheritance APPENDS a child's <li> elements to the parent's list rather than replacing it.
+    Ensuring the node exists rather than assuming it also keeps this def a commons - Shift Change
+    and Outfit Stands Plus add comps to the very same def, and a def left with two <comps> nodes
+    resolves last-wins with a red "defines the same field twice" error.
+  -->
+
+  <Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+    <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and not(comps)]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and not(comps)]</xpath>
+      <value>
+        <comps>
+          <li Class="ForTheOccasion.CompProperties_AssignableToPawn_CeremonialStand" />
+        </comps>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
+    <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps]/comps</xpath>
+      <value>
+        <li Class="ForTheOccasion.CompProperties_AssignableToPawn_CeremonialStand" />
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

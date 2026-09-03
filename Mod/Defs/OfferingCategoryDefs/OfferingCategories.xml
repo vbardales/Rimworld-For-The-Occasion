@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    The four kinds of offering. Quality rewards VARIETY, never quantity: three hundred beers are
+    not a feast. The outcome comp counts distinct satisfied categories, so this file decides the
+    whole shape of the mechanic.
+
+    Every modded item is listed with its own MayRequire. A category whose items are all absent
+    still loads; it simply never gets satisfied, and the ritual window shows it unticked.
+
+    The offering table's storage filter is NOT written out again in the building def: it is built
+    at startup from the union of these categories (OfferingTableFilter). Adding an item here is
+    enough to make it both storable and countable.
+  -->
+
+  <ForTheOccasion.OfferingCategoryDef>
+    <defName>FTO_Offering_Scent</defName>
+    <label>scent</label>
+    <description>Incense and perfume set out for the ceremony.</description>
+    <uiOrder>10</uiOrder>
+    <countRequired>2</countRequired>
+    <filter>
+      <thingDefs>
+        <!-- RimScent Extended - Incense Plus -->
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Frankincense</li>
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Sandalwood</li>
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Berry</li>
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Cocoa</li>
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Psychoid</li>
+        <li MayRequire="nelim.rimscent.extended.incenseplus">RimScentExtended_Incense_Smokeleaf</li>
+        <!-- RimScent: Perfume Expansion -->
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_FlowerPerfume</li>
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_PlantPerfume</li>
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_HuntingPerfume</li>
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_AncientPerfume</li>
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_AnimaPerfume</li>
+        <li MayRequire="reo.rimscent.perfumeexpansion">Romy_AromaflowerPetals</li>
+        <!-- Vanilla fallback. Leaves are what you burn when you have nothing finer, and without
+             any scent mod installed they are the only way this category can ever be filled. -->
+        <li>SmokeleafLeaves</li>
+        <li>PsychoidLeaves</li>
+      </thingDefs>
+    </filter>
+  </ForTheOccasion.OfferingCategoryDef>
+
+  <ForTheOccasion.OfferingCategoryDef>
+    <defName>FTO_Offering_Food</defName>
+    <label>fine food</label>
+    <description>Food worth setting out rather than eating: fine and lavish meals, or a delicacy.</description>
+    <uiOrder>20</uiOrder>
+    <countRequired>4</countRequired>
+    <filter>
+      <thingDefs>
+        <li>MealFine</li>
+        <li>MealLavish</li>
+        <li>MealFine_Veg</li>
+        <li>MealFine_Meat</li>
+        <li>MealLavish_Veg</li>
+        <li>MealLavish_Meat</li>
+        <li>Chocolate</li>
+        <li>InsectJelly</li>
+        <li>RawBerries</li>
+      </thingDefs>
+    </filter>
+  </ForTheOccasion.OfferingCategoryDef>
+
+  <ForTheOccasion.OfferingCategoryDef>
+    <defName>FTO_Offering_Drink</defName>
+    <label>drink</label>
+    <description>Something poured for the assembly.</description>
+    <uiOrder>30</uiOrder>
+    <countRequired>4</countRequired>
+    <filter>
+      <thingDefs>
+        <li>Beer</li>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <!-- Vanilla Brewing Expanded -->
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Ambrandy</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Cider</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Whiskey</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Gin</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Vodka</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Tequila</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_GourmetCocktail</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_LavishCocktail</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_Tea</li>
+        <li MayRequire="VanillaExpanded.VBrewE">VBE_HotCoffee</li>
+        <!-- Rum and Shanties keeps VFE Pirates' own defName. -->
+        <li MayRequire="nelim.rumandshanties">VFEP_Rum</li>
+      </thingDefs>
+    </filter>
+  </ForTheOccasion.OfferingCategoryDef>
+
+  <ForTheOccasion.OfferingCategoryDef>
+    <defName>FTO_Offering_Treasure</defName>
+    <label>treasure</label>
+    <description>Wealth laid out where everyone can see it. Unlike the rest, it is not burned or
+      drunk — but it is still handed over, and it does not come back.</description>
+    <uiOrder>40</uiOrder>
+    <countRequired>50</countRequired>
+    <filter>
+      <thingDefs>
+        <li>Gold</li>
+        <li>Silver</li>
+        <li>Jade</li>
+      </thingDefs>
+    </filter>
+  </ForTheOccasion.OfferingCategoryDef>
+
+</Defs>

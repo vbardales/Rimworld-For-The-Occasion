@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    The offering table.
+
+    Vanilla altars all carry <isAltar>true</isAltar> but no storage whatsoever, and turning one
+    into a Building_Storage would mean changing its thingClass - a shared def that other mods
+    patch too. So the mod ships a table to stand beside the altar instead, and leaves every
+    vanilla altar exactly as it is.
+
+    No new art: the texture, the multi-directional graphic class and the draw size are the
+    vanilla 1x2 table's.
+
+    The storage filter deliberately holds nothing here. It is filled at startup from the union of
+    the OfferingCategoryDefs, so the list of acceptable offerings exists in exactly one place.
+  -->
+
+  <ThingDef ParentName="FurnitureWithQualityBase">
+    <defName>FTO_OfferingTable</defName>
+    <label>offering table</label>
+    <description>A low table for laying out what a ceremony is owed: incense, fine food, drink, treasure. What is set out on it counts towards the quality of a ritual held nearby, and is taken away when the rite ends.\n\nVariety is what matters. Four beers and nothing else read as four beers; incense, a meal, a drink and a little gold read as an occasion.</description>
+    <thingClass>Building_Storage</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <socialPropernessMatters>false</socialPropernessMatters>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <size>(1,2)</size>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <designationCategory>Ideology</designationCategory>
+    <uiOrder>2015</uiOrder>
+    <uiIconScale>0.8</uiIconScale>
+    <graphicData>
+      <texPath>Things/Building/Furniture/Table1x2</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,4)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>750</WorkToBuild>
+      <Mass>5</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+      <StyleDominance>5</StyleDominance>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>28</costStuffCount>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <building>
+      <paintable>true</paintable>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>false</ignoreStoredThingsBeauty>
+      <!-- Three stacks per cell, like a shelf. A 1x2 table can therefore carry all four
+           categories at once; at one stack per cell, two categories would have been the physical
+           maximum and the last two could never have counted. -->
+      <maxItemsInCell>3</maxItemsInCell>
+      <blueprintClass>Blueprint_Storage</blueprintClass>
+      <storageGroupTag>FTO_OfferingTable</storageGroupTag>
+      <fixedStorageSettings>
+        <filter>
+          <disallowNotEverStorable>true</disallowNotEverStorable>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter />
+      </defaultStorageSettings>
+    </building>
+    <comps>
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

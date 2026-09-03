@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>For the Occasion</name>
+  <author>nelim</author>
+  <packageId>nelim.fortheoccasion</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <url>https://github.com/vbardales/Rimworld-For-The-Occasion</url>
+  <description>Colonists get ready for a ceremony instead of turning up to it in work clothes, and an offering table lets you put something on the altar's side that the rite actually consumes.
+
+WHY
+
+RimWorld already grades a ritual. It is not just the room's impressiveness: vanilla exposes twenty-one RitualOutcomeComp - participant count, room stats, a seat, a building used, drums played, loudspeakers running, a loved one present, indoors, a consumable destroyed. Quality is an open extension point, and nothing there rewards either of the two things a real ceremony is made of: what you laid out, and how you turned up.
+
+So the colony that has held forty weddings in the same hall gets the same forty out of forty every time. The only lever the player has is furniture, and furniture is permanent. This mod adds two levers that are not.
+
+WHAT IT ADDS
+
+1. OFFERINGS
+
+A new building, the offering table, to stand beside your altar. What is laid out on it and within the ritual's gathering area counts towards the quality of the rite - and is taken away when the rite ends.
+
+What counts is VARIETY, never quantity. Offerings fall into four categories - scent, fine food, drink, treasure - and the bonus is read off the number of DISTINCT categories present. Three hundred beers are three hundred beers; incense, a meal, a drink and a little gold are an occasion.
+
+The consumption is the point. Without it you would build the table once and every ritual in the game would be better forever, which is not a mechanic, it is a permanent stat. A cancelled ritual takes nothing.
+
+Modded items are supported by category rather than by patch: incense and perfume from RimScent Extended and RimScent: Perfume Expansion, drinks from Vanilla Brewing Expanded and Rum and Shanties, are all listed with their own MayRequire and simply do not exist when their mod does not. The table's storage filter is built at startup from the union of the categories, so it always accepts exactly what it can count. Another mod that adds a category gets both for free.
+
+2. GETTING DRESSED
+
+Colonists put on ceremonial clothes for the rite, and change back afterwards.
+
+There are two ways in, and the mod tries them in order:
+
+- If a colonist has an OUTFIT STAND assigned to them as their ceremonial wardrobe - a new "Set ceremonial owner" button on Odyssey's outfit stand - they walk to it, park their own clothes and take the outfit. On the way back they get their own clothes returned exactly as they were, force-worn flags included. Vanilla's own outfit stand driver cannot be used for this: it is an anonymous bag that hands everything to whoever arrives first and force-flags the street clothes it gives back.
+
+- Otherwise, they put on the finest ceremonial garment they can reach. Robes, capes, the royal wardrobe and Anomaly's ceremonial garb are all marked by criterion, on their existing vanilla apparel tags, so modded garments carrying the same tags come along without a patch. Changing back is free on this path: the mod just drops the force-worn flag and vanilla's own wardrobe optimizer puts the colonist back in their clothes.
+
+Colonists with no tattoo also get a little face paint, drawn from their own ideoligion's style. A TattooDef has no permanence in the engine at all - setting one and clearing it is instant and costs nothing - so this ships zero new art and touches nobody who already has a tattoo of their own.
+
+WHEN
+
+Two triggers, both switchable.
+
+- WHEN A RITUAL IS ANNOUNCED. An obligation - a death, a date on the calendar - lives for up to nine days, but nobody stands around in evening dress for nine days. The window opens the moment the news arrives and lasts a set number of hours (12 by default). Get dressed in that window and it costs nothing: the ritual has not started, there is no clock running. This is the intended way to play it, and it gives "hold the ceremony soon" a mechanical meaning it never had.
+
+- WHEN A RITUAL IS LAUNCHED. Start one cold and participants divert to a wardrobe at the moment of departure. The ritual clock does NOT stop for latecomers - RimWorld advances progress unconditionally - so this genuinely costs you quality on one axis to gain it on another. A distance limit keeps the trade honest.
+
+BUDGET
+
+At most +0.25 quality in total, on a scale RimWorld caps at 1.0 - roughly +0.12 for offerings, +0.13 for preparation - and a slider in the settings moves the whole thing from nothing to double. That number is deliberately small and deliberately visible: three mods each quietly adding their own bonus would blow the cap, and this one tells you exactly what it is worth.
+
+Both bonuses appear as their own line in the "Begin ritual" window, before you commit, with a tooltip listing which offering categories are filled and which are not.
+
+HOW IT BEHAVES
+
+The wardrobe detour is inserted through the method that starts every job for every pawn, which is a place where a crash is a bricked colony. Every hook catches, logs once, disables the mod for the session, and lets vanilla proceed.
+
+It declines to act on a drafted, downed or mentally broken pawn, on a player-forced order, on an emergency work giver, and on anyone lying down. The map-danger gate sits below the return trip and above both dress paths, on purpose: it has to mean "no dressing up under threat", never "no changing", or a raid would freeze everyone in evening dress with their flak vests parked in a wardrobe they are not allowed to walk to.
+
+Ownership records end when vanilla thinks ownership ends - death, trade, kidnapping, leaving the map - plus banishment, which vanilla's own unclaim path does not reach.
+
+COMPATIBILITY
+
+Ideology is required; Harmony is required. Odyssey is OPTIONAL and only unlocks the outfit stand path.
+
+Shift Change (3783456242) is a companion, not a competitor: it dresses colonists for WORK and RECREATION by room role, excludes beds, and ignores rituals entirely. Both mods put an owner comp on the same outfit stand def, and this one is written for that: it scribes mod-prefixed save keys so the two never read each other's owners, and it drops the base comp's hardcoded N hotkey, which on a storage building collides with the settings clipboard.
+
+No vanilla altar is modified. Changing an altar's thingClass to give it storage would fight every other mod that patches altars, so the mod ships a table instead.
+
+Uninstalling: outfit stands go back to being plain outfit stands, a colonist mid-change keeps wearing the outfit (unforce it by hand) and their own clothes are sitting in the stand.
+
+Interface in English and French.
+
+IF I GO QUIET
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+AI-GENERATED
+
+This mod's code was written with Claude Code (Anthropic), under human direction, review and testing. Stated openly: designing with these tools is my job.
+
+THANKS
+
+Ludeon Studios, whose ritual quality system is an extension point and not a wall.
+Andreas Pardeike for Harmony.
+Claude Code (Anthropic).
+
+No file from any other mod is reproduced here - no def, no texture, no line of code. The offering table reuses a vanilla texture path; it ships no art of its own. See ATTRIBUTION.md. This mod is MIT licensed.</description>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Ideology</packageId>
+      <displayName>Ideology</displayName>
+    </li>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+    <li>VanillaExpanded.VBrewE</li>
+    <li>reo.rimscent.perfumeexpansion</li>
+    <li>nelim.rimscent.extended.incenseplus</li>
+    <li>nelim.rumandshanties</li>
+  </loadAfter>
+</ModMetaData>
