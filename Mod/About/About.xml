@@ -25,7 +25,7 @@ What counts is VARIETY, never quantity. Offerings fall into four categories - sc
 
 The consumption is the point. Without it you would build the table once and every ritual in the game would be better forever, which is not a mechanic, it is a permanent stat. A cancelled ritual takes nothing.
 
-Modded items are supported by category rather than by patch: incense and perfume from RimScent Extended and RimScent: Perfume Expansion, drinks from Vanilla Brewing Expanded and Rum and Shanties, are all listed with their own MayRequire and simply do not exist when their mod does not. The table's storage filter is built at startup from the union of the categories, so it always accepts exactly what it can count. Another mod that adds a category gets both for free.
+Modded items are supported by category rather than by patch: incense from RimScent Extended and perfume from Romyashi's Perfumes and Anima Expansion, drinks from Vanilla Brewing Expanded and Rum and Shanties, are all listed with their own MayRequire and simply do not exist when their mod does not. The table's storage filter is built at startup from the union of the categories, so it always accepts exactly what it can count. Another mod that adds a category gets both for free.
 
 2. GETTING DRESSED
 
@@ -109,7 +109,8 @@ No file from any other mod is reproduced here - no def, no texture, no line of c
     <li>Ludeon.RimWorld.Anomaly</li>
     <li>Ludeon.RimWorld.Odyssey</li>
     <li>VanillaExpanded.VBrewE</li>
-    <li>reo.rimscent.perfumeexpansion</li>
+    <li>romyashi.perfumes</li>
+    <li>romyashi.animaexpansion</li>
     <li>nelim.rimscent.extended.incenseplus</li>
     <li>nelim.rumandshanties</li>
   </loadAfter>

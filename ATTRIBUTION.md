@@ -42,7 +42,8 @@ from any of them, and each entry simply does not exist when its mod is absent.
 | Mod | Referenced defs |
 |---|---|
 | RimScent Extended - Incense Plus (`nelim.rimscent.extended.incenseplus`) | the six `RimScentExtended_Incense_*` |
-| RimScent: Perfume Expansion (`reo.rimscent.perfumeexpansion`), by Romyashi | the five `Romy_*Perfume` and `Romy_AromaflowerPetals` |
+| Perfumes (`Romyashi.Perfumes`), by Romyashi | four `Romy_*Perfume` and `Romy_AromaflowerPetals` |
+| Anima Expansion (`Romyashi.AnimaExpansion`), by Romyashi | `Romy_AnimaPerfume` |
 | Vanilla Brewing Expanded (`VanillaExpanded.VBrewE`), by Oskar Potocki and team | ten `VBE_*` drinks |
 | Rum and Shanties (`nelim.rumandshanties`) | `VFEP_Rum` |
 
