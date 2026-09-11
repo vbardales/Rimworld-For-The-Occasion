@@ -37,6 +37,7 @@ namespace ForTheOccasion
                 {
                     if (p == null || !p.Spawned || !p.RaceProps.Humanlike) continue;
                     if (PreparationTracker.IsPrepared(p)) continue;
+                    if (HoldsTheRiteTogether(assignments, p)) continue;
                     PreparationTracker.MarkPending(p, until);
                 }
             }
@@ -44,6 +45,37 @@ namespace ForTheOccasion
             {
                 FtoLog.Fail("Patch_RitualStarted", e);
             }
+        }
+
+        /// <summary>
+        /// Whether this pawn is one the rite cannot spare. Such a pawn is never marked, so no
+        /// wardrobe detour is ever planned for them.
+        ///
+        /// Two independent reasons, either of which is enough:
+        ///
+        /// - <c>countsAsParticipant</c> false. The preparation bonus counts prepared
+        ///   **participants**, and this comp excludes exactly these roles from that count. Sending
+        ///   such a pawn to change clothes is therefore pure cost and cannot earn anything.
+        /// - <c>required</c> true. The ritual does not proceed without this role filled, so the
+        ///   pawn walking off is the one thing that must not happen.
+        ///
+        /// Childbirth is what made this necessary. Both of its roles are declared required and
+        /// non-participant: the mother, who is lying down and already excluded by the posture
+        /// gate, and the **doctor**, who is standing and was not. The emergency gate cannot catch
+        /// the doctor - their job comes from a lord duty, so <c>job.workGiverDef</c> is null and
+        /// the test never fires - and an attendant strolling off to a wardrobe mid-labour is
+        /// exactly the failure a player would never forgive.
+        ///
+        /// The rule is not about births. In vanilla and the DLCs, 26 roles are required and 27 do
+        /// not count as participants: the bestower at a bestowing ceremony, the executioner, the
+        /// accused at a trial, the duellists. None of them should wander off, and none of them
+        /// were ever worth any quality. Spectators, who are what this mod is about, are untouched.
+        /// </summary>
+        static bool HoldsTheRiteTogether(RitualRoleAssignments assignments, Pawn p)
+        {
+            RitualRole role = assignments.RoleForPawn(p);
+            if (role == null) return false;
+            return !role.countsAsParticipant || role.required;
         }
     }
 
