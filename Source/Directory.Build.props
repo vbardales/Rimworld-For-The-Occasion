@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <!--
-      Les intermediaires de compilation sortent du dossier du mod. L'uploader Workshop de RimWorld
-      envoie le dossier entier (SteamUGC.SetItemContent sur la racine, aucune exclusion possible) :
-      laisser obj/ dedans, c'est publier l'Assembly-CSharp.dll publicisee de 5,8 Mo, donc
-      redistribuer le code du jeu. Doit rester dans un Directory.Build.props : la restauration
-      NuGet lit cette propriete avant le csproj.
+      Build intermediates go outside the mod folder. RimWorld's Workshop uploader sends the whole
+      folder (SteamUGC.SetItemContent on the root, no exclusion possible): leaving obj/ inside means
+      publishing the 5.8 MB publicised Assembly-CSharp.dll, that is, redistributing the game's code.
+      This has to stay in a Directory.Build.props: NuGet restore reads the property before the
+      csproj.
     -->
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.build\obj\</BaseIntermediateOutputPath>
     <BaseOutputPath>$(MSBuildThisFileDirectory)..\.build\bin\</BaseOutputPath>
