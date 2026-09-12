@@ -22,7 +22,7 @@ updated:      2026-09-12, automatic sweep
 Read by a sweep across every mod, rather than by asking each thread in turn. It lives at the
 root, never inside `Mod/`, so Steam never receives it.
 
-The fields above were read off the disk on 2026-09-12. Three cannot be, and wait for whoever
+The fields above were read off the disk on 2026-09-12. Four cannot be, and wait for whoever
 holds this mod:
 
 - **`stage`** — one of `port`, `showcase`, `preTest`, `done`, `tested`, `published`. Filled in
