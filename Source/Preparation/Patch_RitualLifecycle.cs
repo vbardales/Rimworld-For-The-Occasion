@@ -66,10 +66,16 @@ namespace ForTheOccasion
         /// the test never fires - and an attendant strolling off to a wardrobe mid-labour is
         /// exactly the failure a player would never forgive.
         ///
-        /// The rule is not about births. In vanilla and the DLCs, 26 roles are required and 27 do
-        /// not count as participants: the bestower at a bestowing ceremony, the executioner, the
-        /// accused at a trial, the duellists. None of them should wander off, and none of them
-        /// were ever worth any quality. Spectators, who are what this mod is about, are untouched.
+        /// The rule is not about births. Counted off the game's own Defs in 1.6, vanilla and the
+        /// DLCs declare 33 roles: 29 are required and 29 do not count as participants, and exactly
+        /// one escapes both tests - the speaker of a throne speech. The executioner, the accused at
+        /// a trial, the duellists and their escorts, the moralist at a sacrifice are all caught.
+        /// None of them should wander off, and none of them were ever worth any quality.
+        /// Spectators, who are what this mod is about, are untouched.
+        ///
+        /// The two fields default the friendly way round - <c>required</c> false,
+        /// <c>countsAsParticipant</c> true - so a role that declares neither is an ordinary
+        /// participant and is free to go and dress.
         /// </summary>
         static bool HoldsTheRiteTogether(RitualRoleAssignments assignments, Pawn p)
         {

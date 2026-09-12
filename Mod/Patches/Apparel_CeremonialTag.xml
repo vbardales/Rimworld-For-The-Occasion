@@ -11,16 +11,25 @@
     display rather than as protection:
 
       Royal (9)            the royal wardrobe, plus Core's cape
-      RoyalRobe, Robe      the two robes
-      Cape                 shoulder capes
-      BestowerHood         the bestowing ceremony's own hood
-      HoraxianCeremonial   Anomaly's ceremonial garb - the name says it
+      RoyalRobe (1)        the royal robe
+      Robe (1)             the plain robe
+      Cape (1)             Core's cape again, which carries both tags
+      BestowerHood (1)     the bestowing ceremony's own hood
+      HoraxianCeremonial (1)   Anomaly's ceremonial garb - the name says it
+
+    Twelve defs in all, the overlaps removed. THREE OF THEM ARE ABSTRACT BASES -
+    ApparelShirtRoyalTier2Base, ApparelVestRoyalTier5Base and ApparelHatRoyalTier2 - and that is
+    not an accident to be tidied away: tagging a base is how the ruffled shirt, the corset, the
+    royal vest, the ladies' hat and the top hat inherit the mark without being named. Nine concrete
+    defs carry the tag themselves and five more inherit it, so fourteen vanilla garments end up
+    ceremonial. Counting the tag rather than the garment is the reason the two figures differ.
 
     Mod authors who want a garment to count only need to add <li>FTO_Ceremonial</li> to its
     apparel tags. Nothing else in the mod reads a defName.
 
-    The two disjoint predicates are not needed here: selecting on apparel/tags/li guarantees the
-    tags node exists.
+    No second operation is needed here, unlike the outfit stand patch: selecting on
+    apparel/tags/li guarantees the tags node exists, and this operation cannot make its own
+    predicate true a second time.
   -->
 
   <Operation Class="PatchOperationConditional">

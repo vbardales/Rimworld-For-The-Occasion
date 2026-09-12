@@ -12,8 +12,16 @@
     Two complementary operations rather than a match/nomatch pair. Patches run BEFORE def
     inheritance is resolved, so at patch time neither stand def carries a <comps> node of its own
     (they inherit one from OutfitStandBase). A single match/nomatch would only ever catch one
-    half of the two defs; two disjoint predicates catch both, and neither errors on an empty
-    match because each sits inside a PatchOperationConditional.
+    half of the two defs; two predicates catch both, and neither errors on an empty match because
+    each sits inside a PatchOperationConditional.
+
+    THE SECOND PREDICATE HAS TO EXCLUDE OUR OWN li, and that is not decoration. Operations are
+    applied in sequence to one accumulating document, so "has no comps" and "has comps" are not
+    disjoint over time: the first operation CREATES the node that makes the second one's predicate
+    true, and without the exclusion every stand ends up carrying the comp TWICE. Measured against
+    Odyssey's real defs, both stands came out with two of them. Two comps of the same class on one
+    building means two owner lists scribed under the same save key. Excluding the li also makes
+    each operation idempotent, which is what lets them be read in any order.
 
     Adding a <comps> node to a def that inherits one is safe and is the intended way: XML
     inheritance APPENDS a child's <li> elements to the parent's list rather than replacing it.
@@ -35,9 +43,9 @@
   </Operation>
 
   <Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Odyssey">
-    <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps]</xpath>
+    <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps and not(comps/li[@Class='ForTheOccasion.CompProperties_AssignableToPawn_CeremonialStand'])]</xpath>
     <match Class="PatchOperationAdd">
-      <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps]/comps</xpath>
+      <xpath>/Defs/ThingDef[(defName="Building_OutfitStand" or defName="Building_KidOutfitStand") and comps and not(comps/li[@Class='ForTheOccasion.CompProperties_AssignableToPawn_CeremonialStand'])]/comps</xpath>
       <value>
         <li Class="ForTheOccasion.CompProperties_AssignableToPawn_CeremonialStand" />
       </value>
