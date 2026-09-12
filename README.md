@@ -219,6 +219,22 @@ dotnet build Source/ForTheOccasion.csproj
 
 ## Validating after a change
 
+Thirty functional tests, which need RimWorld installed but never start it:
+
+```
+powershell -ExecutionPolicy Bypass -File _tools\Run-Functional-Tests.ps1
+```
+
+They execute the mod's own C# and read the game's compiled code, so they catch what a compiler
+cannot: a vanilla method that stopped doing what this mod delegates to it, a patch operation that
+stopped matching, a save key that started colliding, a translation key with no translation. Run
+them before a release. `-ListTests` prints the list, `-Only 8,22` runs a few. What they do NOT do
+is play the mod: `docs/TESTING.md` holds ten scenarios for that, and neither half replaces the
+other.
+
+Three more checkers live in the monorepo this mod was written in, and are not shipped here. They
+still run when this folder sits beside it:
+
 ```
 pwsh -File ../scripts/Check-DefRefs.ps1 -ModPath Mod -Brief
 pwsh -File ../scripts/Check-XmlClasses.ps1 -ModPath . -TypeLists rw16_types.txt -Brief

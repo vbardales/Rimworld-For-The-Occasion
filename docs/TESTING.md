@@ -24,7 +24,8 @@ The log lives at:
 | | State |
 |---|---|
 | Loads without error | **observed**, 2026-09-04 |
-| Everything below | **never observed** |
+| The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
+| Every scenario below | **never observed** |
 
 The load produced exactly the three expected lines:
 
@@ -37,6 +38,24 @@ The load produced exactly the three expected lines:
 One real defect came out of that single run and is fixed: the six `Romy_*` offerings were gated
 on `reo.rimscent.perfumeexpansion`, which defines none of them, so an absent def was demanded and
 the cross-reference failed. They now name `Romyashi.Perfumes` and `Romyashi.AnimaExpansion`.
+
+## The other half, which does not need a colony
+
+`_tools/Run-Functional-Tests.ps1` runs thirty tests in a couple of seconds without starting the
+game. Run it before playing any of the scenarios below, and again before a release:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File _tools\Run-Functional-Tests.ps1
+```
+
+It asks a different question from the one this file asks. The scenarios below ask whether the mod
+does what it says. That file asks whether the game still does what the mod expects of it: whether
+removing a garment still destroys its force-worn flag, whether a duel still ends by calling the
+outcome this mod patches, whether the save key it writes is still one nobody else writes. It also
+runs the mod's own patch operations against the game's real defs, which is how the stand patch was
+caught giving every outfit stand the ceremonial owner comp twice.
+
+Neither half replaces the other. Nothing there sees a colonist walk to a wardrobe.
 
 ## Scenario 0 — it loaded
 
