@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <MainButtonDef>
+    <defName>FTO_Settings</defName>
+    <label>For the Occasion</label>
+    <description>Open the For the Occasion mod settings.</description>
+    <workerClass>ForTheOccasion.MainButtonWorker_Settings</workerClass>
+    <buttonVisible>false</buttonVisible>
+    <validWithoutMap>true</validWithoutMap>
+    <canBeTutorDenied>false</canBeTutorDenied>
+    <order>990</order>
+  </MainButtonDef>
+</Defs>

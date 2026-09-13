@@ -77,7 +77,6 @@ namespace ForTheOccasion
         static bool Decide(Pawn_JobTracker tracker, Pawn pawn, Job newJob,
             JobCondition lastJobEndCondition, bool resumeCurJobAfterwards, bool cancelBusyStances)
         {
-            if (!ForTheOccasionMod.Settings.preparationEnabled) return true;
             if (newJob == null || pawn == null || !pawn.Spawned || pawn.Map == null) return true;
             if (!pawn.RaceProps.Humanlike || pawn.Faction != Faction.OfPlayer) return true;
             if (newJob.def == FtoDefOf.FTO_PrepareForOccasion) return true;
@@ -119,6 +118,9 @@ namespace ForTheOccasion
                 return Divert(tracker, pawn, newJob, back, lastJobEndCondition, resumeCurJobAfterwards,
                     cancelBusyStances);
             }
+
+            // Turning preparation off must still let existing borrowers return their clothes.
+            if (!ForTheOccasionMod.Settings.preparationEnabled) return true;
 
             // ---------------------------------------------------------------- danger
             // The danger gate sits **above the dress paths and below the return trip**. Placed

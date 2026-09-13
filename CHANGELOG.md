@@ -7,6 +7,21 @@ This file serves the repository and the Steam release notes; RimWorld does not d
 
 First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 
+### Pre-release corrections — 2026-09-13
+
+- Disabling preparation still allows borrowers to return clothes and remove temporary face
+  paint at the next eligible job change, including during a ritual. A pending dressing trip
+  no longer equips an outfit after the option was disabled.
+- Added an optional MainButtons shortcut, hidden by default and using the same native settings
+  dialog as Mod options. RIMMSQOL is not required; its interactive integration awaits game tests.
+- Numeric settings normalize old/out-of-range/nonfinite values. Saving settings invalidates
+  the anticipation cache and reapplies the quality budget. Added English/French scope guidance.
+- Corrected the Preview's linking-word typography and added the description's GitHub link.
+- Matched optional-item gates to current 1.6 definitions: anima perfume needs Perfumes plus
+  Anima Expansion; VBE cider also needs Vanilla Plants Expanded or its supported copy package.
+- Extended the out-of-game harness from 30 to 38 tests, including settings serialization and
+  regression checks. Final in-game scenarios remain unexecuted.
+
 ### Offerings
 
 - New building, the **offering table** (Ideology tab): a 1x2 `Building_Storage` to stand beside

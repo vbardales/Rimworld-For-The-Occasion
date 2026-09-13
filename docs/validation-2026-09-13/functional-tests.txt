@@ -1,0 +1,56 @@
+
+For the Occasion, functional tests
+game: C:\Program Files (x86)\Steam\steamapps\common\RimWorld
+
+
+  harness
+  1  ok    everything the other tests read is actually loaded
+
+  mod code
+  2  ok    a category reports its own bad configuration
+  3  ok    both quality comps derive from the base the game filters on
+  4  ok    each comp follows its own switch in the settings
+  5  ok    nothing of ours is left in a save when the mod is removed
+  6  ok    the label can still be written from outside the comp
+  7  ok    the quality budget is the number the mod tells the player it is
+
+  the game
+  8  ok    removing a garment still destroys its force-worn flag
+  9  ok    vanilla's own stand driver still force-flags what it hands back
+ 10  ok    a duel still ends by calling the outcome the mod patches
+ 11  ok    the quality calculation still picks comps out by type
+ 12  ok    the outcome worker still rebuilds its comp data when the count changes
+ 13  ok    the ritual end flag is still where the prefix reads it
+ 14  ok    the job tracker still exposes what the detour writes to
+ 15  ok    the two owner lists are written under keys that cannot collide
+ 16  ok    the gizmo hotkey the mod gives up is still taken twice over
+ 17  ok    banishment still runs through the overload the mod patches
+ 18  ok    the ritual start hook still carries the assignments
+ 19  ok    the outfit stand still holds, hands over and takes back
+ 20  ok    face paint is still free, and still reachable
+ 21  ok    the mod reaches nothing the game keeps to itself
+
+  the xml
+ 22  ok    each outfit stand ends up with exactly one ceremonial owner
+ 23  ok    running the stand patch twice changes nothing
+ 24  ok    a stand another mod got to first is still served once
+ 25  ok    the ceremonial tag lands on the garments the comment names
+ 26  ok    the roles the rite cannot spare are counted as the comment says
+
+  content
+ 27  ok    every offering the mod can count without a gate really exists
+ 28  ok    every key the code asks for is translated in both languages
+ 29  ok    the counts the player is told are the counts the mod uses
+ 30  ok    the table can physically carry every category at once
+
+  settings
+ 31  ok    fresh settings expose the documented eight defaults
+ 32  ok    numeric settings reject nonfinite values and enforce UI bounds
+ 33  ok    all eight values survive a real Scribe save and fresh-instance reload
+ 34  ok    missing and older serialized values recover defaults and valid bounds
+ 35  ok    the shortcut declares native hidden visibility and the shared Options dialog
+ 36  ok    disabling preparation cannot bypass a borrowers return path
+ 37  ok    saving settings invalidates anticipation and rescales installed quality curves
+ 38  ok    closing settings applies the selected budget to actual installed comps
+
+38 passed, 0 failed, 0 skipped, in 43s

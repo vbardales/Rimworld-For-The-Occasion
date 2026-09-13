@@ -4,6 +4,7 @@
   <FTO_ModTitle>For the Occasion</FTO_ModTitle>
 
   <!-- Settings -->
+  <FTO_SettingsScope>Global settings, shared by all saves. Switches affect subsequent actions; the quality budget applies when this window closes. Disabling preparation returns borrowed clothes and removes temporary face paint at the next safe job change.</FTO_SettingsScope>
   <FTO_QualityBudget>Quality budget: up to {0}</FTO_QualityBudget>
   <FTO_QualityBudgetDesc>How much ritual quality this mod can add in total, offerings and preparation together. RimWorld caps a ritual's quality at 100%, so this is deliberately small: at the default it is a quarter of the scale. Set it to zero to keep the behaviour without the bonus.</FTO_QualityBudgetDesc>
 

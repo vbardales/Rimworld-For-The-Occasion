@@ -46,6 +46,7 @@ namespace ForTheOccasion
         /// </summary>
         public static bool ShouldStayDressed(Pawn pawn)
         {
+            if (!ForTheOccasionMod.Settings.preparationEnabled) return false;
             if (InRitual(pawn)) return true;
             return WantsToDress(pawn, out _);
         }
@@ -70,6 +71,12 @@ namespace ForTheOccasion
     {
         static int lastCheckTick = -99999;
         static bool cachedOpen;
+
+        public static void Invalidate()
+        {
+            lastCheckTick = -99999;
+            cachedOpen = false;
+        }
 
         public static bool WindowOpen()
         {

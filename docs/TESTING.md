@@ -25,6 +25,7 @@ The log lives at:
 |---|---|
 | Loads without error | **observed**, 2026-09-04 |
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
+| Settings correction harness | **38 of 38 pass**, 2026-09-13; see VALIDATION-2026-09-13.md |
 | Every scenario below | **never observed** |
 
 The load produced exactly the three expected lines:
@@ -41,7 +42,7 @@ the cross-reference failed. They now name `Romyashi.Perfumes` and `Romyashi.Anim
 
 ## The other half, which does not need a colony
 
-`_tools/Run-Functional-Tests.ps1` runs thirty tests in a couple of seconds without starting the
+`_tools/Run-Functional-Tests.ps1` runs thirty-eight tests without starting the
 game. Run it before playing any of the scenarios below, and again before a release:
 
 ```powershell
@@ -250,6 +251,53 @@ of that can be exercised without Shift Change installed, and it is inert without
 
 To test it: install both, assign the same stand a work owner in Shift Change and a ceremonial
 owner here, save, reload, and check both assignments survived and are still distinct.
+
+## Scenario 10 — settings, defaults and persistence (English and French)
+
+**Setup:** back up the existing settings file and use a clean test configuration; Harmony,
+Ideology and this mod, initially without a MainButtons customization mod. Use a new colony,
+then repeat the relevant checks with an existing save. Repeat the UI steps in English and French.
+
+**Do:** open Mod options -> For the Occasion (Pour l'occasion in French).
+Check defaults: budget x1 (+25% total), offerings/preparation/announcement/launch/paint enabled,
+12 hours, 40 cells. Exercise budget x0/x2, window 1/48 hours, distance 5/120 cells and switch
+dependencies. Close/reopen, restart, and load the other save.
+
+**Expect:** values stay within those limits and persist globally. All labels/tooltips are
+translated, readable and unclipped. The budget applies on close; at x0 the behavior remains
+but both quality bonuses are zero, at x2 their combined ceiling is +50%. Restore x1 and confirm
++25%. Disabling offerings stops both their bonus and consumption while keeping the table usable.
+Disable each preparation trigger separately and verify only that trigger stops; disable paint
+before a new dressing and verify no temporary tattoo is added. Restore all switches afterward.
+
+**Check:** no repeated errors, raw keys or settings exceptions in Player.log. Sliders provide
+no free-text input; missing/older serialized defaults and numeric normalization are additionally
+covered by the automated tests. No runtime result is recorded until these steps are performed.
+
+## Scenario 11 — disable preparation with a borrower and an in-flight trip
+
+**Setup:** scenario 3/4, one borrower dressed from a stand (one original garment forced,
+one not), temporary face paint active; another colonist walking to a stand to get dressed.
+
+**Do:** disable preparation while the ritual is active, close settings, then allow the first
+borrower an eligible non-forced job change and allow the second pawn to finish the trip.
+
+**Expect:** the borrower returns the ceremonial outfit, recovers original clothes and their
+original forced flags, and loses only temporary paint. The second pawn does not dress on
+arrival. Nobody starts a new dressing trip. Reenable preparation and repeat a ceremony:
+normal preparation works again. Repeat without a stand, and with a save/reload while disabled.
+Drafted/downed/forced-job gates may defer return; release those constraints before judging it.
+
+## Scenario 12 — optional hidden shortcut
+
+**Setup:** a clean configuration with the mod active. No customization mod at first.
+
+**Do/expect:** no visible or greyed-out For the Occasion MainButton. The primary settings
+route works. Install RIMMSQOL, record its actual version, reveal `FTO_Settings`, open it and
+change a value. Close, reopen via Mod options and confirm the same value; change it there
+and verify through the shortcut. Hide the button again, restart and confirm visibility
+persists as chosen. Repeat in French and English and check logs. Run the same sequence for
+any other customization mod before claiming that integration tested.
 
 ## Reporting a failure
 

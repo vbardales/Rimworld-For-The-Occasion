@@ -43,8 +43,8 @@ from any of them, and each entry simply does not exist when its mod is absent.
 |---|---|
 | RimScent Extended - Incense Plus (`nelim.rimscent.extended.incenseplus`) | the six `RimScentExtended_Incense_*` |
 | Perfumes (`Romyashi.Perfumes`), by Romyashi | four `Romy_*Perfume` and `Romy_AromaflowerPetals` |
-| Anima Expansion (`Romyashi.AnimaExpansion`), by Romyashi | `Romy_AnimaPerfume` |
-| Vanilla Brewing Expanded (`VanillaExpanded.VBrewE`), by Oskar Potocki and team | ten `VBE_*` drinks |
+| Perfumes with Anima Expansion (`Romyashi.Perfumes` + `Romyashi.AnimaExpansion`), by Romyashi | `Romy_AnimaPerfume`, defined by Perfumes and gated on Anima Expansion |
+| Vanilla Brewing Expanded (`VanillaExpanded.VBrewE`), by Oskar Potocki and team | ten `VBE_*` drinks; cider additionally requires Vanilla Plants Expanded (or its supported `_copy` package), matching VBE's LoadFolders |
 | Rum and Shanties (`nelim.rumandshanties`) | `VFEP_Rum` |
 
 ## Shift Change

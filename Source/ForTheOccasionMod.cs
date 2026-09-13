@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Verse;
 
@@ -30,6 +31,21 @@ namespace ForTheOccasion
 
         public bool tattooEnabled = true;
 
+        // Old or externally edited settings can bypass sliders. Keep their values finite
+        // and within the same limits before either the UI or gameplay reads them.
+        public void Normalize()
+        {
+            qualityBudget = Bounded(qualityBudget, 0f, 2f, 1f);
+            obligationWindowHours = (float)Math.Round(Bounded(obligationWindowHours, 1f, 48f, 12f));
+            maxDetourDistance = (float)Math.Round(Bounded(maxDetourDistance, 5f, 120f, 40f));
+        }
+
+        static float Bounded(float value, float min, float max, float fallback)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value)) return fallback;
+            return Math.Max(min, Math.Min(max, value));
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -41,6 +57,7 @@ namespace ForTheOccasion
             Scribe_Values.Look(ref obligationWindowHours, "obligationWindowHours", 12f);
             Scribe_Values.Look(ref maxDetourDistance, "maxDetourDistance", 40f);
             Scribe_Values.Look(ref tattooEnabled, "tattooEnabled", true);
+            if (Scribe.mode == LoadSaveMode.LoadingVars) Normalize();
         }
     }
 
@@ -57,6 +74,7 @@ namespace ForTheOccasion
         public ForTheOccasionMod(ModContentPack content) : base(content)
         {
             Settings = GetSettings<FtoSettings>();
+            Settings.Normalize();
         }
 
         public override string SettingsCategory() => "FTO_ModTitle".Translate();
@@ -65,6 +83,9 @@ namespace ForTheOccasion
         {
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
+
+            listing.Label("FTO_SettingsScope".Translate());
+            listing.Gap();
 
             listing.Label("FTO_QualityBudget".Translate((Settings.qualityBudget * 0.25f).ToStringPercent("0.#")),
                 -1f, "FTO_QualityBudgetDesc".Translate());
@@ -115,7 +136,9 @@ namespace ForTheOccasion
         /// </summary>
         public override void WriteSettings()
         {
+            Settings.Normalize();
             base.WriteSettings();
+            ObligationWatch.Invalidate();
             OutcomeCompInstaller.RescaleCurves();
         }
     }

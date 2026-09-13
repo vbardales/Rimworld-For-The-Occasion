@@ -219,7 +219,7 @@ dotnet build Source/ForTheOccasion.csproj
 
 ## Validating after a change
 
-Thirty functional tests, which need RimWorld installed but never start it:
+Thirty-eight functional tests, which need RimWorld installed but never start it:
 
 ```
 powershell -ExecutionPolicy Bypass -File _tools\Run-Functional-Tests.ps1
@@ -229,16 +229,36 @@ They execute the mod's own C# and read the game's compiled code, so they catch w
 cannot: a vanilla method that stopped doing what this mod delegates to it, a patch operation that
 stopped matching, a save key that started colliding, a translation key with no translation. Run
 them before a release. `-ListTests` prints the list, `-Only 8,22` runs a few. What they do NOT do
-is play the mod: `docs/TESTING.md` holds ten scenarios for that, and neither half replaces the
+is play the mod: `docs/TESTING.md` holds the game scenarios for that, and neither half replaces the
 other.
+
+The settings tests cover defaults, numeric limits, real Scribe round trips and older files,
+the hidden shortcut's native definition/dialog contract, preparation-disable regressions,
+and actual quality curves after closing settings. They do not simulate Unity's GUI or certify
+RIMMSQOL interaction. See `docs/VALIDATION-2026-09-13.md` for results and remaining game checks.
+
+Settings are accessible through **Mod options -> For the Occasion** and apply globally.
+The optional `FTO_Settings` MainButton is hidden by default; customization tools can reveal
+it to open the same settings. The quality budget applies when the dialog closes. Disabling
+preparation lets existing borrowers return their clothes at the next eligible job change.
+
+When the optional content providers are installed locally, also run:
+
+```powershell
+pwsh -File _tools/Check-Optional-Offerings.ps1
+```
+
+This checks eight combinations of the providers' actual 1.6 Defs and LoadFolders. Use
+`-WorkshopDir` or `-SourcePaths` when their local paths differ. Missing packages are reported
+as unverified prerequisites, not skipped successful tests.
 
 Three more checkers live in the monorepo this mod was written in, and are not shipped here. They
 still run when this folder sits beside it:
 
 ```
 pwsh -File ../scripts/Check-DefRefs.ps1 -ModPath Mod -Brief
-pwsh -File ../scripts/Check-XmlClasses.ps1 -ModPath . -TypeLists rw16_types.txt -Brief
-pwsh -File ../scripts/Check-DefInjected.ps1 -TransMod Mod -Targets Mod
+pwsh -File ../scripts/Check-XmlClasses.ps1 -ModPath . -TypeLists ../rw16_types.txt -Brief
+pwsh -File ../scripts/Check-DefInjected.ps1 -TransMod Mod -Targets Mod -ExtraAssemblies Mod/Assemblies/ForTheOccasion.dll
 ```
 
 ## Licence

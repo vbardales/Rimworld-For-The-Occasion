@@ -95,6 +95,10 @@ namespace ForTheOccasion
                     return;
                 }
 
+                // A player may disable preparation while this pawn is walking to the stand.
+                // Existing return trips above must still finish, but a new outfit must not start.
+                if (!ForTheOccasionMod.Settings.preparationEnabled) return;
+
                 PrepPlan plan = job.targetA.Thing is Building_OutfitStand stand
                     ? new PrepPlan { stand = stand }
                     : new PrepPlan { apparel = job.targetA.Thing as Apparel };

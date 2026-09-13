@@ -3,7 +3,8 @@
 
   <FTO_ModTitle>Pour l'occasion</FTO_ModTitle>
 
-  <!-- Réglages -->
+  <!-- Settings -->
+  <FTO_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les interrupteurs agissent sur les actions suivantes ; le budget de qualité s'applique à la fermeture de cette fenêtre. Désactiver la préparation restitue les vêtements empruntés et retire la peinture temporaire au prochain changement de tâche sans danger.</FTO_SettingsScope>
   <FTO_QualityBudget>Budget de qualité : jusqu'à {0}</FTO_QualityBudget>
   <FTO_QualityBudgetDesc>Ce que ce mod peut ajouter en tout à la qualité d'un rituel, offrandes et préparation réunies. RimWorld plafonne la qualité d'un rituel à 100 %, d'où un budget volontairement modeste : par défaut, un quart de l'échelle. À zéro, le comportement subsiste sans le bonus.</FTO_QualityBudgetDesc>
 
@@ -28,7 +29,7 @@
   <FTO_Tattoo>Peinture de visage pour l'occasion</FTO_Tattoo>
   <FTO_TattooDesc>Les colons qui ne portent aucun tatouage d'habitude en reçoivent un, tiré du style de leur propre idéologie, effacé au moment où ils se rechangent. Ceux qui en portent déjà un ne sont pas touchés.</FTO_TattooDesc>
 
-  <!-- En jeu -->
+  <!-- In game -->
   <FTO_OfferingsFactor>Offrandes</FTO_OfferingsFactor>
   <FTO_OfferingsTooltip>Nombre de sortes d'offrandes distinctes posées sur les tables d'offrandes de la zone de rassemblement. C'est la variété qui compte, pas la quantité. Elles sont consommées à la fin du rituel.</FTO_OfferingsTooltip>
   <FTO_OfferingsConsumed>La cérémonie a consommé {0} offrandes.</FTO_OfferingsConsumed>

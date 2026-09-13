@@ -25,6 +25,10 @@
 .PARAMETER ListTests
     Print the numbered test list and stop.
 
+.PARAMETER AssemblyPath
+    Optional earlier or mutated DLL for regression checks. Defaults to the shipped assembly.
+    The selected DLL is copied to scratch before loading; it never replaces the shipped DLL.
+
 .NOTES
     Windows PowerShell 5.1. Written for it, not for pwsh, and it has traps: -Raw without
     -Encoding UTF8 mangles prose, -replace ignores case, and a param's type constraint survives
@@ -34,10 +38,15 @@
 param(
     [string] $GameDir = "C:\Program Files (x86)\Steam\steamapps\common\RimWorld",
     [int[]]  $Only,
+    [string] $AssemblyPath,
     [switch] $ListTests
 )
 
 $ErrorActionPreference = 'Stop'
+
+# RimWorld's Root calls CultureInfoUtility.EnsureEnglish before Scribe runs.
+# PowerShell otherwise uses the desktop culture and writes e.g. 1,5 as a float.
+[Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::GetCultureInfo('en-US')
 
 $script:Root      = Split-Path $PSScriptRoot -Parent
 $script:ModDir    = Join-Path $script:Root 'Mod'
@@ -99,7 +108,8 @@ function Get-LoadedTypes($asm) {
 $script:Scratch = Join-Path ([IO.Path]::GetTempPath()) ('fto-tests-' + [Guid]::NewGuid().ToString('N').Substring(0, 8))
 [void](New-Item -ItemType Directory -Path $script:Scratch -Force)
 $modCopy = Join-Path $script:Scratch 'ForTheOccasion.dll'
-Copy-Item (Join-Path $script:ModDir 'Assemblies\ForTheOccasion.dll') $modCopy -Force
+if (-not $AssemblyPath) { $AssemblyPath = Join-Path $script:ModDir 'Assemblies\ForTheOccasion.dll' }
+Copy-Item $AssemblyPath $modCopy -Force
 
 $script:Cs       = [Reflection.Assembly]::LoadFrom((Join-Path $script:Managed 'Assembly-CSharp.dll'))
 $script:Mod      = [Reflection.Assembly]::LoadFrom($modCopy)
@@ -210,6 +220,7 @@ function Get-FieldSites($method) {
         if (-not $f) { continue }
         $out += [pscustomobject]@{
             Name     = $f.Name
+            Offset   = $i
             Declares = $(if ($f.DeclaringType) { $f.DeclaringType.FullName } else { '' })
             Target   = $f
             Writes   = ($op -eq 0x7D -or $op -eq 0x80)
@@ -1035,6 +1046,205 @@ Test-Case 'content' 'the table can physically carry every category at once' {
     # The fixed filter is built at startup from the categories, so it must start out empty here.
     $written = $def.SelectNodes('building/fixedStorageSettings/filter/thingDefs/li')
     if ($written.Count -ne 0) { Fail "the table's def writes out $($written.Count) allowed defs, duplicating the categories" }
+}
+
+# =============================================================================================
+# Settings regressions. Keep the original test numbers and historical mutation record stable.
+# =============================================================================================
+
+function Assert-Settings($settings, $expected) {
+    foreach ($name in $expected.Keys) {
+        $actual = Get-ObjField $settings $name
+        if ($actual -ne $expected[$name]) { Fail "$name expected $($expected[$name]), got $actual" }
+    }
+}
+
+function Read-TestSettings($path) {
+    $settings = New-Obj (ModTypeOf 'ForTheOccasion.FtoSettings')
+    $scribe = GameType 'Verse.Scribe'
+    $loader = $scribe.GetField('loader', $script:Flags).GetValue($null)
+    try {
+        $loader.InitLoading($path)
+        $settings.ExposeData()
+        $loader.FinalizeLoading()
+    }
+    finally { [void]$scribe.GetMethod('ForceStop', $script:Flags).Invoke($null, @()) }
+    $settings
+}
+
+Test-Case 'settings' 'fresh settings expose the documented eight defaults' {
+    Assert-Settings (New-Obj (ModTypeOf 'ForTheOccasion.FtoSettings')) @{
+        qualityBudget = [single]1; offeringsEnabled = $true; preparationEnabled = $true
+        prepareOnObligation = $true; prepareOnLaunch = $true; obligationWindowHours = [single]12
+        maxDetourDistance = [single]40; tattooEnabled = $true
+    }
+}
+
+Test-Case 'settings' 'numeric settings reject nonfinite values and enforce UI bounds' {
+    $settings = New-Obj (ModTypeOf 'ForTheOccasion.FtoSettings')
+    foreach ($case in @(
+        ,@(-1, -2, -3, 0, 1, 5)
+        ,@(3, 49, 121, 2, 48, 120)
+        ,@([single]::NaN, [single]::PositiveInfinity, [single]::NegativeInfinity, 1, 12, 40)
+        ,@(0.5, 12.2, 39.8, 0.5, 12, 40)
+        ,@(0, 1, 5, 0, 1, 5)
+        ,@(2, 48, 120, 2, 48, 120)
+    )) {
+        Set-ObjField $settings 'qualityBudget' ([single]$case[0])
+        Set-ObjField $settings 'obligationWindowHours' ([single]$case[1])
+        Set-ObjField $settings 'maxDetourDistance' ([single]$case[2])
+        $settings.Normalize()
+        Assert-Settings $settings @{qualityBudget=[single]$case[3]; obligationWindowHours=[single]$case[4]; maxDetourDistance=[single]$case[5]}
+    }
+}
+
+Test-Case 'settings' 'all eight values survive a real Scribe save and fresh-instance reload' {
+    $settings = New-Obj (ModTypeOf 'ForTheOccasion.FtoSettings')
+    $expected = @{qualityBudget=[single]1.5; offeringsEnabled=$false; preparationEnabled=$false
+        prepareOnObligation=$false; prepareOnLaunch=$false; obligationWindowHours=[single]23
+        maxDetourDistance=[single]87; tattooEnabled=$false}
+    foreach ($name in $expected.Keys) { Set-ObjField $settings $name $expected[$name] }
+    $path = Join-Path $script:Scratch 'settings-roundtrip.xml'
+    $scribe = GameType 'Verse.Scribe'
+    $saver = $scribe.GetField('saver', $script:Flags).GetValue($null)
+    try {
+        $saver.InitSaving($path, 'Settings')
+        $settings.ExposeData()
+        $saver.FinalizeSaving()
+    }
+    finally { $scribe.GetMethod('ForceStop', $script:Flags).Invoke($null, @()) }
+    Assert-Settings (Read-TestSettings $path) $expected
+}
+
+Test-Case 'settings' 'missing and older serialized values recover defaults and valid bounds' {
+    $path = Join-Path $script:Scratch 'settings-old.xml'
+    [IO.File]::WriteAllText($path, '<Settings><qualityBudget>99</qualityBudget><obligationWindowHours>-1</obligationWindowHours><maxDetourDistance>NaN</maxDetourDistance></Settings>')
+    Assert-Settings (Read-TestSettings $path) @{qualityBudget=[single]2; obligationWindowHours=[single]1
+        maxDetourDistance=[single]40; offeringsEnabled=$true; preparationEnabled=$true
+        prepareOnObligation=$true; prepareOnLaunch=$true; tattooEnabled=$true}
+    [IO.File]::WriteAllText($path, '<Settings/>')
+    Assert-Settings (Read-TestSettings $path) @{qualityBudget=[single]1; obligationWindowHours=[single]12
+        maxDetourDistance=[single]40; offeringsEnabled=$true; preparationEnabled=$true
+        prepareOnObligation=$true; prepareOnLaunch=$true; tattooEnabled=$true}
+}
+
+Test-Case 'settings' 'the shortcut declares native hidden visibility and the shared Options dialog' {
+    $node = (Get-ModXml 'Defs\MainButtonDefs\MainButtons.xml').SelectSingleNode('/Defs/MainButtonDef[defName="FTO_Settings"]')
+    if (-not $node) { Fail 'the discoverable settings MainButtonDef is absent' }
+    $def = New-Obj (GameType 'RimWorld.MainButtonDef')
+    Set-ObjField $def 'buttonVisible' ([bool]::Parse($node.buttonVisible))
+    $workerType = ModTypeOf $node.workerClass
+    Set-ObjField $def 'workerClass' $workerType
+    $worker = $def.Worker
+    if (Get-ObjField $def 'buttonVisible') { Fail 'settings button is visible on a clean configuration' }
+    Set-ObjField $def 'buttonVisible' $true
+    if (-not (Get-ObjField (Get-ObjField $worker 'def') 'buttonVisible')) { Fail 'worker does not share the editable definition' }
+    Set-ObjField $def 'buttonVisible' $false
+    if (Get-ObjField (Get-ObjField $worker 'def') 'buttonVisible') { Fail 'worker does not see a restored hidden definition' }
+    if ($workerType.GetMethod('get_Visible', $script:Flags)) { Fail 'shortcut overrides the native visibility contract' }
+    # Calling native Visible would initialize ModsConfig and scan the user's installed mods.
+    # Read the installed game's actual getter instead; no interactive visibility test is claimed.
+    $nativeVisible = (GameType 'RimWorld.MainButtonWorker').GetMethod('get_Visible', $script:Flags)
+    if (-not (@(Get-FieldSites $nativeVisible).Name -contains 'buttonVisible')) { Fail 'native Visible no longer reads the configurable field' }
+    if ($node.validWithoutMap -ne 'true') { Fail 'settings cannot be opened without a map' }
+    $factory = $workerType.GetMethod('CreateDialog', $script:Flags)
+    $calls = @(Get-CallSites $factory)
+    $lookup = @($calls | Where-Object { $_.Declares -eq 'Verse.LoadedModManager' -and $_.Name -eq 'GetMod' })
+    if ($lookup.Count -ne 1 -or $lookup[0].Target.GetGenericArguments()[0] -ne (ModTypeOf 'ForTheOccasion.ForTheOccasionMod')) {
+        Fail 'shortcut does not retrieve the existing ForTheOccasionMod instance'
+    }
+    if (@($calls | Where-Object { $_.Kind -eq 'newobj' -and $_.Declares -eq 'RimWorld.Dialog_ModSettings' }).Count -ne 1) {
+        Fail 'shortcut no longer creates the native Mod settings dialog'
+    }
+    $activate = @(Get-CallSites ($workerType.GetMethod('Activate', $script:Flags)))
+    if (-not ($activate.Name -contains 'CreateDialog') -or -not ($activate.Name -contains 'Add')) { Fail 'Activate does not open the shared dialog' }
+    $close = @(Get-CallSites ((GameType 'RimWorld.Dialog_ModSettings').GetMethod('PreClose', $script:Flags)))
+    if (-not ($close.Name -contains 'WriteSettings')) { Fail 'native dialog no longer saves on close' }
+}
+
+Test-Case 'settings' 'disabling preparation cannot bypass a borrowers return path' {
+    # Test the delivered control flow, including calls on both sides of the guard.
+    # The original bug reads the switch and returns before RecordFor/Undress.
+    $decide = (ModTypeOf 'ForTheOccasion.Patch_JobInterception').GetMethod('Decide', $script:Flags)
+    $switch = @(Get-FieldSites $decide | Where-Object Name -eq 'preparationEnabled')
+    $returns = @(Get-CallSites $decide | Where-Object Name -eq 'Undress')
+    if ($switch.Count -ne 1 -or $returns.Count -ne 2) { Fail 'return-path shape changed; review the guard regression' }
+    if (@($returns | Where-Object { $_.Offset -gt $switch[0].Offset }).Count) { Fail 'preparation switch bypasses an existing return path' }
+    $stay = (ModTypeOf 'ForTheOccasion.PreparationReason').GetMethod('ShouldStayDressed', $script:Flags)
+    $staySwitch = @(Get-FieldSites $stay | Where-Object Name -eq 'preparationEnabled')
+    $ritual = @(Get-CallSites $stay | Where-Object Name -eq 'InRitual')
+    if ($staySwitch.Count -ne 1 -or $ritual.Count -ne 1 -or $staySwitch[0].Offset -gt $ritual[0].Offset) {
+        Fail 'a running ritual retains dress despite disabling preparation'
+    }
+    $change = (ModTypeOf 'ForTheOccasion.JobDriver_PrepareForOccasion').GetMethod('DoChange', $script:Flags)
+    $guard = @(Get-FieldSites $change | Where-Object Name -eq 'preparationEnabled')
+    $calls = @(Get-CallSites $change)
+    $undress = @($calls | Where-Object Name -eq 'Undress')
+    $dress = @($calls | Where-Object Name -eq 'Dress')
+    if ($guard.Count -ne 1 -or $undress.Count -ne 1 -or $dress.Count -ne 1 -or
+        $guard[0].Offset -lt $undress[0].Offset -or $guard[0].Offset -gt $dress[0].Offset) {
+        Fail 'an in-flight job does not guard dressing while preserving undressing'
+    }
+}
+
+Test-Case 'settings' 'saving settings invalidates anticipation and rescales installed quality curves' {
+    $mod = ModTypeOf 'ForTheOccasion.ForTheOccasionMod'
+    $calls = @(Get-CallSites ($mod.GetMethod('WriteSettings', $script:Flags)))
+    foreach ($name in 'Normalize', 'WriteSettings', 'Invalidate', 'RescaleCurves') {
+        if (-not ($calls.Name -contains $name)) { Fail "settings close no longer calls $name" }
+    }
+    $watch = ModTypeOf 'ForTheOccasion.ObligationWatch'
+    $watch.GetField('lastCheckTick', $script:Flags).SetValue($null, 123456)
+    $watch.GetField('cachedOpen', $script:Flags).SetValue($null, $true)
+    $watch.GetMethod('Invalidate', $script:Flags).Invoke($null, @())
+    if ($watch.GetField('lastCheckTick', $script:Flags).GetValue($null) -ge 0 -or
+        $watch.GetField('cachedOpen', $script:Flags).GetValue($null)) { Fail 'anticipation cache survived settings close' }
+    $rescale = (ModTypeOf 'ForTheOccasion.OutcomeCompInstaller').GetMethod('RescaleCurves', $script:Flags)
+    $fields = @(Get-FieldSites $rescale)
+    if (-not ($fields.Name -contains 'qualityBudget') -or @($fields | Where-Object { $_.Name -eq 'curve' -and $_.Writes }).Count -ne 2) {
+        Fail 'rescaling does not read current budget and replace both comp curves'
+    }
+}
+
+# =============================================================================================
+Test-Case 'settings' 'closing settings applies the selected budget to actual installed comps' {
+    # No world or user configuration is loaded. Native logging is disabled because its
+    # sink requires Unity; labels fall back to keys, tested separately by content checks.
+    $logLock = (GameType 'Verse.Log').GetMethod('LockMessages', $script:Flags).Invoke($null, @())
+    $mod = ModTypeOf 'ForTheOccasion.ForTheOccasionMod'
+    $settingsField = $mod.GetField('Settings', $script:Flags)
+    $oldSettings = $settingsField.GetValue($null)
+    $settings = New-Obj (ModTypeOf 'ForTheOccasion.FtoSettings')
+    $settingsField.SetValue($null, $settings)
+    $installer = ModTypeOf 'ForTheOccasion.OutcomeCompInstaller'
+    $offList = $null; $prepList = $null
+    try {
+        $offList = $installer.GetField('offeringComps', $script:Flags).GetValue($null)
+        $prepList = $installer.GetField('preparedComps', $script:Flags).GetValue($null)
+        $off = New-Obj (ModTypeOf 'ForTheOccasion.RitualOutcomeComp_Offerings')
+        $prep = New-Obj (ModTypeOf 'ForTheOccasion.RitualOutcomeComp_PreparedParticipants')
+        $offList.Add($off); $prepList.Add($prep)
+        # Skip only the mod constructor's user-config read, not its WriteSettings implementation.
+        # Its base modSettings is null; serialization is exercised separately in tests 33-34.
+        $instance = [Runtime.Serialization.FormatterServices]::GetUninitializedObject($mod)
+        foreach ($budget in @([single]0, [single]0.5, [single]1, [single]2, [single]1)) {
+            Set-ObjField $settings 'qualityBudget' $budget
+            $mod.GetMethod('WriteSettings', $script:Flags).Invoke($instance, @())
+            # SimpleCurve is enumerable; returning it through Get-ObjField would unwrap points.
+            $offCurve = $off.GetType().GetField('curve', $script:FlatFlags).GetValue($off)
+            $prepCurve = $prep.GetType().GetField('curve', $script:FlatFlags).GetValue($prep)
+            if ([math]::Abs($offCurve.Evaluate([single]100) - 0.12 * $budget) -gt 0.00001) { Fail 'offering budget not applied on close' }
+            if ([math]::Abs($prepCurve.Evaluate([single]100) - 0.13 * $budget) -gt 0.00001) { Fail 'preparation budget not applied on close' }
+            if ($offCurve.Evaluate([single]0) -ne 0 -or $prepCurve.Evaluate([single]0) -ne 0) { Fail 'empty ritual receives a bonus' }
+        }
+        if ((ModTypeOf 'ForTheOccasion.FtoLog').GetProperty('Disabled').GetValue($null)) { Fail 'mod silently disabled during settings application' }
+    }
+    finally {
+        if ($null -ne $offList) { [void]$offList.Remove($off) }
+        if ($null -ne $prepList) { [void]$prepList.Remove($prep) }
+        $settingsField.SetValue($null, $oldSettings)
+        $logLock.Dispose()
+    }
 }
 
 # =============================================================================================

@@ -87,7 +87,9 @@ Ludeon Studios, whose ritual quality system is an extension point and not a wall
 Andreas Pardeike for Harmony.
 Claude Code (Anthropic).
 
-No file from any other mod is reproduced here - no def, no texture, no line of code. The offering table reuses a vanilla texture path; it ships no art of its own. See ATTRIBUTION.md. This mod is MIT licensed.</description>
+No file from any other mod is reproduced here - no def, no texture, no line of code. The offering table reuses a vanilla texture path; it ships no art of its own. See ATTRIBUTION.md. This mod is MIT licensed.
+
+[url=https://github.com/vbardales/Rimworld-For-The-Occasion]Source code on GitHub[/url]</description>
   <modDependencies>
     <li>
       <packageId>Ludeon.RimWorld.Ideology</packageId>
@@ -109,6 +111,8 @@ No file from any other mod is reproduced here - no def, no texture, no line of c
     <li>Ludeon.RimWorld.Anomaly</li>
     <li>Ludeon.RimWorld.Odyssey</li>
     <li>VanillaExpanded.VBrewE</li>
+    <li>VanillaExpanded.VPlantsE</li>
+    <li>VanillaExpanded.VPlantsE_copy</li>
     <li>romyashi.perfumes</li>
     <li>romyashi.animaexpansion</li>
     <li>nelim.rimscent.extended.incenseplus</li>
