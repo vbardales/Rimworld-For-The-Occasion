@@ -5,8 +5,10 @@ in this workspace. Final distributed assembly SHA256:
 `9FF631359D7CCC108DAFEAD1918D7364874917D53DEA6CC79D982AF1E5E2F7DE`.
 No commit, push, Workshop publication or game session was performed.
 
-Preserved run output: [functional-tests.txt](validation-2026-09-13/functional-tests.txt).
-Audited source/Mod/test-file hashes: [manifest.txt](validation-2026-09-13/manifest.txt).
+The raw harness output and the hash manifest that sat beside this file were removed on 2026-09-28:
+the same distributed assembly (SHA256 above) was rebuilt and the same 38 tests rerun that day, so
+they proved nothing the newer run does not (docs/runs/2026-09-28.md). What they established is in
+the tables below.
 
 ## Changes
 
@@ -93,7 +95,7 @@ loading, not the gameplay behavior of any third-party integration.
 ## Required final game validation
 
 Current stage is **done**, ready for final game validation under the supplied workflow.
-Execute docs/TESTING.md scenarios 0-12 in English and French, with a new colony and an
+Execute TESTING.md scenarios 0-12 in English and French, with a new colony and an
 existing save. Check actual settings effects, force-worn flags and paint cleanup, changing
 settings mid-trip, save/restart persistence, absence of a default visible/grey shortcut,
 RIMMSQOL reveal/open/hide persistence, applicable companion mods and Player.log. Record

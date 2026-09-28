@@ -229,7 +229,7 @@ They execute the mod's own C# and read the game's compiled code, so they catch w
 cannot: a vanilla method that stopped doing what this mod delegates to it, a patch operation that
 stopped matching, a save key that started colliding, a translation key with no translation. Run
 them before a release. `-ListTests` prints the list, `-Only 8,22` runs a few. What they do NOT do
-is play the mod: `docs/TESTING.md` holds the game scenarios for that, and neither half replaces the
+is play the mod: `TESTING.md` holds the game scenarios for that, and neither half replaces the
 other.
 
 The settings tests cover defaults, numeric limits, real Scribe round trips and older files,

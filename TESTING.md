@@ -25,7 +25,7 @@ The log lives at:
 |---|---|
 | Loads without error | **observed**, 2026-09-04 |
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
-| Settings correction harness | **38 of 38 pass**, 2026-09-13; see VALIDATION-2026-09-13.md |
+| Settings correction harness | **38 of 38 pass**, 2026-09-13; see docs/runs/2026-09-13-validation.md |
 | Every scenario below | **never observed** |
 
 The load produced exactly the three expected lines:

@@ -3,7 +3,7 @@
     Functional tests for For the Occasion, run without starting RimWorld.
 
 .DESCRIPTION
-    docs/TESTING.md is the other half of the testing for this mod: ten scenarios to observe in a
+    TESTING.md is the other half of the testing for this mod: scenarios to observe in a
     real colony. This file asks the question those scenarios cannot.
 
     The mod hands its conduct to vanilla classes. It relies on a removal clearing a flag, on a
@@ -1006,7 +1006,7 @@ Test-Case 'content' 'every key the code asks for is translated in both languages
 }
 
 Test-Case 'content' 'the counts the player is told are the counts the mod uses' {
-    # docs/TESTING.md tells the player to expect exactly these to be taken. A value changed in
+    # TESTING.md tells the player to expect exactly these to be taken. A value changed in
     # the XML and not in the file would make a true scenario read as a failure.
     $cats = Get-ModXml 'Defs\OfferingCategoryDefs\OfferingCategories.xml'
     $actual = @{}
@@ -1018,9 +1018,9 @@ Test-Case 'content' 'the counts the player is told are the counts the mod uses' 
         if (-not $actual.ContainsKey($k)) { Fail "the mod no longer ships $k" }
         if ($actual[$k] -ne $expected[$k]) { Fail "$k now needs $($actual[$k]), not $($expected[$k])" }
     }
-    $testing = Get-Prose (Join-Path $script:Root 'docs\TESTING.md')
+    $testing = Get-Prose (Join-Path $script:Root 'TESTING.md')
     if ($testing -cnotmatch [regex]::Escape('2 scent, 4 food, 4 drink, 50 treasure')) {
-        Fail 'docs/TESTING.md no longer names the amounts a scenario tells the player to count'
+        Fail 'TESTING.md no longer names the amounts a scenario tells the player to count'
     }
 }
 
@@ -1353,7 +1353,7 @@ exit $(if ($fail -gt 0) { 1 } else { 0 })
 # This does not run in CI. It needs RimWorld's Managed folder and its Data folder, and a build
 # runner has neither. The workflow compiles the mod; this file is run by hand before a release.
 #
-# The other half of the testing is docs/TESTING.md, and it is not optional. Nothing here observes
+# The other half of the testing is TESTING.md, and it is not optional. Nothing here observes
 # a colonist walking to a wardrobe, an offering being taken off a table, or a raid arriving while
 # somebody is in evening dress. These tests say that the game still does what the mod expects of
 # it. Only a colony says that the mod does what it says it does.
