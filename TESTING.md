@@ -25,7 +25,8 @@ The log lives at:
 |---|---|
 | Loads without error | **observed**, 2026-09-04 |
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
-| Settings correction harness | **38 of 38 pass**, 2026-09-13; see docs/runs/2026-09-13-validation.md |
+| Settings correction harness | **38 of 38 pass**, 2026-09-13 and again 2026-09-28 on `e9b1bc7`, the same DLL; see docs/runs/2026-09-13-validation.md and docs/runs/2026-09-28.md |
+| Workflow audit against `AUDIT.md` | 2026-09-28, stage `options`; see `STATUS.md` |
 | Every scenario below | **never observed** |
 
 The load produced exactly the three expected lines:
@@ -298,6 +299,72 @@ change a value. Close, reopen via Mod options and confirm the same value; change
 and verify through the shortcut. Hide the button again, restart and confirm visibility
 persists as chosen. Repeat in French and English and check logs. Run the same sequence for
 any other customization mod before claiming that integration tested.
+
+## What `tested` requires
+
+The scenarios above are what has to be watched. This section is what has to be true before
+`STATUS.md` may say `tested`. It restates the step `done -> tested` of `AUDIT.md` for this mod, with
+what each rule comes to here. Today none of it is met: every scenario above is still a manual one
+and no Pickle suite exists.
+
+- **No scenario left in `@wip`.** A scenario set aside is either repaired and replayed, or deleted with
+  its reason. One left standing is a scenario waiting, not one passed.
+- **Every conditional scenario has run.** Each `@requires:<packageId>` scenario, whether it needs an
+  optional mod, a DLC or a companion tool, gets its own pass on a map that mounts it, and that report
+  is read: `setName`, suite and scenario names are checked before it is cited, because the report
+  folder is shared by the whole machine. A scenario skipped for want of its condition is not a passed
+  scenario. The conditions of this mod are Odyssey (the outfit stand path), RIMMSQOL (the hidden
+  shortcut), Shift Change (the shared stand) and the five providers of optional offerings named under
+  "Passes this mod needs".
+- **No manual test left to validate.** Each of scenarios 0 to 12 is either written in Gherkin and
+  green, or listed here as not applicable with its reason. Nothing is left to tick by hand. The
+  `@review` captures still have to be opened and looked at, but that is the reading of an image a
+  scenario has already proved to be in the intended state, not one more manual test. Which scenario
+  becomes which is decided when the suite is written; it is not decided here.
+- **A green run is not the proof.** Read `exitReason` before the numbers, compare the scenarios played
+  with the features discovered, and open every `@review` capture. A green says the path was walked,
+  not that the image shows a colonist in a robe or a ritual window with its two quality lines.
+- Logs read; interface checked in French and in English, in a game in developer mode: an accented
+  gibberish is a key missing from the active language, a clean English line in a French game is a
+  string that never went through `Translate`.
+- Every scenario that failed has been replayed green on a build that contains its fix.
+
+## Passes this mod needs
+
+A mod whose `TESTING.md` does not say how many passes it needs is tried, not tested. This is the plan,
+to be confirmed when the suite is written; the pass maps live in `Tests/Pickle/`, one `-DepMap` per
+request, and the language of a pass is fixed at launch, so each language is a request of its own.
+
+1. **Without the optional mods**, English and French: Core, the DLC, Harmony, Pickle, Ideology (a hard
+   dependency, with Harmony) and this mod. It proves the mod stands alone and it is the only pass where
+   a capture is clean. All four offering categories can be filled from vanilla items (smokeleaf leaves,
+   fine meals, beer, gold), so every offering scenario can run here.
+2. **Without Odyssey** (`!ludeon.rimworld.odyssey` in the pass map): the outfit stand does not exist,
+   so the no-building path is the only one, and the mod must load without raising an error.
+3. **With the optional mods**, one pass per combination that cannot coexist: RIMMSQOL (1084452457) for
+   the shortcut, Shift Change (3783456242) for the shared stand, RimScent Extended - Incense Plus and
+   Rum and Shanties (both of this collection), Perfumes (3013711969) with Anima Expansion (3532147582),
+   and Vanilla Brewing Expanded (2186560858) with Vanilla Plants Expanded. Vanilla Plants Expanded and
+   its `_copy` package are two separate ways of opening the cider gate (the two profiles of
+   `_tools/Check-Optional-Offerings.ps1`). Whether they can be loaded together is not established
+   here, so each gets its own pass until it is.
+4. **A pass per declared incompatibility:** none. `About.xml` declares no `incompatibleWith`.
+
+## Evidence to keep
+
+The full rules, with the reasons, are in [docs/runs/README.md](docs/runs/README.md). In short, for a
+Pickle run and for the harness:
+
+- **Keep**, for the revision now in the repository and per pass: `summary.json`, `summary.md`,
+  `junit.xml` and `Player.log` of the latest run; one capture per asserted state; a film only for the
+  dressing trip, where the assertion is in the motion; and an older report only when it is the sole
+  proof of a check the latest run did not repeat (the RIMMSQOL pass, the Shift Change pass).
+- **Delete** `report.html`, `messages.ndjson`, earlier runs of the same set, failed attempts once their
+  cause is written down, and anything about a superseded build.
+- **Minify** what stays: captures as JPEG at `-q:v 3`, looked at in full size first.
+- **Where:** on disk under `evidence/` and `Tests/Pickle/Evidence/`, both ignored by git. What goes to
+  git is one text line per run in `docs/runs/`, carrying the revision, the set, `exitReason`, the
+  counts and what a person opened.
 
 ## Reporting a failure
 

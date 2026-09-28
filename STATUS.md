@@ -1,35 +1,109 @@
 ---
-localization: complete
-translation_en: complete
-translation_fr: complete
-settings_audit: complete
+localization: partial
+translation_en: partial
+translation_fr: partial
 mod:          For the Occasion
 packageId:    nelim.fortheoccasion
 repo:         Rimworld-For-The-Occasion
+remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
+local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-stage:        done
+stage:        options   # workflow state names are used literally, no codes; see the 2026-09-28 audit
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 dependencies: declared
 showcase:     complete
 tested_on:
-workshop:
+workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
+settings_audit: complete
+audit_date:   2026-09-28
+audit_revision: 5053f5d when the checks ran, then the audit's own commits up to 018d573 (Source/, the DLL and every Mod/ file except ATTRIBUTION.md and the id file are unchanged since 5053f5d)
+automated_tests: 38 passed, 0 failed, 0 skipped, 2026-09-28, on e9b1bc7 and the DLL 9FF63135 (same file as the one distributed)
 remaining:
-  - unverified: Execute docs/TESTING.md scenarios 0-12 in game, in English and French,
-      on a new colony and an existing save; inspect Player.log and UI layout.
-  - unverified: Confirm settings effects and restart persistence, borrower cleanup when disabled,
-      and RIMMSQOL shortcut reveal/open/hide persistence; no customization integration tested in game.
-  - unverified: Exercise Shift Change coexistence and relevant optional content in game.
+  - "defect (options -> l10n, TRANSLATIONS.md counts and plurals, 2026-09-25): the message 'The ceremony consumed {0} offerings.' / 'La cérémonie a consommé {0} offrandes.' (FTO_OfferingsConsumed, Source/Preparation/Patch_RitualLifecycle.cs line 138) builds a plural by putting a count in front of a noun and has no .One and .Many keys in either language. It reads '1 offerings' when the count is 1. The four shipped categories need 2, 4, 4 and 50, so the count is 2 or more today; a category added by another mod with countRequired 1 makes it reachable, and this mod advertises exactly that. Fix, to be made by whoever develops: FTO_OfferingsConsumed.One and .Many in both Keyed files, chosen by the count in Patch_RitualLifecycle, a harness test for both keys, a rebuild, then the three translation fields back to complete."
+  - "blocking (preTest -> done, AUDIT.md step 8): no Pickle suite. Tests/Pickle/ does not exist, so the Gherkin scenarios are neither written nor justified as out of scope. What only a running game can show is real here: the settings window in both languages, the hidden shortcut and RIMMSQOL, the Begin ritual window with its two quality lines, a colonist walking to a stand and back. Running them is not asked at done, writing them is."
+  - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: TESTING.md scenarios 0 to 12 are all manual today, each must become a green Gherkin scenario or be listed as not applicable with its reason. The plan of passes is in TESTING.md."
+  - "unverified (done -> tested): nothing has been observed in game on this build. Settings effects, persistence across restart, the disable-with-a-borrower regressions, the RIMMSQOL reveal, open and hide, English and French layout, Player.log, a new colony and an existing save, and Shift Change coexistence. Only the load (scenario 0) was ever seen, on 2026-09-04, on an older build."
+  - "unverified: no customization mod has been tested in game, so no integration may be claimed. The shortcut is checked by its definition and by the native getter in the delivered code, not by a running RIMMSQOL."
+  - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
+  - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_06821e6c-e45a-492a-99fd-d6a96d00f8af
-updated:      2026-09-13
+updated:      2026-09-28, workflow audit against AUDIT.md: stage retained options, was done
 ---
 
 # For the Occasion — status
 
+## Workflow audit — 2026-09-28
+
+**Previous stage: `done` (2026-09-13). Retained stage: `options`.** The stage names are the workflow's own,
+used literally: `dansMonoRepo`, `horsMonoRepo`, ModIcon generated, Preview generated, `preOptions`, `options`,
+`l10n`, `preTest`, `done`, `tested`, `prepublished`, `published`. Later independent checks are kept where they
+were established, but no state is claimed past a transition whose mandatory criteria are not all met.
+
+Audited revision: `5053f5d` on `main`, equal to `origin/main` and to GitHub HEAD when the checks ran, then the audit's own commits up to `018d573`. Local
+changes when the audit started: `Mod/About/PublishedFileId.txt` and `Art/ModIcon.ico`, `Art/Preview.ico`, all
+untracked, and `Mod/desktop.ini`, ignored. No file of `Mod/` other than `ATTRIBUTION.md` changed during the
+audit, and `Source/` and the DLL did not change at all. Protocol documents and their versions:
+[docs/PROTOCOLS-READ.md](docs/PROTOCOLS-READ.md). No game was started and none was needed.
+
+| Transition | Result |
+| --- | --- |
+| `dansMonoRepo` -> `horsMonoRepo` | **Validated.** Standalone repository at `C:\Users\nelim\Documents\rimworld\ForTheOccasion`, remote `origin` to the existing GitHub repository, PUBLIC (`gh repo view`), local HEAD equal to `origin/main`. STATUS.md initialised. `licence: open`, justified by an explicit MIT licence, sources shipped and no third-party file. Names agree: For the Occasion, `nelim.fortheoccasion`, `Rimworld-For-The-Occasion`, `ForTheOccasion`; no `renew`, since it is original. README, ATTRIBUTION, LICENSE and CHANGELOG are in English, and `ATTRIBUTION.md` and `LICENSE` are byte-identical to their copies in `Mod/`. **Origin repository: none.** This is an original work (nothing to fork, base on, or send a pull request to); the nearest prior art, Shift Change (MrBeverage, MIT, `github.com/beverage/shift-change`), was read for design only and nothing of it is reused. Written in ATTRIBUTION.md. |
+| -> ModIcon generated | **Validated.** Release build, zero warnings and zero errors, rebuilt DLL identical to the distributed one (SHA256 `9FF631359D7CCC108DAFEAD1918D7364874917D53DEA6CC79D982AF1E5E2F7DE`). `ModIcon.png`: 128 x 128 PNG, 22,376 bytes, and legible at 32 px: the head, its party hat and the horn stay readable, the confetti reduces to specks. Nothing was generated, modified or requested. |
+| -> Preview generated | **Validated.** `Preview.png`: 896 x 504 PNG, 831,737 bytes, under 1 MB. Opened at full size and at 268 px: the title, the summary and the ceremony scene (offering table, brazier, three colonists seen from above) are legible. No concrete camera defect. |
+| -> `preOptions` | **Validated.** Description in English. The gold rule is one accent against a warm ambient and no secondary ink is in use, so there is nothing to confuse. `the` is set at the reduced linking-word size. No prefix or suffix is owed. The description ends on `[url=https://github.com/vbardales/Rimworld-For-The-Occasion]Source code on GitHub[/url]`, and its target agrees with the remote and with `<url>`. |
+| -> `options` | **Validated, by source analysis and automated tests; not in game.** Eight global settings, each with a consumer; primary access is Mod options -> For the Occasion; the `FTO_Settings` MainButtonDef ships `buttonVisible=false` and opens the same native dialog. Harness tests 31 to 38 (defaults, bounds, a real Scribe round trip, older values, the shortcut contract, the disable regression, cache invalidation, real WriteSettings rescaling) pass on the delivered DLL. No customization mod was tested, so none is claimed. |
+| -> `l10n` | **Defect, so not established.** One counted phrase breaks the counts-and-plurals rule of TRANSLATIONS.md (2026-09-25), see `remaining`. Everything else passes: 26 Keyed keys per language, nonempty, unique, with the same parameters; harness test 28 takes the requested keys out of the delivered code's `Translate` calls and finds all of them in both languages; `Check-DefInjected` 13 keys, 0 errors; no hardcoded player-facing sentence found. The three translation fields go from `complete` to `partial` for that reason alone. |
+| -> `preTest` | **Validated independently; retained but not reachable yet.** Ideology and Harmony are declared and used; Odyssey is optional and its patches carry `MayRequire`; `loadAfter` names the optional providers; no `LoadFolders` is needed for a single root. `Check-Optional-Offerings`: 8 profiles pass, 23 optional references resolve. That is XML availability, not an in-game integration test. |
+| -> `done` | **Not met.** Scenarios 0 to 12 are written with preconditions, actions and results; automated tests are written, run and green (38 of 38); the XML tests are part of them. **No Pickle Gherkin suite is written** (`Tests/Pickle/` does not exist) and its scope is not justified. |
+| -> `tested` | **Not verified.** Nothing was played, and nothing may be until a suite exists and a pass is filed. The three gates are listed in `remaining` and in TESTING.md. |
+| -> `prepublished` | **Not evaluated.** Independent findings are in `remaining`. |
+| -> `published` | **No.** The Workshop item 3806761333 exists, private, from the `0.1.0` pre-publication (CHANGELOG.md, commit `0768d4d`); it is not the `1.0.0`. |
+
+### Checks run, and what they showed
+
+- `dotnet build Source/ForTheOccasion.csproj -c Release -t:Rebuild -p:OutputPath=<scratch>`: passed; the rebuilt
+  DLL and `Mod/Assemblies/ForTheOccasion.dll` share the SHA256 above.
+- `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1`: 38 passed, 0 failed,
+  0 skipped, 24 s, on `e9b1bc7`. It reads the installed game's assembly and Core and DLC Defs, and starts no game.
+  Raw output on disk, ignored: `evidence/2026-09-28-e9b1bc7-harness.txt`.
+- `pwsh -File _tools/Check-Optional-Offerings.ps1`: 8 profiles passed, 23 targets. From the monorepo root:
+  `Check-DefRefs` (7 owned defs, no missing or wrong-type reference), `Check-XmlClasses` (11 types resolve),
+  `Check-DefInjected -ExtraAssemblies Mod/Assemblies/ForTheOccasion.dll` (13 keys, 0 errors).
+- Images read directly; the 32 px and 268 px renditions were made in a scratch folder and deleted.
+- The `TESTING.md` move was checked by mutation on a scratch copy: harness test 29 goes red when the sentence it
+  looks for disappears and when the file is missing.
+
+### Kept, moved and removed today
+
+- `0.1.0` added to CHANGELOG.md (`## [0.1.0]`, "creation of the `PublishedFileId.txt` file"), with the id file,
+  committed and pushed as `0768d4d`.
+- `.gitignore` gained `*.dds`, `*.ico`, `evidence/` and `Tests/Pickle/Evidence/`. **No `.dds` has ever been tracked**
+  in this repository, in the tree or in any commit, and there was no Pickle evidence or capture anywhere, so nothing
+  had to leave git for those reasons.
+- `docs/validation-2026-09-13/` (raw output of a 38-test run and a hash manifest, both in git) removed: superseded by
+  today's run on the identical DLL. Its narrative is `docs/runs/2026-09-13-validation.md`, and today's line is
+  `docs/runs/2026-09-28.md`. What evidence to keep for the tests is written in `docs/runs/README.md` and
+  `TESTING.md`.
+- `TESTING.md` moved from `docs/` to the root, like every other mod; the harness, README and validation record follow.
+
+### Strictly necessary to cross the next transition
+
+1. **`options` -> `l10n`:** fix the one counted phrase (two keys per language, chosen by the count), add a harness
+   test for it, rebuild so the distributed DLL matches the sources, and set the three translation fields back to
+   `complete`.
+2. **`preTest` -> `done`:** write the Pickle Gherkin suite for what only a running game can show, and state its
+   scope. Read `PickleTools/Authoring/README.md` first; it was not read in this audit.
+
+Not needed and not done: running any test in game, generating any image, publishing.
+
+> The sections below are earlier audits, kept as history. Their statement that the stage is `done` is superseded by
+> this one.
+
 ## Corrections and revalidation — 2026-09-13
 
-**Current stage: `done` = ready for final functional validation in game.** This is
+**Current stage: `done` = ready for final functional validation in game (superseded on 2026-09-28: see the audit above).** This is
 the supplied workflow's `done`, not `tested`. The previous audit below describes
 the earlier revision and is retained as history; its defects are superseded here.
 
@@ -38,7 +112,7 @@ corrections. No commit or publication was performed. The pre-existing STATUS.md
 changes and original art were preserved. Sources, distributed DLL, Preview,
 settings shortcut Def and FR injection, Keyed scope text, optional-item gates,
 About/attribution, tests and documentation changed. Detailed results and commands:
-[docs/VALIDATION-2026-09-13.md](docs/VALIDATION-2026-09-13.md).
+[docs/runs/2026-09-13-validation.md](docs/runs/2026-09-13-validation.md).
 
 - Preview: `the` reduced to the linking-word size; final image actually inspected,
   896 x 504 PNG, 831,737 bytes. Prior banner archived in Art/; original source kept.
@@ -226,7 +300,7 @@ to anyone — not a name, not an idea traceable to one mod, not a value derived 
 
 Held here by hand, so that the next thread does not have to re-derive it.
 
-**Nothing has been observed in game.** `docs/TESTING.md` holds ten scenarios, none of them run.
+**Nothing has been observed in game.** `TESTING.md` holds ten scenarios, none of them run.
 The one thing that has been seen is the load, on 2026-09-04, and it produced its three expected
 lines. Read that file before playing: this mod fails open, so a failure shows up as silence
 rather than as an error, and a clean `Player.log` is not evidence that anything worked.
