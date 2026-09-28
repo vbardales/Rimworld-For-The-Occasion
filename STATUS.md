@@ -12,6 +12,7 @@ detached:     yes
 stage:        done      # workflow state names are used literally, no codes; see the 2026-09-28 audit
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
+upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
 dependencies: declared
 showcase:     complete
 tested_on:
