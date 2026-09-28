@@ -321,9 +321,11 @@ and has never been played, so no scenario has run in game and every one below is
   captures still have to be opened and looked at, but that is the reading of an image a scenario has
   already proved to be in the intended state, not one more manual test. The suite is written and
   [Tests/Pickle/README.md](Tests/Pickle/README.md) has the table of which feature plays which scenario.
-  Scenario 9 (a birth) is listed there as not applicable, with its reason, and two things stay open
-  gaps rather than justified absences: the hook that consumes at the end of a real ritual, and the
-  Begin ritual window drawn as a window. Both have to be closed or justified before `tested`.
+  Scenario 9 (a birth) is listed there as not applicable, with its reason. The hook that consumes at
+  the end of a real ritual is now a feature of its own (`14-ritual-hook`), the least certain of the
+  suite because it drives the game's Begin ritual window by reflection: if its first run cannot
+  begin a ritual from the test colony, that gap reopens and has to be closed or justified before
+  `tested`.
 - **A green run is not the proof.** Read `exitReason` before the numbers, compare the scenarios played
   with the features discovered, and open every `@review` capture. A green says the path was walked,
   not that the image shows a colonist in a robe or a ritual window with its two quality lines.

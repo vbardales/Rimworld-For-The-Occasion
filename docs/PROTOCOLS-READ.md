@@ -62,5 +62,5 @@ Also read for the steps, not as protocol: the features and step code of `SkillIc
 | `TESTING.md` | Moved to the root; gained "What `tested` requires", "Passes this mod needs" and "Evidence to keep". Scenarios 0 to 12 are all manual; only the load (scenario 0) was ever observed, on 2026-09-04 and on an older build. |
 | `docs/runs/` | `README.md` (what evidence to keep), `2026-09-13-validation.md` and `2026-09-28.md`. |
 | `Mod/About/About.xml` | Read. The description ends on `Source code on GitHub` with the repository as its target, and `<url>` agrees. `THANKS` does not yet credit Romyashi, Vanilla Brewing Expanded or Shift Change: that is `prepublished` work. |
-| `Tests/Pickle/` | Written 2026-09-28: 13 features, the steps assembly and five pass maps; `README.md` there says what is covered and what is not. Never run. |
+| `Tests/Pickle/` | Written 2026-09-28: 14 features, the steps assembly and five pass maps; `README.md` there says what is covered and what is not. Never run. |
 | `PUBLICATION.md`, `BACKLOG.md`, `NOTES.md`, `BUGS.md` | **Do not exist.** `PUBLICATION.md` is required by `tested -> prepublished`. |

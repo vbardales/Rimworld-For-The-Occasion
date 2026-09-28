@@ -22,7 +22,7 @@ a translation resource or a reading of the game's compiled code can settle is in
 | --- | --- | --- |
 | 0, the load | `01-loading` | The mod loads after its dependencies, its defs exist, and nothing in the log belongs to it and no key is missing from the active language (LoadAudit reads the data, since the game logs no missing key). |
 | 1, variety and not quantity | `05-offering-table` | The table really accepts the items, the stacks really fit (three a cell), and the offerings line the player is shown reads the counts and percentages he is told (the comp installed on the game's real ritual outcome defs, with its real curve). |
-| 2, consumption | `05-offering-table` | The amounts taken from a real table are exactly 2, 4, 4 and 50, and nothing else moves. See "Not covered" for the hook. |
+| 2, consumption | `05-offering-table`, `14-ritual-hook` | The amounts taken from a real table are exactly 2, 4, 4 and 50 and nothing else moves (05); and through a real ritual begun from the game's own Begin ritual window, the postfix on `ApplyOutcome` takes them once, takes nothing from a cancelled rite and nothing more when the outcome is reported twice (14). |
 | 3, 4, the stand and the flags | `07-dressing-stand` | A colonist really walks to the stand, dresses, is undone at the end and gets their own clothes back with the force-worn flag they had. Also: one ceremonial owner comp per stand def once inheritance is resolved, and the record surviving a save and a reload. |
 | 5, no building | `06-dressing-floor` | The prefix on `StartJob` really sends a free colonist to the finest ceremonial garment, and leaves an ordinary one alone. The tag reaches the game's garments, heirs of abstract bases included. |
 | 6, face paint | `06-dressing-floor` | The face and the preparation record never disagree, and switching paint off paints nobody. |
@@ -42,13 +42,14 @@ a translation resource or a reading of the game's compiled code can settle is in
   counting as participants, and the two roles of childbirth), and so is the wiring of the hook that reads them
   (harness 18). A birth would need a pregnant colonist in labour, a doctor, and a real launch of the childbirth
   ritual, none of which a Pickle step stages; a scenario that faked them would test the fake.
-- **The hook that consumes at the end of a ritual.** `LordJob_Ritual.ApplyOutcome`'s postfix is checked by the
-  harness where it can be (its target, its parameter names, the `ended` flag it reads in a prefix, the duel's
-  unconditional call to the base). No step starts a real ritual, so `05` calls the consumption directly and the
-  message it raises is not asserted. This is a **known gap**, not a justified absence: a step that launches a
-  ritual through `RitualBehaviorWorker.TryExecuteOn` would close it.
-- **The Begin ritual window itself.** The offerings line is asked of the comp, not read off a drawn window, and
-  the preparation line is not asked at all (it needs role assignments).
+- **The message the hook raises at the end of a rite.** `14` proves the hook consumes; it does not assert the
+  message it puts on screen, whose singular and plural sentences are pinned by the harness (test 39).
+- **The ritual is picked, not chosen.** `14` runs the first ritual of the player's ideoligion that takes a ritual
+  spot and needs no role. If the fixture's ideoligion has none, the first step says so and lists what it tried;
+  the rite is ended by asking its lord job to apply its outcome, not by waiting out game hours. It is the least
+  certain feature of the suite: it drives the game's Begin ritual window and its Start method by reflection.
+- **The preparation line of the Begin ritual window** is not asked at all (it needs role assignments); the
+  offerings line is asked of the comp and shown in the window's capture, which a person reads.
 - **A new colony.** Every scenario loads the supplied `test-colony`. The mod adds nothing to a colony at
   creation, and what it does save (the preparation records, the owner lists) is exercised by a save and a reload.
   The NewColony companion is played once in a final pass, and is not part of this suite.
