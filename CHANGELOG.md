@@ -95,3 +95,17 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
   (`CompAssignableToPawn` scribes `assignedPawns` flat), no hotkey on the gizmo (`Misc4` = N
   collides with the storage settings clipboard), no owner overlay.
 - No vanilla altar is modified.
+
+## [0.1.0] — 2026-09-23
+
+Creation of the `PublishedFileId.txt` file (`Mod/About/PublishedFileId.txt`). The Workshop item,
+3806761333, was created by the first upload from the game's own button, and it stays private until
+it is switched to public by hand: Steam creates every item private and RimWorld never sets its
+visibility.
+
+This is a pre-publication, not a release. It says nothing about the mod being tested, and it is
+not the `prepublished` state of the workflow: it is the act that creates the item.
+
+What went up is `Mod/` as it stood at commit `5053f5d` (2026-09-20), and nothing in `Mod/` has
+changed between that commit and the upload (the id file was written on 2026-09-23). The content
+is the one described under 1.0.0 above, including its pre-release corrections of 2026-09-13.
