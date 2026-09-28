@@ -1,0 +1,13 @@
+# The optional providers of offerings, prerequisites above their consumers. Vanilla Plants Expanded is left out on purpose:
+# it opens only the cider gate, which the XML profiles of _tools/Check-Optional-Offerings.ps1 already cover.
+Romyashi.Perfumes 3013711969
+romyashi.bunnyframework 3015333853
+Romyashi.AnimaExpansion 3532147582
+OskarPotocki.VanillaFactionsExpanded.Core 2023507013
+VanillaExpanded.VBrewE 2186560858
+reo.RimScent 3645569466
+ocarina.rimscent.incense 3678830567
+nelim.rimscent.extended path:RimScentExtended/Mod
+nelim.rimscent.extended.incenseplus path:RimScentExtendedIncensePlusExpansion/Mod
+nelim.rumandshanties path:RumAndShanties/Mod
+nelim.pickletools.loadaudit path:PickleTools/LoadAudit/Mod

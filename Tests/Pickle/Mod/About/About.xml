@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>For the Occasion - Pickle tests</name>
+  <author>Nelim</author>
+  <packageId>nelim.fortheoccasion.pickletests</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>In-game functional tests for For the Occasion, run by Pickle. Development only: never published.
+
+Written, never run. The feature files are in Pickle/Features and the companion steps assembly is built from Tests/Pickle/Source against Mod/Assemblies/ForTheOccasion.dll. See TESTING.md at the root of the repository for every scenario, and Tests/Pickle/README.md for what is and is not covered.</description>
+  <modDependencies>
+    <li>
+      <packageId>nelim.fortheoccasion</packageId>
+      <displayName>For the Occasion</displayName>
+    </li>
+    <li>
+      <packageId>rimworks.pickle</packageId>
+      <displayName>Pickle</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>nelim.fortheoccasion</li>
+    <li>rimworks.pickle</li>
+  </loadAfter>
+</ModMetaData>

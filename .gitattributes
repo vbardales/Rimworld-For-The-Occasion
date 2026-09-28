@@ -11,3 +11,7 @@
 *.png binary
 *.jpg binary
 *.dll binary
+
+# Pickle pass maps are read by a bash `while read` in the staging script: a carriage return at the end of a
+# line would stay in the Workshop id and the line would not stage. Always LF, whatever the machine's setting.
+*.map text eol=lf

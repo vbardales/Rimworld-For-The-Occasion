@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-stage:        preTest   # workflow state names are used literally, no codes; see the 2026-09-28 audit
+stage:        done      # workflow state names are used literally, no codes; see the 2026-09-28 audit
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 dependencies: declared
@@ -20,28 +20,37 @@ settings_audit: complete
 audit_date:   2026-09-28
 audit_revision: 5053f5d when the checks ran; the plural fix is 8116a55 (it changed Source/, the two Keyed files and the DLL)
 automated_tests: 39 passed, 0 failed, 0 skipped, 2026-09-28, on 8116a55 and the DLL DD89BD90 (rebuilt to the same bytes as the one distributed)
+pickle_suite: written 2026-09-28, never run; 13 features (01 loading, 02 settings, 03 shortcut, 04 RIMMSQOL, 05 offering table, 06 dressing without a building, 07 outfit stand, 08 danger, 09 without Odyssey, 10 optional providers, 11 Shift Change, 12 and 13 restart), five pass maps
 remaining:
   - "resolved 2026-09-28 (options -> l10n): FTO_OfferingsConsumed now has .One and .Many in both languages, chosen by the count (commit 8116a55), with harness test 39, seen red on three mutations. The three translation fields are complete again. The 0.1.0 upload carries the earlier DLL."
-  - "blocking (preTest -> done, AUDIT.md step 8): no Pickle suite. Tests/Pickle/ does not exist, so the Gherkin scenarios are neither written nor justified as out of scope. What only a running game can show is real here: the settings window in both languages, the hidden shortcut and RIMMSQOL, the Begin ritual window with its two quality lines, a colonist walking to a stand and back. Running them is not asked at done, writing them is."
-  - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: TESTING.md scenarios 0 to 12 are all manual today, each must become a green Gherkin scenario or be listed as not applicable with its reason. The plan of passes is in TESTING.md."
+  - "resolved 2026-09-28 (preTest -> done, AUDIT.md step 8): the Pickle Gherkin suite is written in Tests/Pickle: 13 features, a steps assembly, five pass maps and a README that says what is covered and why what is left is not. Its step patterns compile with Pickle's own engine and every step line resolves without ambiguity (Tests/Pickle/Check-Steps.ps1). Scenario 9 (a birth) is justified as not applicable. Written, never run, and the first run is expected to need tuning."
+  - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: the suite now exists and TESTING.md scenarios 0 to 12 map to its features (Tests/Pickle/README.md); every one must run green, scenario 9 is justified as not applicable, and two gaps stay open until closed or justified: the hook that consumes at the end of a real ritual (no step launches one) and the Begin ritual window drawn as a window. Seven requests are needed, listed in TESTING.md."
   - "unverified (done -> tested): nothing has been observed in game on this build. Settings effects, persistence across restart, the disable-with-a-borrower regressions, the RIMMSQOL reveal, open and hide, English and French layout, Player.log, a new colony and an existing save, and Shift Change coexistence. Only the load (scenario 0) was ever seen, on 2026-09-04, on an older build."
   - "unverified: no customization mod has been tested in game, so no integration may be claimed. The shortcut is checked by its definition and by the native getter in the delivered code, not by a running RIMMSQOL."
   - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_06821e6c-e45a-492a-99fd-d6a96d00f8af
-updated:      2026-09-28, audit against AUDIT.md (stage options), then the plural fix: stage preTest
+updated:      2026-09-28, audit (options), plural fix (preTest), Pickle suite written (done)
 ---
 
 # For the Occasion — status
 
 ## Update after the fix — 2026-09-28
 
-**Stage: `preTest`.** The counted phrase was corrected the same day (commit `8116a55`): `FTO_OfferingsConsumed.One`
+**Stage: `preTest`, at that point.** The counted phrase was corrected the same day (commit `8116a55`): `FTO_OfferingsConsumed.One`
 and `.Many` in both languages, picked by the count, and harness test 39 pins them. The rebuilt DLL matches the
 distributed one (SHA256 `DD89BD90B58AEAD76455C8AF3B178F8127227EC7C0348C804D3D576A085C443F`), the harness passes
 39 of 39, `Check-DefInjected` reports 13 keys and 0 errors. `options -> l10n` is therefore met, and
 `l10n -> preTest` was already met, so the stage is `preTest`; `done` still needs the Pickle suite.
 In the audit below, the `l10n` row and the first item of "Strictly necessary" describe the state before this fix.
+
+**Stage: `done`, later the same day.** The Pickle Gherkin suite was written in `Tests/Pickle`: thirteen features,
+a steps assembly of 54 steps, five pass maps and a README with the scope and the reasons. It has never been run.
+`Tests/Pickle/Check-Steps.ps1` compiles every pattern with Pickle's own expression engine and matches all 312 step
+lines against Pickle's vocabulary and the companions the maps stage: none is invalid, ambiguous or undefined (it
+caught one undefined step while the suite was being written, `I save and reload`). The other criteria of
+`preTest -> done` were already met: the scenarios are written, and the 39 automated tests and the XML tests are
+green on the delivered DLL. What is left is the `done -> tested` gates, listed in `remaining`.
 
 ## Workflow audit — 2026-09-28
 

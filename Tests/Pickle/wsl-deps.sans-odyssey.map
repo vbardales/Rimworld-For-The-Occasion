@@ -1,0 +1,4 @@
+# This pass leaves Odyssey out: the outfit stand does not exist, so the no-building path is the only one.
+!ludeon.rimworld.odyssey
+nelim.pickletools.loadaudit path:PickleTools/LoadAudit/Mod
+nelim.pickletools.expansions path:PickleTools/ExpansionSteps/Mod

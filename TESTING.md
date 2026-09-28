@@ -304,8 +304,8 @@ any other customization mod before claiming that integration tested.
 
 The scenarios above are what has to be watched. This section is what has to be true before
 `STATUS.md` may say `tested`. It restates the step `done -> tested` of `AUDIT.md` for this mod, with
-what each rule comes to here. Today none of it is met: every scenario above is still a manual one
-and no Pickle suite exists.
+what each rule comes to here. Today none of it is met: the Pickle suite in `Tests/Pickle/` is written
+and has never been played, so no scenario has run in game and every one below is still to be observed.
 
 - **No scenario left in `@wip`.** A scenario set aside is either repaired and replayed, or deleted with
   its reason. One left standing is a scenario waiting, not one passed.
@@ -317,10 +317,13 @@ and no Pickle suite exists.
   shortcut), Shift Change (the shared stand) and the five providers of optional offerings named under
   "Passes this mod needs".
 - **No manual test left to validate.** Each of scenarios 0 to 12 is either written in Gherkin and
-  green, or listed here as not applicable with its reason. Nothing is left to tick by hand. The
-  `@review` captures still have to be opened and looked at, but that is the reading of an image a
-  scenario has already proved to be in the intended state, not one more manual test. Which scenario
-  becomes which is decided when the suite is written; it is not decided here.
+  green, or listed as not applicable with its reason. Nothing is left to tick by hand. The `@review`
+  captures still have to be opened and looked at, but that is the reading of an image a scenario has
+  already proved to be in the intended state, not one more manual test. The suite is written and
+  [Tests/Pickle/README.md](Tests/Pickle/README.md) has the table of which feature plays which scenario.
+  Scenario 9 (a birth) is listed there as not applicable, with its reason, and two things stay open
+  gaps rather than justified absences: the hook that consumes at the end of a real ritual, and the
+  Begin ritual window drawn as a window. Both have to be closed or justified before `tested`.
 - **A green run is not the proof.** Read `exitReason` before the numbers, compare the scenarios played
   with the features discovered, and open every `@review` capture. A green says the path was walked,
   not that the image shows a colonist in a robe or a ritual window with its two quality lines.
@@ -331,9 +334,12 @@ and no Pickle suite exists.
 
 ## Passes this mod needs
 
-A mod whose `TESTING.md` does not say how many passes it needs is tried, not tested. This is the plan,
-to be confirmed when the suite is written; the pass maps live in `Tests/Pickle/`, one `-DepMap` per
-request, and the language of a pass is fixed at launch, so each language is a request of its own.
+A mod whose `TESTING.md` does not say how many passes it needs is tried, not tested. The pass maps
+live in `Tests/Pickle/` (one `wsl-deps.<name>.map` each, never run) and the filter of each pass is in
+[Tests/Pickle/README.md](Tests/Pickle/README.md). One `-DepMap` per request, and the language of a pass
+is fixed at launch, so each language is a request of its own: seven requests in all: the first
+pass in English and in French, then one each for the pass without Odyssey, with RIMMSQOL, with Shift
+Change, with the optional providers, and for the restart pair.
 
 1. **Without the optional mods**, English and French: Core, the DLC, Harmony, Pickle, Ideology (a hard
    dependency, with Harmony) and this mod. It proves the mod stands alone and it is the only pass where
