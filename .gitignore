@@ -20,3 +20,20 @@ Source/bin/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# RimWorld converts every PNG to a .dds next to it the first time the game loads the mod. They are
+# a per-machine cache, regenerated on demand, and none has ever been tracked here. Ignoring them
+# keeps them out of git, not out of an upload: Steam sends Mod/ as it stands on disk, so a .dds
+# that appears there would ship.
+*.dds
+
+# Windows Explorer folder icons. desktop.ini in the root and in Mod/ points at Art/ModIcon.ico and
+# Art/Preview.ico, local conversions of the delivered images that make the folders recognisable in
+# the file manager. They are not part of the mod, and Mod/desktop.ini would reach the players.
+*.ico
+
+# Test evidence: Pickle's -EvidenceDir target and any other report kept on disk for the session that
+# reads it. Screenshots, films and Player.log make it grow without bound, so git carries none of it.
+# What is worth keeping goes to docs/runs/ as text (see docs/runs/README.md).
+Tests/Pickle/Evidence/
+evidence/
