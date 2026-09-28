@@ -8,6 +8,14 @@ every patch, every line of C# and every string in it was written for this mod.
 That is why it carries neither the `Nelim's` prefix nor a ` 1.6` suffix: there is no upstream mod
 whose place it could take, and nothing here needs anyone's permission to be redistributed.
 
+## Where this mod started
+
+**There is no origin repository.** `PUBLISHING.md` asks to start from the origin project's repository
+when it has one, and to say so when it does not. This is an original work: there is no upstream mod to
+clone or fork, no code to base this one on, and no pull request to send to anyone. The provenance
+actually used is the one described in this file: RimWorld's own classes, called and never copied, and
+the design notes of one MIT mod, read and not reused (see Shift Change below).
+
 ## RimWorld
 
 - **Author:** Ludeon Studios.
@@ -49,8 +57,9 @@ from any of them, and each entry simply does not exist when its mod is absent.
 
 ## Shift Change
 
-- **Author:** see its own `About.xml`.
-- **Source:** Steam Workshop [3783456242](https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242).
+- **Author:** MrBeverage.
+- **Source:** Steam Workshop [3783456242](https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242),
+  and its repository, [beverage/shift-change](https://github.com/beverage/shift-change).
 - **Licence:** MIT, with sources and a `docs/DESIGN.md` shipped inside the mod.
 
 **Nothing from it is reused.** Its design document was read before writing the wardrobe path, and
