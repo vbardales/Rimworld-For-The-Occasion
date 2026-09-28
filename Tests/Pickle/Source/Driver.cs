@@ -36,8 +36,13 @@ namespace ForTheOccasion.PickleSteps
         /// </summary>
         public static FtoSettings Settings(PickleContext ctx)
         {
-            var value = ForTheOccasionMod.Settings;
-            ctx.Require(value != null, "ForTheOccasionMod.Settings is null: the mod has not finished loading");
+            // The object the game itself writes when the settings window closes is the one the mod holds in
+            // its base class. The static field must be that same object: a step that swapped it for another
+            // (a re-read from disk) would change values the window never writes, and a "close the window
+            // and the file has it" scenario would fail for a reason that is not the mod's.
+            var value = Mod(ctx).GetSettings<FtoSettings>();
+            ctx.Require(value != null, "the mod holds no settings object: it has not finished loading");
+            ForTheOccasionMod.Settings = value;
             return value;
         }
 
@@ -99,11 +104,13 @@ namespace ForTheOccasion.PickleSteps
             ctx.Require(ModsConfig.IdeologyActive, "Ideology is not active: there are no rituals to announce");
             var ideos = Faction.OfPlayer?.ideos;
             ctx.Require(ideos != null, "the player's faction has no ideoligion tracker");
-            var ritual = ideos.AllIdeos
-                .SelectMany(i => i.PreceptsListForReading)
-                .OfType<Precept_Ritual>()
-                .FirstOrDefault(r => r.activeObligations != null && r.obligationTargetFilter != null);
-            ctx.Require(ritual != null, "the player's ideoligion has no ritual that takes an obligation");
+            // activeObligations is null until a first obligation is added (AddObligation creates the list),
+            // so it cannot be part of the choice: a ritual takes obligations when it has a target filter.
+            var all = ideos.AllIdeos.SelectMany(i => i.PreceptsListForReading).OfType<Precept_Ritual>().ToList();
+            var ritual = all.FirstOrDefault(r => r.obligationTargetFilter != null);
+            ctx.Require(ritual != null,
+                $"the player's ideoligions hold {all.Count} rituals and none has an obligation target filter: "
+                + string.Join(", ", all.Select(r => r.Label)));
             return ritual;
         }
     }

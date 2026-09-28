@@ -204,7 +204,11 @@ namespace ForTheOccasion.PickleSteps
         public void ReadBack(PickleContext ctx)
         {
             var mod = Driver.Mod(ctx);
-            ForTheOccasionMod.Settings = LoadedModManager.ReadModSettings<FtoSettings>(mod.Content.FolderName, mod.GetType().Name);
+            var fresh = LoadedModManager.ReadModSettings<FtoSettings>(mod.Content.FolderName, mod.GetType().Name);
+            // Into the live object, field by field, never in its place: see Driver.Settings.
+            var live = Driver.Settings(ctx);
+            foreach (var f in typeof(FtoSettings).GetFields(BindingFlags.Public | BindingFlags.Instance))
+                f.SetValue(live, f.GetValue(fresh));
             OutcomeCompInstaller.RescaleCurves();
         }
 

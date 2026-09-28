@@ -113,7 +113,8 @@ namespace ForTheOccasion.PickleSteps
                 .OfType<RitualOutcomeComp_Offerings>()
                 .FirstOrDefault();
             ctx.Require(comp != null, "no RitualOutcomeComp_Offerings is installed on any ritual outcome def: the installer at startup did not run or found nothing");
-            var factor = comp.GetQualityFactor(Driver.Ritual(ctx), new TargetInfo(table.Position, table.Map), null, null, null);
+            // The offerings comp reads only the target cell and the settings, so no ritual is needed.
+            var factor = comp.GetQualityFactor(null, new TargetInfo(table.Position, table.Map), null, null, null);
             ctx.Require(factor != null, "the offerings comp returned no line although offerings are enabled");
             ctx.Assert(factor.count == count, $"the offerings line reads '{factor.count}', expected '{count}'");
             var actual = (int)System.Math.Round(factor.quality * 100f);
