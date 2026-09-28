@@ -21,6 +21,11 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
   Anima Expansion; VBE cider also needs Vanilla Plants Expanded or its supported copy package.
 - Extended the out-of-game harness from 30 to 38 tests, including settings serialization and
   regression checks. Final in-game scenarios remain unexecuted.
+- The message shown when a rite consumes offerings now has a singular and a plural sentence in both
+  languages (`FTO_OfferingsConsumed.One` and `.Many`), chosen by the count. It used to put a count in
+  front of a plural noun, which reads "1 offerings" and "1 offrandes" as soon as another mod adds an
+  offering category that needs a single item. The harness is now 39 tests. The distributed assembly
+  differs from the one the `0.1.0` pre-publication uploaded.
 
 ### Offerings
 

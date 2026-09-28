@@ -265,11 +265,15 @@ function Get-TranslationKeys($method) {
     $lits = @(Get-StringLits $method)
     if ($lits.Count -eq 0) { return @() }
     $out = @()
+    $last = 0
     foreach ($c in (Get-CallSites $method)) {
         if ($c.Name -cne 'Translate') { continue }
-        $before = @($lits | Where-Object { $_.Offset -lt $c.Offset -and $_.Value -cmatch '^FTO_' })
-        if ($before.Count -eq 0) { continue }
-        $out += ($before | Sort-Object Offset | Select-Object -Last 1).Value
+        # Every FTO_ literal since the previous Translate call, not only the nearest one: a ternary
+        # that picks between a .One and a .Many key loads both before the single call.
+        $from = $last
+        $before = @($lits | Where-Object { $_.Offset -lt $c.Offset -and $_.Offset -ge $from -and $_.Value -cmatch '^FTO_' })
+        $last = $c.Offset
+        foreach ($b in $before) { $out += $b.Value }
     }
     $out
 }
@@ -1244,6 +1248,31 @@ Test-Case 'settings' 'closing settings applies the selected budget to actual ins
         if ($null -ne $prepList) { [void]$prepList.Remove($prep) }
         $settingsField.SetValue($null, $oldSettings)
         $logLock.Dispose()
+    }
+}
+
+Test-Case 'content' 'a counted message has a singular and a plural sentence in both languages' {
+    # TRANSLATIONS.md, counts and plurals: never a count in front of a pluralised noun. French
+    # pluralises every word whatever the count, so "1 offrandes" would be printed. Each form is a
+    # whole sentence with the count as {0}, and the code has to be able to ask for both.
+    $asked = New-Object 'System.Collections.Generic.HashSet[string]'
+    foreach ($m in (Get-AllMethods (ModTypeOf 'ForTheOccasion.Patch_ConsumeOfferings'))) {
+        foreach ($k in (Get-TranslationKeys $m)) { [void]$asked.Add($k) }
+    }
+    foreach ($form in 'FTO_OfferingsConsumed.One', 'FTO_OfferingsConsumed.Many') {
+        if (-not $asked.Contains($form)) { Fail "the ritual-end hook no longer asks for $form" }
+    }
+    if ($asked.Contains('FTO_OfferingsConsumed')) { Fail 'the bare FTO_OfferingsConsumed is asked for again, with a count in front of a noun' }
+    foreach ($lang in 'English', 'French') {
+        $x = Get-ModXml "Languages\$lang\Keyed\ForTheOccasion.xml"
+        $one = $x.SelectSingleNode('/LanguageData/*[local-name()="FTO_OfferingsConsumed.One"]')
+        $many = $x.SelectSingleNode('/LanguageData/*[local-name()="FTO_OfferingsConsumed.Many"]')
+        if (-not $one -or -not $many) { Fail "$lang lacks a .One or a .Many form of FTO_OfferingsConsumed" }
+        foreach ($n in $one, $many) {
+            if ($n.InnerText -cnotmatch '^\S.*\{0\}') { Fail "$lang $($n.Name) has no {0} for the count" }
+        }
+        if ($one.InnerText -ceq $many.InnerText) { Fail "$lang uses the same sentence for one and for many" }
+        if ($x.SelectSingleNode('/LanguageData/*[local-name()="FTO_OfferingsConsumed"]')) { Fail "$lang still defines the bare FTO_OfferingsConsumed" }
     }
 }
 

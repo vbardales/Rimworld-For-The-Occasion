@@ -135,7 +135,9 @@ namespace ForTheOccasion
 
                 int consumed = OfferingScan.Consume(__instance.Spot, __instance.Map);
                 if (consumed > 0)
-                    Messages.Message("FTO_OfferingsConsumed".Translate(consumed),
+                    // The noun is counted, so each form is a whole sentence of its own: never a count
+                    // in front of a pluralised word (French pluralises regardless of the count).
+                    Messages.Message((consumed == 1 ? "FTO_OfferingsConsumed.One" : "FTO_OfferingsConsumed.Many").Translate(consumed),
                         new TargetInfo(__instance.Spot, __instance.Map), MessageTypeDefOf.NeutralEvent, false);
             }
             catch (Exception e)

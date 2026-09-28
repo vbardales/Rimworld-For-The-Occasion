@@ -219,7 +219,7 @@ dotnet build Source/ForTheOccasion.csproj
 
 ## Validating after a change
 
-Thirty-eight functional tests, which need RimWorld installed but never start it:
+Thirty-nine functional tests, which need RimWorld installed but never start it:
 
 ```
 powershell -ExecutionPolicy Bypass -File _tools\Run-Functional-Tests.ps1

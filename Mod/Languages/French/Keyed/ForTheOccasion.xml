@@ -32,7 +32,8 @@
   <!-- In game -->
   <FTO_OfferingsFactor>Offrandes</FTO_OfferingsFactor>
   <FTO_OfferingsTooltip>Nombre de sortes d'offrandes distinctes posées sur les tables d'offrandes de la zone de rassemblement. C'est la variété qui compte, pas la quantité. Elles sont consommées à la fin du rituel.</FTO_OfferingsTooltip>
-  <FTO_OfferingsConsumed>La cérémonie a consommé {0} offrandes.</FTO_OfferingsConsumed>
+  <FTO_OfferingsConsumed.One>La cérémonie a consommé {0} offrande.</FTO_OfferingsConsumed.One>
+  <FTO_OfferingsConsumed.Many>La cérémonie a consommé {0} offrandes.</FTO_OfferingsConsumed.Many>
 
   <FTO_PreparedFactor>Habillés pour l'occasion</FTO_PreparedFactor>
   <FTO_PreparedTooltip>Participants en tenue de cérémonie, présents sur au moins la moitié du rituel. Le chiffre affiché ici est le nombre de ceux qui sont déjà prêts : un rituel lancé à froid part de zéro.</FTO_PreparedTooltip>

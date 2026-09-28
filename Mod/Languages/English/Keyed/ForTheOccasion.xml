@@ -32,7 +32,8 @@
   <!-- In game -->
   <FTO_OfferingsFactor>Offerings</FTO_OfferingsFactor>
   <FTO_OfferingsTooltip>Distinct kinds of offering laid out on offering tables in the gathering area. Variety is what counts, not quantity. They are consumed when the ritual ends.</FTO_OfferingsTooltip>
-  <FTO_OfferingsConsumed>The ceremony consumed {0} offerings.</FTO_OfferingsConsumed>
+  <FTO_OfferingsConsumed.One>The ceremony consumed {0} offering.</FTO_OfferingsConsumed.One>
+  <FTO_OfferingsConsumed.Many>The ceremony consumed {0} offerings.</FTO_OfferingsConsumed.Many>
 
   <FTO_PreparedFactor>Dressed for the occasion</FTO_PreparedFactor>
   <FTO_PreparedTooltip>Participants in ceremonial clothes, present for at least half of the rite. Shown here is how many are already dressed: launching a ritual cold starts this at zero.</FTO_PreparedTooltip>

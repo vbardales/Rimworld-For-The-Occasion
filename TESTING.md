@@ -43,7 +43,7 @@ the cross-reference failed. They now name `Romyashi.Perfumes` and `Romyashi.Anim
 
 ## The other half, which does not need a colony
 
-`_tools/Run-Functional-Tests.ps1` runs thirty-eight tests without starting the
+`_tools/Run-Functional-Tests.ps1` runs thirty-nine tests without starting the
 game. Run it before playing any of the scenarios below, and again before a release:
 
 ```powershell
