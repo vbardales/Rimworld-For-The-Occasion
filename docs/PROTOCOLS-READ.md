@@ -51,7 +51,7 @@ It was not read.
 | File | State when read |
 | --- | --- |
 | `STATUS.md` | Rewritten by this audit; `stage: options`, `settings_audit: complete`, and the three translation fields `partial`. The older audits stay below it as history. |
-| `README.md` | Read. It already says thirty-eight tests and points at `TESTING.md`, which moved from `docs/` to the root today. |
+| `README.md` | Read. It says thirty-nine tests after the fix and points at `TESTING.md`, which moved from `docs/` to the root today. |
 | `CHANGELOG.md` | Read. `0.1.0` (creation of the `PublishedFileId.txt` file) added today under the unreleased `1.0.0`. |
 | `ATTRIBUTION.md`, `LICENSE` | Read. Each is byte-identical to its copy in `Mod/`. `ATTRIBUTION.md` now says there is no origin repository and names Shift Change's author and repository. |
 | `TESTING.md` | Moved to the root; gained "What `tested` requires", "Passes this mod needs" and "Evidence to keep". Scenarios 0 to 12 are all manual; only the load (scenario 0) was ever observed, on 2026-09-04 and on an older build. |

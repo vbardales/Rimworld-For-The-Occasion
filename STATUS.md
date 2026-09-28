@@ -1,7 +1,7 @@
 ---
-localization: partial
-translation_en: partial
-translation_fr: partial
+localization: complete
+translation_en: complete
+translation_fr: complete
 mod:          For the Occasion
 packageId:    nelim.fortheoccasion
 repo:         Rimworld-For-The-Occasion
@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-stage:        options   # workflow state names are used literally, no codes; see the 2026-09-28 audit
+stage:        preTest   # workflow state names are used literally, no codes; see the 2026-09-28 audit
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 dependencies: declared
@@ -18,10 +18,10 @@ tested_on:
 workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
 settings_audit: complete
 audit_date:   2026-09-28
-audit_revision: 5053f5d when the checks ran, then the audit's own commits up to 018d573 (Source/, the DLL and every Mod/ file except ATTRIBUTION.md and the id file are unchanged since 5053f5d)
-automated_tests: 38 passed, 0 failed, 0 skipped, 2026-09-28, on e9b1bc7 and the DLL 9FF63135 (same file as the one distributed)
+audit_revision: 5053f5d when the checks ran; the plural fix is 8116a55 (it changed Source/, the two Keyed files and the DLL)
+automated_tests: 39 passed, 0 failed, 0 skipped, 2026-09-28, on 8116a55 and the DLL DD89BD90 (rebuilt to the same bytes as the one distributed)
 remaining:
-  - "defect (options -> l10n, TRANSLATIONS.md counts and plurals, 2026-09-25): the message 'The ceremony consumed {0} offerings.' / 'La cérémonie a consommé {0} offrandes.' (FTO_OfferingsConsumed, Source/Preparation/Patch_RitualLifecycle.cs line 138) builds a plural by putting a count in front of a noun and has no .One and .Many keys in either language. It reads '1 offerings' when the count is 1. The four shipped categories need 2, 4, 4 and 50, so the count is 2 or more today; a category added by another mod with countRequired 1 makes it reachable, and this mod advertises exactly that. Fix, to be made by whoever develops: FTO_OfferingsConsumed.One and .Many in both Keyed files, chosen by the count in Patch_RitualLifecycle, a harness test for both keys, a rebuild, then the three translation fields back to complete."
+  - "resolved 2026-09-28 (options -> l10n): FTO_OfferingsConsumed now has .One and .Many in both languages, chosen by the count (commit 8116a55), with harness test 39, seen red on three mutations. The three translation fields are complete again. The 0.1.0 upload carries the earlier DLL."
   - "blocking (preTest -> done, AUDIT.md step 8): no Pickle suite. Tests/Pickle/ does not exist, so the Gherkin scenarios are neither written nor justified as out of scope. What only a running game can show is real here: the settings window in both languages, the hidden shortcut and RIMMSQOL, the Begin ritual window with its two quality lines, a colonist walking to a stand and back. Running them is not asked at done, writing them is."
   - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: TESTING.md scenarios 0 to 12 are all manual today, each must become a green Gherkin scenario or be listed as not applicable with its reason. The plan of passes is in TESTING.md."
   - "unverified (done -> tested): nothing has been observed in game on this build. Settings effects, persistence across restart, the disable-with-a-borrower regressions, the RIMMSQOL reveal, open and hide, English and French layout, Player.log, a new colony and an existing save, and Shift Change coexistence. Only the load (scenario 0) was ever seen, on 2026-09-04, on an older build."
@@ -29,10 +29,19 @@ remaining:
   - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_06821e6c-e45a-492a-99fd-d6a96d00f8af
-updated:      2026-09-28, workflow audit against AUDIT.md: stage retained options, was done
+updated:      2026-09-28, audit against AUDIT.md (stage options), then the plural fix: stage preTest
 ---
 
 # For the Occasion — status
+
+## Update after the fix — 2026-09-28
+
+**Stage: `preTest`.** The counted phrase was corrected the same day (commit `8116a55`): `FTO_OfferingsConsumed.One`
+and `.Many` in both languages, picked by the count, and harness test 39 pins them. The rebuilt DLL matches the
+distributed one (SHA256 `DD89BD90B58AEAD76455C8AF3B178F8127227EC7C0348C804D3D576A085C443F`), the harness passes
+39 of 39, `Check-DefInjected` reports 13 keys and 0 errors. `options -> l10n` is therefore met, and
+`l10n -> preTest` was already met, so the stage is `preTest`; `done` still needs the Pickle suite.
+In the audit below, the `l10n` row and the first item of "Strictly necessary" describe the state before this fix.
 
 ## Workflow audit — 2026-09-28
 

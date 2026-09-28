@@ -26,7 +26,7 @@ The log lives at:
 | Loads without error | **observed**, 2026-09-04 |
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
 | Settings correction harness | **38 of 38 pass**, 2026-09-13 and again 2026-09-28 on `e9b1bc7`, the same DLL; see docs/runs/2026-09-13-validation.md and docs/runs/2026-09-28.md |
-| Workflow audit against `AUDIT.md` | 2026-09-28, stage `options`; see `STATUS.md` |
+| Workflow audit against `AUDIT.md` | 2026-09-28, stage `options`, then `preTest` after the plural fix; see `STATUS.md` |
 | Every scenario below | **never observed** |
 
 The load produced exactly the three expected lines:
