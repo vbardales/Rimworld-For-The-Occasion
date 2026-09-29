@@ -58,7 +58,11 @@ namespace ForTheOccasion.PickleSteps
             {
                 var roles = ritual.behavior?.def?.roles;
                 var needsRole = roles != null && roles.Any(r => r.required);
-                var accepts = ritual.behavior != null && ritual.CanUseTarget(target, null).canUse;
+                // A ritual built for a different kind of target (a corpse, a pawn) can throw when asked
+                // about a bare RitualSpot rather than answer false: that is not a candidate either.
+                bool accepts;
+                try { accepts = ritual.behavior != null && ritual.CanUseTarget(target, null).canUse; }
+                catch (Exception e) { accepts = false; tried.Add($"{ritual.Label}: threw asking CanUseTarget ({e.Message})"); continue; }
                 tried.Add($"{ritual.Label} (needs a role: {needsRole}, accepts the spot: {accepts})");
                 if (pick == null && accepts && !needsRole) pick = ritual;
             }

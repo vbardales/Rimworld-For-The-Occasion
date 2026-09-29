@@ -98,20 +98,43 @@ namespace ForTheOccasion.PickleSteps
             return method;
         }
 
-        /// <summary>The first ritual precept the player's ideoligion owns and can carry an obligation.</summary>
-        public static Precept_Ritual Ritual(PickleContext ctx)
+        /// <summary>
+        /// Every ritual precept the player's ideoligion owns that has an obligation target filter, most
+        /// permissive first: a filter is not proof that building an obligation for it will not throw (one
+        /// can need a corpse, a specific map state, a quest), so a caller that actually builds one must
+        /// try candidates in turn rather than trust the first.
+        /// </summary>
+        public static List<Precept_Ritual> Rituals(PickleContext ctx)
         {
             ctx.Require(ModsConfig.IdeologyActive, "Ideology is not active: there are no rituals to announce");
             var ideos = Faction.OfPlayer?.ideos;
             ctx.Require(ideos != null, "the player's faction has no ideoligion tracker");
             // activeObligations is null until a first obligation is added (AddObligation creates the list),
             // so it cannot be part of the choice: a ritual takes obligations when it has a target filter.
-            var all = ideos.AllIdeos.SelectMany(i => i.PreceptsListForReading).OfType<Precept_Ritual>().ToList();
-            var ritual = all.FirstOrDefault(r => r.obligationTargetFilter != null);
-            ctx.Require(ritual != null,
-                $"the player's ideoligions hold {all.Count} rituals and none has an obligation target filter: "
-                + string.Join(", ", all.Select(r => r.Label)));
-            return ritual;
+            var all = ideos.AllIdeos.SelectMany(i => i.PreceptsListForReading).OfType<Precept_Ritual>()
+                .Where(r => r.obligationTargetFilter != null).ToList();
+            ctx.Require(all.Count > 0,
+                "the player's ideoligions hold no ritual with an obligation target filter: "
+                + string.Join(", ", ideos.AllIdeos.SelectMany(i => i.PreceptsListForReading).OfType<Precept_Ritual>().Select(r => r.Label)));
+            return all;
+        }
+
+        /// <summary>The first ritual precept that can actually build an obligation right now.</summary>
+        public static Precept_Ritual Ritual(PickleContext ctx) => RitualWithObligation(ctx).Key;
+
+        /// <summary>Builds and returns the obligation too, since building it is the whole test.</summary>
+        public static KeyValuePair<Precept_Ritual, RitualObligation> RitualWithObligation(PickleContext ctx)
+        {
+            var candidates = Rituals(ctx);
+            var failures = new List<string>();
+            foreach (var candidate in candidates)
+            {
+                try { return new KeyValuePair<Precept_Ritual, RitualObligation>(candidate, new RitualObligation(candidate, false)); }
+                catch (Exception e) { failures.Add($"{candidate.Label}: {e.Message}"); }
+            }
+            ctx.Require(false,
+                $"none of the {candidates.Count} candidate rituals could build an obligation: " + string.Join(" | ", failures));
+            return default;
         }
     }
 

@@ -13,6 +13,7 @@ Written, never run. The feature files are in Pickle/Features and the companion s
     <li>
       <packageId>nelim.fortheoccasion</packageId>
       <displayName>For the Occasion</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3806761333</steamWorkshopUrl>
     </li>
     <li>
       <packageId>rimworks.pickle</packageId>

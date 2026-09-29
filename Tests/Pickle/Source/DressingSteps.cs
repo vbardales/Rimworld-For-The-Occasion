@@ -61,10 +61,9 @@ namespace ForTheOccasion.PickleSteps
         [Given("For the Occasion: a ritual obligation is announced")]
         public void Announce(PickleContext ctx)
         {
-            var ritual = Driver.Ritual(ctx);
-            var obligation = new RitualObligation(ritual, false);
-            ritual.AddObligation(obligation);
-            Made(ctx).Obligations.Add(new KeyValuePair<Precept_Ritual, RitualObligation>(ritual, obligation));
+            var pair = Driver.RitualWithObligation(ctx);
+            pair.Key.AddObligation(pair.Value);
+            Made(ctx).Obligations.Add(pair);
         }
 
         /// <summary>A window of a few hundred ticks keeps a scenario short: the obligation is already this many ticks old when it stops counting.</summary>
@@ -283,6 +282,10 @@ namespace ForTheOccasion.PickleSteps
             var map = Driver.Map(ctx);
             var parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
             parms.forced = true;
+            // The default arrival mode walks the raid in from the map edge, which can take far more ticks
+            // to be noticed than a scenario's window: drop the raiders in instead, so the danger watcher
+            // has something to rate on the very next recalculation.
+            parms.raidArrivalMode = PawnsArrivalModeDefOf.CenterDrop;
             ctx.Require(IncidentDefOf.RaidEnemy.Worker.TryExecute(parms), "the game would not run a RaidEnemy incident on this map");
             await ctx.WaitTicks(250);
             await ctx.WaitUntil(() => map.dangerWatcher.DangerRating != StoryDanger.None, 30f);
