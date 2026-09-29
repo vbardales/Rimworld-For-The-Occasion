@@ -122,18 +122,28 @@ namespace ForTheOccasion.PickleSteps
         /// <summary>The first ritual precept that can actually build an obligation right now.</summary>
         public static Precept_Ritual Ritual(PickleContext ctx) => RitualWithObligation(ctx).Key;
 
-        /// <summary>Builds and returns the obligation too, since building it is the whole test.</summary>
+        /// <summary>
+        /// Builds and adds the obligation too, since building one that survives AddObligation is the
+        /// whole test: the constructor alone did not always throw for a ritual that later broke inside
+        /// AddObligation (which also recalculates the target and can read a null field the constructor
+        /// never touches).
+        /// </summary>
         public static KeyValuePair<Precept_Ritual, RitualObligation> RitualWithObligation(PickleContext ctx)
         {
             var candidates = Rituals(ctx);
             var failures = new List<string>();
             foreach (var candidate in candidates)
             {
-                try { return new KeyValuePair<Precept_Ritual, RitualObligation>(candidate, new RitualObligation(candidate, false)); }
+                try
+                {
+                    var obligation = new RitualObligation(candidate, false);
+                    candidate.AddObligation(obligation);
+                    return new KeyValuePair<Precept_Ritual, RitualObligation>(candidate, obligation);
+                }
                 catch (Exception e) { failures.Add($"{candidate.Label}: {e.Message}"); }
             }
             ctx.Require(false,
-                $"none of the {candidates.Count} candidate rituals could build an obligation: " + string.Join(" | ", failures));
+                $"none of the {candidates.Count} candidate rituals could build and add an obligation: " + string.Join(" | ", failures));
             return default;
         }
     }

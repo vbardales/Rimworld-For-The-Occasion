@@ -61,8 +61,8 @@ namespace ForTheOccasion.PickleSteps
         [Given("For the Occasion: a ritual obligation is announced")]
         public void Announce(PickleContext ctx)
         {
+            // Driver.RitualWithObligation already calls AddObligation: adding a second time was the bug.
             var pair = Driver.RitualWithObligation(ctx);
-            pair.Key.AddObligation(pair.Value);
             Made(ctx).Obligations.Add(pair);
         }
 
@@ -284,9 +284,14 @@ namespace ForTheOccasion.PickleSteps
             parms.forced = true;
             // The default arrival mode walks the raid in from the map edge, which can take far more ticks
             // to be noticed than a scenario's window: drop the raiders in instead, so the danger watcher
-            // has something to rate on the very next recalculation.
+            // has something to rate on the very next recalculation. The default strategy can also pick a
+            // raid with no pawns on the map at all (a poison or a mortar barrage): force a strategy that
+            // always lands fighting colonists in melee/ranged range right away.
             parms.raidArrivalMode = PawnsArrivalModeDefOf.CenterDrop;
+            parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
             ctx.Require(IncidentDefOf.RaidEnemy.Worker.TryExecute(parms), "the game would not run a RaidEnemy incident on this map");
+            var before = map.mapPawns.AllPawnsSpawned.Count(p => p.HostileTo(Faction.OfPlayer));
+            ctx.Require(before > 0, "the forced raid put no hostile pawn on the map: dangerWatcher has nothing to rate");
             await ctx.WaitTicks(250);
             await ctx.WaitUntil(() => map.dangerWatcher.DangerRating != StoryDanger.None, 30f);
         }
