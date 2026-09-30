@@ -1,7 +1,7 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: complete
+translation_fr: partial   # gender-agreement pass done 2026-09-30, no switch needed anywhere; awaiting Virginie's own review (TRANSLATIONS.md section 3)
 mod:          For the Occasion
 packageId:    nelim.fortheoccasion
 repo:         Rimworld-For-The-Occasion
@@ -23,6 +23,7 @@ audit_revision: 5053f5d when the checks ran; the plural fix is 8116a55 (it chang
 automated_tests: 39 passed, 0 failed, 0 skipped, 2026-09-28, on 8116a55 and the DLL DD89BD90 (rebuilt to the same bytes as the one distributed)
 pickle_suite: written 2026-09-28; 14 features (01 loading, 02 settings, 03 shortcut, 04 RIMMSQOL, 05 offering table, 06 dressing without a building, 07 outfit stand, 08 danger, 09 without Odyssey, 10 optional providers, 11 Shift Change, 12 and 13 restart, 14 the ritual hook), five pass maps. Three runs so far, `sans-facultatifs`; docs/runs/2026-09-28.md (runs 1-2) and docs/runs/2026-09-29.md (run 3) have the detail. Run 3 (c9be), 2026-09-29: 102 passed, 14 failed, 13 skipped of 129; settings/offerings/log/Odyssey-pass all confirmed fixed; two more test-side bugs fixed (a double AddObligation call, a raid strategy that could land no pawn on the map); feature 14 (the ritual hook) now fails cleanly on a fixture limitation flagged to the owner (the test-colony ideoligion has no ritual that both skips a required role and accepts a bare RitualSpot) — not yet resolved, so `tested` is not reached
 remaining:
+  - "unverified: French review by Virginie (TRANSLATIONS.md section 3, 2026-09-30 rule). The session's gender-agreement pass found no text needing a switch, but only Virginie's own reading certifies French quality; translation_fr stays partial until she reviews revision f2ffec3, flagged texts FTO_TattooDesc and FTO_PreparedTooltip."
   - "resolved 2026-09-28 (options -> l10n): FTO_OfferingsConsumed now has .One and .Many in both languages, chosen by the count (commit 8116a55), with harness test 39, seen red on three mutations. The three translation fields are complete again. The 0.1.0 upload carries the earlier DLL."
   - "resolved 2026-09-28 (preTest -> done, AUDIT.md step 8): the Pickle Gherkin suite is written in Tests/Pickle: 14 features, a steps assembly, five pass maps and a README that says what is covered and why what is left is not. Its step patterns compile with Pickle's own engine and every step line resolves without ambiguity (Tests/Pickle/Check-Steps.ps1). Scenario 9 (a birth) is justified as not applicable. Written, never run, and the first run is expected to need tuning."
   - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: the suite now exists and TESTING.md scenarios 0 to 12 map to its features (Tests/Pickle/README.md); every one must run green, scenario 9 is justified as not applicable, and one risk stays open: feature 14 (the hook that consumes at the end of a real ritual, begun from the game's own Begin ritual window) has never run, and if the test colony cannot begin such a ritual the gap reopens and must be closed or justified. Seven requests are needed, listed in TESTING.md."
@@ -250,6 +251,23 @@ not resolve the custom class (eight UNKNOWN TYPE warnings); rerun with
 and no unknown-type warning. OfferingCategoryDef inherits native translatable
 label/description from Verse.Def. In-game formatting and language switching remain
 unverified. Formal finalization waits for the settings gate, not missing resources.
+
+**French gender-agreement pass, 2026-09-30 (TRANSLATIONS.md section 3), revision f2ffec3.**
+Read every French text this mod ships: `Mod/Languages/French/Keyed/ForTheOccasion.xml`
+(25 entries), and DefInjected for `ForTheOccasion.OfferingCategoryDef` (4 entries),
+`JobDef` (1), `ThingDef` (1), `MainButtonDef` (2). No `{PAWN_gender ? : : }` switch
+exists anywhere in the mod (grep for `PAWN`, `_gender`, `RulePack` over
+`Mod/Languages` and `Source`: no match), and none was needed: no owned text
+interpolates or otherwise names one gendered pawn next to an agreeing adjective or
+past participle. The texts that come closest are all plural-generic settings prose
+("les colons s'apprêtent", "Ceux qui en portent déjà un ne sont pas touchés",
+"Participants ... présents") or a reflexive verb with no gender form
+("se prépare pour l'occasion."); `{0}` interpolations are a count or a pawn's own
+name, never an adjective. Flagged for Virginie regardless, since this is a reading,
+not a pattern match: `FTO_TattooDesc` and `FTO_PreparedTooltip` are the two texts
+whose plural-generic wording is least obviously exempt on a first read.
+`translation_fr` stays `partial`: only Virginie's own review can set it `complete`
+(TRANSLATIONS.md section 3).
 
 ### Executed checks and boundaries
 
