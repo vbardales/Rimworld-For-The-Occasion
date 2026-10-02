@@ -27,7 +27,8 @@ The log lives at:
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
 | Settings correction harness | **38 of 38 pass**, 2026-09-13 and again 2026-09-28 on `e9b1bc7`, the same DLL; see docs/runs/2026-09-13-validation.md and docs/runs/2026-09-28.md |
 | Workflow audit against `AUDIT.md` | 2026-09-28, stage `options`, then `preTest` after the plural fix; see `STATUS.md` |
-| Every scenario below | **never observed** |
+| The Pickle suite | **played in the WSL, English only**, 2026-09-29/30, all seven passes once: offerings, RIMMSQOL and restart green; features 06, 07, 08, 14 and the Shift Change reload red; see docs/runs/2026-09-30.md |
+| Every scenario below | **not yet seen as a whole**; no person has watched the game |
 
 The load produced exactly the three expected lines:
 
@@ -304,8 +305,8 @@ any other customization mod before claiming that integration tested.
 
 The scenarios above are what has to be watched. This section is what has to be true before
 `STATUS.md` may say `tested`. It restates the step `done -> tested` of `AUDIT.md` for this mod, with
-what each rule comes to here. Today none of it is met: the Pickle suite in `Tests/Pickle/` is written
-and has never been played, so no scenario has run in game and every one below is still to be observed.
+what each rule comes to here. Today it is not met: the Pickle suite in `Tests/Pickle/` has been played once per pass (docs/runs/2026-09-30.md)
+and several features are red, so those scenarios are still to be replayed green.
 
 - **No scenario left in `@wip`.** A scenario set aside is either repaired and replayed, or deleted with
   its reason. One left standing is a scenario waiting, not one passed.
@@ -337,7 +338,7 @@ and has never been played, so no scenario has run in game and every one below is
 ## Passes this mod needs
 
 A mod whose `TESTING.md` does not say how many passes it needs is tried, not tested. The pass maps
-live in `Tests/Pickle/` (one `wsl-deps.<name>.map` each, never run) and the filter of each pass is in
+live in `Tests/Pickle/` (one `wsl-deps.<name>.map` each, each run once) and the filter of each pass is in
 [Tests/Pickle/README.md](Tests/Pickle/README.md). One `-DepMap` per request, and the language of a pass
 is fixed at launch, so each language is a request of its own: seven requests in all: the first
 pass in English and in French, then one each for the pass without Odyssey, with RIMMSQOL, with Shift

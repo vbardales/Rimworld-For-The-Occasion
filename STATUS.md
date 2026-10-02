@@ -9,33 +9,74 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-stage:        done      # workflow state names are used literally, no codes; see the 2026-09-28 audit
+stage:        done      # one of port, showcase, preTest, done, tested, published; `done` is its own code
+workflow_stage: done
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
 dependencies: declared
 showcase:     complete
-tested_on:
+tested_on:    2026-09-30, headless Pickle in the WSL, English only, partial and red (see pickle_suite); no French pass, nothing seen by a person in the Windows game
 workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
 settings_audit: complete
-audit_date:   2026-09-28
-audit_revision: 5053f5d when the checks ran; the plural fix is 8116a55 (it changed Source/, the two Keyed files and the DLL)
-automated_tests: 39 passed, 0 failed, 0 skipped, 2026-09-28, on 8116a55 and the DLL DD89BD90 (rebuilt to the same bytes as the one distributed)
-pickle_suite: written 2026-09-28; 14 features (01 loading, 02 settings, 03 shortcut, 04 RIMMSQOL, 05 offering table, 06 dressing without a building, 07 outfit stand, 08 danger, 09 without Odyssey, 10 optional providers, 11 Shift Change, 12 and 13 restart, 14 the ritual hook), five pass maps. Three runs so far, `sans-facultatifs`; docs/runs/2026-09-28.md (runs 1-2) and docs/runs/2026-09-29.md (run 3) have the detail. Run 3 (c9be), 2026-09-29: 102 passed, 14 failed, 13 skipped of 129; settings/offerings/log/Odyssey-pass all confirmed fixed; two more test-side bugs fixed (a double AddObligation call, a raid strategy that could land no pawn on the map); feature 14 (the ritual hook) now fails cleanly on a fixture limitation flagged to the owner (the test-colony ideoligion has no ritual that both skips a required role and accepts a bare RitualSpot) — not yet resolved, so `tested` is not reached
+audit_date:   2026-10-02
+audit_revision: 84a70dc, tree clean apart from untracked documents; the last change to Source/, Mod/Languages and the DLL is 8116a55
+automated_tests: 39 passed, 0 failed, 0 skipped, 2026-10-02, replayed on 84a70dc with the DLL DD89BD90 (not rebuilt this time; the distributed file)
+pickle_suite: written 2026-09-28; 14 features (01 loading, 02 settings, 03 shortcut, 04 RIMMSQOL, 05 offering table, 06 dressing without a building, 07 outfit stand, 08 danger, 09 without Odyssey, 10 optional providers, 11 Shift Change, 12 and 13 restart, 14 the ritual hook), five pass maps. Three runs so far, `sans-facultatifs`; docs/runs/2026-09-28.md (runs 1-2) and docs/runs/2026-09-29.md (run 3) have the detail. Run 3 (c9be), 2026-09-29: 102 passed, 14 failed, 13 skipped of 129; settings/offerings/log/Odyssey-pass all confirmed fixed; two more test-side bugs fixed (a double AddObligation call, a raid strategy that could land no pawn on the map); feature 14 (the ritual hook) now fails cleanly on a fixture limitation flagged to the owner (the test-colony ideoligion has no ritual that both skips a required role and accepts a bare RitualSpot) — not yet resolved, so `tested` is not reached. Since then (docs/runs/2026-09-30.md): fourth run 2026-09-29, 104 passed, 12 failed, 13 skipped of 129, the same features red (06 dressing, 07 stand, 08 danger, 14 ritual hook); `avec-offrandes` 5/5 green, `avec-rimmsqol` 4/4 green, restart pair green; `sans-odyssey` watchdog-timeout, feature 06 times out; `avec-shiftchange` 1 of 2, the reload loses the owner. All passes have now run once in English, none is fully green
 remaining:
-  - "unverified: French review by Virginie (TRANSLATIONS.md section 3, 2026-09-30 rule). The session's gender-agreement pass found no text needing a switch, but only Virginie's own reading certifies French quality; translation_fr stays partial until she reviews revision f2ffec3, flagged texts FTO_TattooDesc and FTO_PreparedTooltip."
+  - "unverified: French review by Virginie (TRANSLATIONS.md section 3, 2026-09-30 rule). The session's gender-agreement pass found no text needing a switch, but only Virginie's own reading certifies French quality; translation_fr stays partial until she reviews. The review file is FRENCH_REVIEW.md at the root (generated 2026-10-02 by scripts/Make-FrenchReview.ps1 at revision 8116a55, the last change to the shipped texts; flags in french-review-flags.json: FTO_TattooDesc and FTO_PreparedTooltip)."
+  - "defect (done -> tested): scenarios red on the fourth run and the Shift Change pass: features 06, 07, 08 (no preparation record after Announce; the outfit stays unchanged; the raid step times out), feature 14 (the fixture ideoligion offers no ritual that takes a bare RitualSpot without a role), and the Shift Change reload ('ceremonial owners are [Belle], not Aurel'). Whether each is a mod defect or a test defect is not yet established from the reports. None has a green replay on a build that contains a fix."
+  - "unverified (done -> tested): a French pass of the suite (every pass so far ran in English), the @review captures (only the hidden-shortcut capture was opened), and the pass `sans-odyssey` played to its end (it hit the watchdog)."
   - "resolved 2026-09-28 (options -> l10n): FTO_OfferingsConsumed now has .One and .Many in both languages, chosen by the count (commit 8116a55), with harness test 39, seen red on three mutations. The three translation fields are complete again. The 0.1.0 upload carries the earlier DLL."
   - "resolved 2026-09-28 (preTest -> done, AUDIT.md step 8): the Pickle Gherkin suite is written in Tests/Pickle: 14 features, a steps assembly, five pass maps and a README that says what is covered and why what is left is not. Its step patterns compile with Pickle's own engine and every step line resolves without ambiguity (Tests/Pickle/Check-Steps.ps1). Scenario 9 (a birth) is justified as not applicable. Written, never run, and the first run is expected to need tuning."
-  - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read; (3) no manual test left to validate: the suite now exists and TESTING.md scenarios 0 to 12 map to its features (Tests/Pickle/README.md); every one must run green, scenario 9 is justified as not applicable, and one risk stays open: feature 14 (the hook that consumes at the end of a real ritual, begun from the game's own Begin ritual window) has never run, and if the test colony cannot begin such a ritual the gap reopens and must be closed or justified. Seven requests are needed, listed in TESTING.md."
+  - "blocking (done -> tested), the gates set by the owner: (1) no scenario left in @wip: none exists, and none may be parked; (2) every conditional scenario has run, that is each @requires:<packageId> (Odyssey, RIMMSQOL, Shift Change, the optional offering providers) has had its own pass with a report read (RIMMSQOL and the providers: played and green; Odyssey-absent and Shift Change: played, red); (3) no manual test left to validate: the suite now exists and TESTING.md scenarios 0 to 12 map to its features (Tests/Pickle/README.md); every one must run green, scenario 9 is justified as not applicable, and one risk stays open: feature 14 (the hook that consumes at the end of a real ritual, begun from the game's own Begin ritual window) has never run, and if the test colony cannot begin such a ritual the gap reopens and must be closed or justified. Seven requests are needed, listed in TESTING.md."
   - "unverified (done -> tested): nothing has been observed in game on this build. Settings effects, persistence across restart, the disable-with-a-borrower regressions, the RIMMSQOL reveal, open and hide, English and French layout, Player.log, a new colony and an existing save, and Shift Change coexistence. Only the load (scenario 0) was ever seen, on 2026-09-04, on an older build."
   - "unverified: no customization mod has been tested in game, so no integration may be claimed. The shortcut is checked by its definition and by the native getter in the delivered code, not by a running RIMMSQOL."
   - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_06821e6c-e45a-492a-99fd-d6a96d00f8af
-updated:      2026-09-28, audit (options), plural fix (preTest), Pickle suite written (done)
+updated:      2026-10-02, workflow audit (done retained), Pickle runs of 2026-09-29/30 recorded, evidence trimmed, FRENCH_REVIEW.md generated
 ---
 
 # For the Occasion — status
+
+## Workflow audit — 2026-10-02
+
+**Previous stage: `done`. Retained stage: `done`** (`workflow_stage: done`). Revision `84a70dc` on `main`; the only local
+changes were untracked documents (`docs/translations-side-by-side.md`, written by an earlier session, kept as it was).
+No file of `Mod/` or `Source/` changed. No game was started: sessions never launch one, and the Pickle reports read
+below were played earlier by the dispatcher worker. AUDIT.md and TRANSLATIONS.md changed since the last audit; the
+versions read are in [docs/PROTOCOLS-READ.md](docs/PROTOCOLS-READ.md).
+
+| Transition | Result |
+| --- | --- |
+| `horsMonoRepo`, icon, Preview, `preOptions` | Kept from 2026-09-28. The Preview now carries the cutout ModIcon (commit `6f09caf`, 2026-09-29); not re-inspected image by image this time. |
+| `options` | Kept: `settings_audit: complete` (source and harness). |
+| `l10n` | Holds: no key or text changed since the plural fix. Rule of 2026-09-30: only Virginie certifies French, so `translation_fr` stays `partial`; `FRENCH_REVIEW.md` now exists for her. |
+| `preTest` | Holds: dependencies unchanged since 2026-09-28. |
+| `done` | **Holds, rechecked.** Harness replayed today: 39 passed, 0 failed, 0 skipped, 8 s, on the distributed DLL (SHA256 `DD89BD90…`). Pickle suite written (14 features, five pass maps), and now run. |
+| `tested` | **Not reached.** Every pass has run once, in English, in the WSL. Green: offerings (5/5), RIMMSQOL (4/4), restart pair. Red: features 06, 07, 08, 14 in the main pass, feature 06 in `sans-odyssey` (watchdog), the reload in `avec-shiftchange`. Detail in `remaining`. |
+
+### What changed in the repository today
+
+- Evidence: `Tests/Pickle/Evidence` went from 330 MB to 17 MB. Deleted: the third run (superseded by the fourth), every
+  `report.html` and `messages.ndjson`, all films and every capture of another companion's scenario, the 5 MB `junit.xml`
+  of `sans-odyssey`. Kept: `summary.*`, `junit.xml`, `Player.log` of the latest run of each set, and FTO's own captures as
+  JPEG (one opened at full size first). No field of this file points into the deleted runs. The harness output
+  `evidence/2026-09-28-8116a55-harness.txt` is replaced by `evidence/2026-10-02-84a70dc-harness.txt`.
+- `docs/runs/2026-09-30.md` records the six reports; `docs/runs/2026-09-29.md` was corrected.
+- Already in place and checked: `*.dds`, `*.ico`, `evidence/` and `Tests/Pickle/Evidence/` are in `.gitignore`, no `.dds` or
+  evidence was ever tracked; `CHANGELOG.md` opens its released part on `0.1.0` and `PublishedFileId.txt` (3806761333) is
+  committed; no origin repository exists (original work, `upstream_mod_remotes: N/A`).
+- WSL: this mod mounts no Workshop item of its own that other maps do not name; the session downloaded nothing and
+  removed nothing. Check again after the last ticket of this mod.
+
+### Strictly necessary to cross `done -> tested`
+
+1. Establish from the fourth-run captures and `Player.log` why no preparation record exists after `Announce` (mod or test), fix, replay.
+2. Settle the feature 14 fixture question (the test colony's ideoligion has no ritual that takes a bare RitualSpot).
+3. Fix the Shift Change reload and replay it; replay `sans-odyssey` to its end.
+4. A French pass; open the `@review` captures. The non-regression passes go last, on the final revision.
 
 ## Update after the fix — 2026-09-28
 

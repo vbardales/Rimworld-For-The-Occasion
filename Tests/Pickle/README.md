@@ -3,10 +3,10 @@
 The scenarios of [TESTING.md](../../TESTING.md) that only a running game can settle, written in Gherkin for
 [Pickle](https://github.com/RimWorks/Rimworld-Pickle) (`rimworks.pickle`, Workshop 3791648678).
 
-**Written, never run.** Nothing here has been played. The suite compiles, every step line resolves against
+**Played once per pass (2026-09-29/30), English only, not all green** (docs/runs/2026-09-30.md). The suite compiles, every step line resolves against
 Pickle's vocabulary and the companions its pass maps stage, and no expression is ambiguous
 (`Check-Steps.ps1`, below). That says the scenarios can be loaded. It does not say a step does what its
-sentence claims: only a run does, and the first one is expected to need tuning. The coordinates, the number of
+sentence claims: only a run does, and the runs so far needed tuning. The coordinates, the number of
 ticks and the colony's colonists are guesses about the `test-colony` fixture until it has been played.
 
 `Mod/` is a companion mod, **For the Occasion - Pickle tests**, never published. It holds the feature files
