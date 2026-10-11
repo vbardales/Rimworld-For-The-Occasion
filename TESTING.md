@@ -10,7 +10,7 @@ therefore catches, logs once, disables the mod for the session, and lets vanilla
 
 The consequence for testing is the whole reason this file exists: **a failure shows up as
 silence, not as an error.** A clean `Player.log` is not evidence that the mod works. Every
-scenario below is written to produce *positive* evidence — something you can see happen — because
+scenario below is written to produce *positive* evidence, something you can see happen, because
 "nothing went wrong" and "nothing happened at all" look identical from the log.
 
 The log lives at:
@@ -60,7 +60,7 @@ caught giving every outfit stand the ceremonial owner comp twice.
 
 Neither half replaces the other. Nothing there sees a colonist walk to a wardrobe.
 
-## Scenario 0 — it loaded
+## Scenario 0: it loaded
 
 **Do:** start a game with the mod active.
 
@@ -78,7 +78,7 @@ Select-String -Path "$env:USERPROFILE\AppData\LocalLow\Ludeon Studios\RimWorld b
 **Fails if:** any of the three lines is missing, or one names zero defs. Zero ritual outcome defs
 means the comps were never attached and every quality scenario below is moot.
 
-## Scenario 1 — the offering table counts variety, not quantity
+## Scenario 1: the offering table counts variety, not quantity
 
 **Setup:** build an offering table beside an altar. Put **four beers and nothing else** on it.
 
@@ -91,21 +91,21 @@ with a tick against *drink* and a cross against the other three.
 
 **Expect:** the line becomes **Offerings 4 / 4**, worth about +12 %.
 
-**Fails if:** three hundred beers ever read as more than 1 / 4. That is the entire mechanic — the
+**Fails if:** three hundred beers ever read as more than 1 / 4. That is the entire mechanic, the
 bonus is read off the number of distinct satisfied categories, never off the amount.
 
 **Gotcha:** an item counts towards at most one category, so a stack of chocolate cannot fill both
 *fine food* and *treasure*. And the table is 1x2 with three stacks per cell: six stacks, enough
 for all four categories on one table. If you only ever see two, check `maxItemsInCell`.
 
-## Scenario 2 — the offerings are consumed
+## Scenario 2: the offerings are consumed
 
 **Setup:** scenario 1, with all four categories satisfied. Note the stack counts.
 
 **Do:** let the ritual run to completion.
 
 **Expect:** a message naming how many offerings were consumed, and the stacks reduced by exactly
-each category's `countRequired` — 2 scent, 4 food, 4 drink, 50 treasure. Nothing else on the table
+each category's `countRequired`, 2 scent, 4 food, 4 drink, 50 treasure. Nothing else on the table
 is touched.
 
 **Fails if:** nothing is consumed. Without this step you would build the table once and every
@@ -117,7 +117,7 @@ ritual in the game would be better forever, which is not a mechanic, it is a per
 straight from the parameter, and `ended` captured in a prefix so a second call cannot consume
 twice.
 
-## Scenario 3 — a colonist actually changes clothes, with an outfit stand
+## Scenario 3: a colonist actually changes clothes, with an outfit stand
 
 This is the core of the mod and the riskiest code in it: a job inserted ahead of the one that was
 starting, the deferred job's targets reserved with `curJob` temporarily swapped, a static
@@ -132,10 +132,10 @@ re-entrancy guard. None of it has ever been seen to run.
 robe**. Their own clothes are now inside the stand.
 
 **Fails if:** they walk straight to the ritual in work clothes. That means the prefix declined or
-threw. Check the log for a single `[For the Occasion] disabled for this session` line — if it is
+threw. Check the log for a single `[For the Occasion] disabled for this session` line, if it is
 there, the mod is off, not merely idle.
 
-## Scenario 4 — and gets them back, force-worn flags included
+## Scenario 4: and gets them back, force-worn flags included
 
 This is the half vanilla's own stand driver never does: `JobDriver_UseOutfitStand` force-flags
 everything it hands back, street clothes included.
@@ -155,7 +155,7 @@ restores it after `Wear`.
 
 **Fails if:** everything comes back force-worn, or nothing does.
 
-## Scenario 5 — the no-building path
+## Scenario 5: the no-building path
 
 **Setup:** a colonist with **no** stand assigned. Leave a robe, a cape or any royal garment lying
 on the floor within reach.
@@ -164,7 +164,7 @@ on the floor within reach.
 
 **Expect:** they put the garment on; their displaced clothes fall on the floor, exactly as when an
 apparel policy is changed by hand. After the ritual the mod simply drops the force-worn flag and
-**vanilla's own `JobGiver_OptimizeApparel` re-dresses them** — there is no return trip on this
+**vanilla's own `JobGiver_OptimizeApparel` re-dresses them**, there is no return trip on this
 path, and that is deliberate.
 
 **Fails if:** they never change, or they stay in the robe forever. The second case means the flag
@@ -175,7 +175,7 @@ apparel already tagged `Royal`, `RoyalRobe`, `Robe`, `Cape`, `BestowerHood` or
 `HoraxianCeremonial`. Without Royalty, vanilla has very few. If nothing happens, verify you are
 holding one of those and not an ordinary duster.
 
-## Scenario 6 — face paint
+## Scenario 6: face paint
 
 **Setup:** a colonist with **no tattoo at all**, in an ideoligion that has tattoo styles.
 
@@ -190,7 +190,7 @@ somebody else's mark for an evening, so the mod only paints a bare face.
 **Costs nothing to check:** a `TattooDef` has no permanence in the engine. Setting and clearing
 one is instant and free, which is why this ships no art.
 
-## Scenario 7 — the danger gate, in both directions
+## Scenario 7: the danger gate, in both directions
 
 The gate sits **above both dress paths and below the return trip**, and the asymmetry is the whole
 point. Shift Change learned this in play: with the gate above both arms, a raid froze every
@@ -208,12 +208,12 @@ borrower in evening dress with their armour parked in a wardrobe they were not a
 **Fails if:** the dressed colonist is stuck in the robe for the whole raid. That is the exact bug
 the placement exists to avoid, and it would mean the gate has drifted above the return trip.
 
-## Scenario 8 — anticipation, the free path
+## Scenario 8: anticipation, the free path
 
 **Setup:** in the settings, confirm *Get ready when a ritual is announced* is on and note the
 window, 12 hours by default.
 
-**Do:** cause a ritual obligation — a colonist dying gives you a funeral obligation.
+**Do:** cause a ritual obligation, a colonist dying gives you a funeral obligation.
 
 **Expect:** over the following hours, free colonists dress themselves with no ritual running. The
 *Begin ritual* window then already shows **Dressed for the occasion n / 6** before you start
@@ -222,10 +222,10 @@ anything, and starting it costs no progress.
 **Expect after the window closes:** they change back on their own.
 
 **Why it matters:** this is the intended way to play. The last-minute detour genuinely costs
-quality — `RitualStage.ProgressPerTick` is 1 and `LordJob_Ritual.LordJobTick` advances
+quality, `RitualStage.ProgressPerTick` is 1 and `LordJob_Ritual.LordJobTick` advances
 unconditionally, so the clock does not stop for latecomers.
 
-## Scenario 9 — nobody is diverted away from a birth
+## Scenario 9: nobody is diverted away from a birth
 
 **Setup:** Biotech. A colonist in labour, with another standing by.
 
@@ -239,8 +239,8 @@ assignment holds as required for the rite.
 their job comes from a lord duty, so `job.workGiverDef` is null and the emergency test never
 fires.
 
-**The same rule covers more than births.** Anyone the ritual cannot proceed without — the
-bestower at a bestowing ceremony, the executioner, the accused at a trial — stays put for the same
+**The same rule covers more than births.** Anyone the ritual cannot proceed without, the
+bestower at a bestowing ceremony, the executioner, the accused at a trial, stays put for the same
 reason. Spectators, who are the point of the mod, are free to go and dress.
 
 ## What cannot be tested here
@@ -254,7 +254,7 @@ of that can be exercised without Shift Change installed, and it is inert without
 To test it: install both, assign the same stand a work owner in Shift Change and a ceremonial
 owner here, save, reload, and check both assignments survived and are still distinct.
 
-## Scenario 10 — settings, defaults and persistence (English and French)
+## Scenario 10: settings, defaults and persistence (English and French)
 
 **Setup:** back up the existing settings file and use a clean test configuration; Harmony,
 Ideology and this mod, initially without a MainButtons customization mod. Use a new colony,
@@ -276,7 +276,7 @@ before a new dressing and verify no temporary tattoo is added. Restore all switc
 no free-text input; missing/older serialized defaults and numeric normalization are additionally
 covered by the automated tests. No runtime result is recorded until these steps are performed.
 
-## Scenario 11 — disable preparation with a borrower and an in-flight trip
+## Scenario 11: disable preparation with a borrower and an in-flight trip
 
 **Setup:** scenario 3/4, one borrower dressed from a stand (one original garment forced,
 one not), temporary face paint active; another colonist walking to a stand to get dressed.
@@ -290,7 +290,7 @@ arrival. Nobody starts a new dressing trip. Reenable preparation and repeat a ce
 normal preparation works again. Repeat without a stand, and with a save/reload while disabled.
 Drafted/downed/forced-job gates may defer return; release those constraints before judging it.
 
-## Scenario 12 — optional hidden shortcut
+## Scenario 12: optional hidden shortcut
 
 **Setup:** a clean configuration with the mod active. No customization mod at first.
 

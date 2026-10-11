@@ -10,13 +10,13 @@ vanilla's own 1x2 table.
 ## The problem
 
 A ritual's quality is not only the room's impressiveness. Vanilla exposes twenty-one
-`RitualOutcomeComp` — participant count, room stats, a seat, a building used, drums played,
+`RitualOutcomeComp`, participant count, room stats, a seat, a building used, drums played,
 loudspeakers running, a loved one present, indoors, a consumable destroyed. It is an open
 extension point.
 
 Nothing in it rewards either of the two things a ceremony is actually made of: **what you laid
 out**, and **how you turned up**. So a colony that has held forty weddings in the same hall gets
-the same forty out of forty every time, and the only lever the player has is furniture — which is
+the same forty out of forty every time, and the only lever the player has is furniture, which is
 permanent. This mod adds two levers that are not.
 
 ## The budget, and why it is one number
@@ -26,7 +26,7 @@ number, capped**. Three mods each quietly adding their own bonus would blow the 
 them would know.
 
 So this mod ships **both** ritual mechanics together and spends at most **+0.25 in total** —
-about +0.12 for offerings, +0.13 for preparation — with a slider running from nothing to double.
+about +0.12 for offerings, +0.13 for preparation, with a slider running from nothing to double.
 That is also why the pyjama mechanic lives in a separate mod ([Night
 Change](https://github.com/vbardales/Rimworld-Night-Change)): it depends on Odyssey rather than
 Ideology, and it does not touch ritual quality at all.
@@ -81,7 +81,7 @@ back they get their clothes returned **exactly as they were, force-worn flags in
 
 Vanilla's own stand driver cannot be reused for this. `JobDriver_UseOutfitStand` is anonymous: it
 hands every wearable item to whoever arrives first, pushes their displaced clothes into the same
-undifferentiated bag, and force-flags everything it gives back — street clothes included, whether
+undifferentiated bag, and force-flags everything it gives back, street clothes included, whether
 or not they were force-worn before.
 
 **Anything ceremonial within reach.** Otherwise the colonist puts on the finest garment tagged
@@ -89,14 +89,14 @@ or not they were force-worn before.
 when you change an apparel policy by hand. Changing back on this path is **free**: drop the
 force-worn flag and `JobGiver_OptimizeApparel` re-dresses the pawn on its own.
 
-The tag is applied **by criterion**, on tags the game already ships — `Royal`, `RoyalRobe`,
+The tag is applied **by criterion**, on tags the game already ships, `Royal`, `RoyalRobe`,
 `Robe`, `Cape`, `BestowerHood`, `HoraxianCeremonial`. A modded garment carrying any of them joins
 in with no patch of its own, and a mod author who wants theirs to count only has to add
 `<li>FTO_Ceremonial</li>` to its apparel tags. Nothing in the mod reads a defName.
 
 **Face paint.** A colonist who normally wears no tattoo gets one drawn from their own ideoligion's
 style (`PawnStyleItemChooser.RandomTattooFor`), cleared when they change back. A `TattooDef` has
-no permanence in the engine — setting one and clearing it is instant and free — so this ships zero
+no permanence in the engine, setting one and clearing it is instant and free, so this ships zero
 new art. Anyone who already has a tattoo is left alone: you do not erase somebody's mark for an
 evening.
 
@@ -104,7 +104,7 @@ evening.
 
 | Trigger | Cost | Distance |
 |---|---|---|
-| a ritual obligation is announced | none — nothing is running yet | unlimited |
+| a ritual obligation is announced | none, nothing is running yet | unlimited |
 | a ritual is launched cold | ritual progress | capped, default 40 cells |
 
 An obligation lives for up to nine days (`RitualObligation.StageDays`), but nobody stands around
@@ -113,7 +113,7 @@ hours (12 by default). Past it, colonists change back and a ritual launched late
 last-minute detour instead. That gives "hold the ceremony soon" a mechanical meaning it never had.
 
 The last-minute detour genuinely costs you. `RitualStage.ProgressPerTick` is 1 and
-`LordJob_Ritual.LordJobTick` advances progress unconditionally — the clock does **not** stop for
+`LordJob_Ritual.LordJobTick` advances progress unconditionally, the clock does **not** stop for
 latecomers.
 
 ## How it hooks in
@@ -131,7 +131,7 @@ latecomers.
 `PatchOperation`s run **before** def inheritance is resolved, and a list node **merges** with its
 parent's rather than replacing it (`XmlInheritance.RecursiveNodeCopyOverwriteElements` appends the
 child's `<li>` elements). Several concrete `RitualOutcomeEffectDef`s inherit from another
-*concrete* one — `TrialMentalState` from `Trial`, the three `DestroyConsumableBuilding_*` from
+*concrete* one, `TrialMentalState` from `Trial`, the three `DestroyConsumableBuilding_*` from
 `DestroyConsumableBuilding`. An xpath catching both parent and child would install the comp
 **twice** in the child and double the bonus: precisely the cap-busting this design exists to
 avoid.
@@ -155,7 +155,7 @@ the session, and lets vanilla proceed.
 The insertion pattern is vanilla's own opportunistic-haul path: reserve the deferred job's targets
 (with `curJob` temporarily set, because several drivers reserve against `pawn.CurJob` rather than
 their own field), **start the detour first, enqueue the displaced job second**, return `false`. A
-static re-entrancy guard is mandatory — starting a job from inside a `StartJob` prefix re-enters
+static re-entrancy guard is mandatory, starting a job from inside a `StartJob` prefix re-enters
 the prefix.
 
 The gates: drafted, downed or in a mental state; `job.playerForced`; `workGiverDef.emergency`; not
@@ -169,8 +169,8 @@ allowed to walk to. It has to mean "no dressing up under threat", never "no chan
 ### The forced-apparel flag
 
 `Pawn_ApparelTracker.Notify_ApparelRemoved` calls `SetForced(ap, false)` unconditionally: **every
-removal destroys the flag**. So the record captures forced-ness *before* `Remove` — the last
-moment the fact exists anywhere in the game — and restores it *after* `Wear`. Garments that were
+removal destroys the flag**. So the record captures forced-ness *before* `Remove`, the last
+moment the fact exists anywhere in the game, and restores it *after* `Wear`. Garments that were
 force-worn come back force-worn; garments that were not stay policy-managed.
 
 ### Sharing the outfit stand def
@@ -178,22 +178,22 @@ force-worn come back force-worn; garments that were not stay policy-managed.
 `CompAssignableToPawn` scribes `assignedPawns` **flat** into the thing's save node, so two
 subclasses on the same def read each other's owners on load. `PostExposeData` is therefore
 overridden **without calling base**, with `FTO_`-prefixed keys. The base comp's gizmo is also
-hardcoded to `KeyBindingDefOf.Misc4` — **N** — which on a storage building collides with the
+hardcoded to `KeyBindingDefOf.Misc4`, **N**, which on a storage building collides with the
 storage settings clipboard; the gizmo is rebuilt here without a hotkey.
 
 The def is patched as a **commons**: the `<comps>` node is ensured first and appended into second,
 in two disjoint `PatchOperationConditional`s rather than a `match`/`nomatch` pair, because at patch
-time neither stand def carries a `<comps>` node of its own — they inherit one — and a `match`/
+time neither stand def carries a `<comps>` node of its own, they inherit one, and a `match`/
 `nomatch` would only ever catch half of them.
 
 ### Save footprint
 
-The preparation records live in a `GameComponent` — not in a comp patched onto the `Human` def,
+The preparation records live in a `GameComponent`, not in a comp patched onto the `Human` def,
 which would miss every modded race.
 
 The two ritual comps are attached to defs at runtime and are never scribed. Their **data** is:
 `null` for offerings, and vanilla's own `RitualOutcomeComp_DataThingPresence` for preparation.
-That is deliberate — `compDatas` *is* scribed, and a class of our own in there would leave an
+That is deliberate, `compDatas` *is* scribed, and a class of our own in there would leave an
 unreadable node behind the day the mod is uninstalled. On uninstall the count mismatch makes
 `RitualOutcomeEffectWorker.FillCompData` rebuild the list by itself.
 
@@ -208,8 +208,8 @@ rituals entirely. It is the natural companion, not a competitor, and this mod is
 cohabitation on the shared outfit stand def: prefixed scribe keys, no hotkey, no overlay label of
 its own.
 
-No vanilla altar is modified. Giving an altar storage would mean changing its `thingClass` — a
-shared def that other mods patch too — so the mod ships a table instead.
+No vanilla altar is modified. Giving an altar storage would mean changing its `thingClass`, a
+shared def that other mods patch too, so the mod ships a table instead.
 
 ## Building
 

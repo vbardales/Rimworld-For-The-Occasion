@@ -39,7 +39,7 @@
   <FTO_PreparedTooltip>Participants in ceremonial clothes, present for at least half of the rite. Shown here is how many are already dressed: launching a ritual cold starts this at zero.</FTO_PreparedTooltip>
 
   <FTO_SetCeremonialOwner>Set ceremonial owner</FTO_SetCeremonialOwner>
-  <FTO_SetCeremonialOwnerDesc>Make this outfit stand a colonist's ceremonial wardrobe. They will change into what it holds for rituals, and get their own clothes back afterwards - force-worn ones included.</FTO_SetCeremonialOwnerDesc>
+  <FTO_SetCeremonialOwnerDesc>Designate this outfit stand as a colonist's ceremonial wardrobe. They will change into what it holds for rituals, and get their own clothes back afterwards - force-worn ones included.</FTO_SetCeremonialOwnerDesc>
   <FTO_CeremonialWardrobeOf>Ceremonial wardrobe of {0}</FTO_CeremonialWardrobeOf>
 
 </LanguageData>

@@ -20,7 +20,7 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 - Matched optional-item gates to current 1.6 definitions: anima perfume needs Perfumes plus
   Anima Expansion; VBE cider also needs Vanilla Plants Expanded or its supported copy package.
 - Extended the out-of-game harness from 30 to 38 tests, including settings serialization and
-  regression checks. Final in-game scenarios remain unexecuted.
+  regression checks. Final in-game scenarios had not yet been run at that point.
 - The message shown when a rite consumes offerings now has a singular and a plural sentence in both
   languages (`FTO_OfferingsConsumed.One` and `.Many`), chosen by the count. It used to put a count in
   front of a plural noun, which reads "1 offerings" and "1 offrandes" as soon as another mod adds an
@@ -113,4 +113,4 @@ not the `prepublished` state of the workflow: it is the act that creates the ite
 
 What went up is `Mod/` as it stood at commit `5053f5d` (2026-09-20), and nothing in `Mod/` has
 changed between that commit and the upload (the id file was written on 2026-09-23). The content
-is the one described under 1.0.0 above, including its pre-release corrections of 2026-09-13.
+is the one described under [Unreleased] above, including its pre-release corrections of 2026-09-13.
