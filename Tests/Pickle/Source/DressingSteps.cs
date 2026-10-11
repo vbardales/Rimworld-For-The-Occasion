@@ -64,6 +64,9 @@ namespace ForTheOccasion.PickleSteps
             // Driver.RitualWithObligation already calls AddObligation: adding a second time was the bug.
             var pair = Driver.RitualWithObligation(ctx);
             Made(ctx).Obligations.Add(pair);
+            // WindowOpen caches its answer for 250 ticks, and the Background's own StartJob calls have already
+            // cached "closed": without this the next assertion reads the stale answer (fourth run, 2026-09-29).
+            ObligationWatch.Invalidate();
         }
 
         /// <summary>A window of a few hundred ticks keeps a scenario short: the obligation is already this many ticks old when it stops counting.</summary>
