@@ -3,7 +3,7 @@
 Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This file serves the repository and the Steam release notes; RimWorld does not display it in game.
 
-## [1.0.0] — unreleased
+## [Unreleased]
 
 First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 

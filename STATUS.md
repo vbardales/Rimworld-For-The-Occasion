@@ -65,3 +65,9 @@ Earlier dated sections moved to [docs/runs/2026-10-11-status-history.md](docs/ru
 ### Then in `playTests`
 
 Fix and replay red features 06, 07, 08, 14, the Shift Change reload and `sans-odyssey`; a French pass; open `@review` captures.
+### Full replay of the chain, 2026-10-11 (current protocols)
+
+- **setupRepo, makeSources:** repo PUBLIC, `main` equal to `origin/main`; `ATTRIBUTION.md` and `LICENSE` identical to their `Mod/` copies; ModIcon.png 128 x 128 PNG, 21.8 KB; Preview.png 896 x 504 PNG; icon and Preview derivatives are newer than neither source change of 2026-10-02/03 (Art migration still uncommitted, owned by another change). `Art/` still holds files outside the minimal set (`ModIcon-original.png`, `ModIcon-signature-candidate.png`, `echo-source.svg`): closing-pass step 1, to clear at commit.
+- **code:** CHANGELOG heading renamed `## [Unreleased]` (it was `## [1.0.0] - unreleased`, 3.c). Build: 0 warnings, 0 errors; DLL not reproducible byte for byte (see `remaining`).
+- **declareDependencies, auditSettings, localize:** `Check-ModBasics` PASS (13 XML, 7 defs), `Check-Translations` PASS (25 Keyed calls, French injections), `Check-DefRefs` clean (7 defs). About.xml: Ideology and Harmony hard, optional providers in `loadAfter`.
+- **writeTests:** harness 39 passed; Pickle suite written. `TESTING.md` is the scenario file (AUDIT.md 7.a names `TEST_SCENARIOS.md`, other protocol lines say `TESTING.md`: not renamed). `PUBLICATION.md` does not exist yet (writeDocs). Exit blocked by 7.g only.
