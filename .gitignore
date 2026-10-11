@@ -37,3 +37,9 @@ desktop.ini
 # What is worth keeping goes to docs/runs/ as text (see docs/runs/README.md).
 Tests/Pickle/Evidence/
 evidence/
+
+# Reproducible Preview diagnostics generated locally by the shared renderer.
+Art/.render/
+
+Tests/Pickle/Source/obj/
+Tests/Pickle/Source/bin/

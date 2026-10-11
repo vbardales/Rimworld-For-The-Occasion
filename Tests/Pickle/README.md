@@ -16,7 +16,7 @@ and the steps assembly built from `Source/`, so nothing test-related ships in th
 
 `AUDIT.md` keeps in Gherkin only what a running game can show. Everything that a calculation, an XML contract,
 a translation resource or a reading of the game's compiled code can settle is in
-[`_tools/Run-Functional-Tests.ps1`](../../_tools/Run-Functional-Tests.ps1) (39 tests, no game). What is left:
+[`scripts/Run-Functional-Tests.ps1`](../../scripts/Run-Functional-Tests.ps1) (39 tests, no game). What is left:
 
 | Scenario of TESTING.md | Feature | What only a running game shows |
 | --- | --- | --- |

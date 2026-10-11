@@ -222,7 +222,7 @@ dotnet build Source/ForTheOccasion.csproj
 Thirty-nine functional tests, which need RimWorld installed but never start it:
 
 ```
-powershell -ExecutionPolicy Bypass -File _tools\Run-Functional-Tests.ps1
+powershell -ExecutionPolicy Bypass -File scripts\Run-Functional-Tests.ps1
 ```
 
 They execute the mod's own C# and read the game's compiled code, so they catch what a compiler
@@ -245,7 +245,7 @@ preparation lets existing borrowers return their clothes at the next eligible jo
 When the optional content providers are installed locally, also run:
 
 ```powershell
-pwsh -File _tools/Check-Optional-Offerings.ps1
+pwsh -File scripts/Check-Optional-Offerings.ps1
 ```
 
 This checks eight combinations of the providers' actual 1.6 Defs and LoadFolders. Use
