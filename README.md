@@ -25,7 +25,7 @@ permanent. This mod adds two levers that are not.
 number, capped**. Three mods each quietly adding their own bonus would blow the cap and none of
 them would know.
 
-So this mod ships **both** ritual mechanics together and spends at most **+0.25 in total** —
+So this mod ships **both** ritual mechanics together and spends at most **+0.25 in total**:
 about +0.12 for offerings, +0.13 for preparation, with a slider running from nothing to double.
 That is also why the pyjama mechanic lives in a separate mod ([Night
 Change](https://github.com/vbardales/Rimworld-Night-Change)): it depends on Odyssey rather than

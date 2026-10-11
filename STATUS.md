@@ -1,7 +1,7 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: partial   # gender-agreement pass done 2026-09-30, no switch needed anywhere; awaiting Virginie's own review (TRANSLATIONS.md section 3)
+translation_fr: complete   # reviewed by Virginie 2026-10-11 (reviewer, corrections applied verbatim in 685b646, see Translation audit below)
 mod:          For the Occasion
 packageId:    nelim.fortheoccasion
 repo:         Rimworld-For-The-Occasion
@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-workflow_stage: writeTests[1.0.0]
+workflow_stage: playTests[1.0.0]
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
@@ -24,9 +24,7 @@ automated_tests: 39 passed, 0 failed, 0 skipped, 2026-10-02, replayed on 84a70dc
 pickle_suite: written 2026-09-28; 14 features (01 loading, 02 settings, 03 shortcut, 04 RIMMSQOL, 05 offering table, 06 dressing without a building, 07 outfit stand, 08 danger, 09 without Odyssey, 10 optional providers, 11 Shift Change, 12 and 13 restart, 14 the ritual hook), five pass maps. Three runs so far, `sans-facultatifs`; docs/runs/2026-09-28.md (runs 1-2) and docs/runs/2026-09-29.md (run 3) have the detail. Run 3 (c9be), 2026-09-29: 102 passed, 14 failed, 13 skipped of 129; settings/offerings/log/Odyssey-pass all confirmed fixed; two more test-side bugs fixed (a double AddObligation call, a raid strategy that could land no pawn on the map); feature 14 (the ritual hook) now fails cleanly on a fixture limitation flagged to the owner (the test-colony ideoligion has no ritual that both skips a required role and accepts a bare RitualSpot) — not yet resolved, so `tested` is not reached. Since then (docs/runs/2026-09-30.md): fourth run 2026-09-29, 104 passed, 12 failed, 13 skipped of 129, the same features red (06 dressing, 07 stand, 08 danger, 14 ritual hook); `avec-offrandes` 5/5 green, `avec-rimmsqol` 4/4 green, restart pair green; `sans-odyssey` watchdog-timeout, feature 06 times out; `avec-shiftchange` 1 of 2, the reload loses the owner. All passes have now run once in English, none is fully green
 remaining:
   - "unverified (writeTests, 3.b): a rebuild on 2026-10-11 gives a DLL (SHA256 7B0ABAB2...) that differs from the committed one (DD89BD90...) with the same sources: Source/ForTheOccasion.csproj floats Lib.Harmony 2.* and Krafs.Rimworld.Ref 1.6.*-*, and newer packages are now in the NuGet cache. The committed DLL was kept; not pinned (no code change made). Decide with the owner whether to pin."
-  - "blocking (writeTests -> playTests, AUDIT.md 7.g): Virginie's French review (FRENCH_REVIEW.md, flags FTO_TattooDesc and FTO_PreparedTooltip). Until it is recorded, translation_fr stays partial and the stage stays writeTests."
   - "unverified (writeTests, 7.b): LOCAL_SCRIPTS.md rows for scripts/*.ps1 and Tests/Pickle/Check-Steps.ps1 await the Audit workflow session validation. 2026-10-11: _tools/ moved to scripts/, _tools/cutout-icon.cjs and compose-preview-icon.cjs deleted (obsolete), .build/ removed (the two Directory.Build.props deleted: intermediates now in Source/obj, gitignored)."
-  - "unverified: French review by Virginie (TRANSLATIONS.md section 3, 2026-09-30 rule). The session's gender-agreement pass found no text needing a switch, but only Virginie's own reading certifies French quality; translation_fr stays partial until she reviews. The review file is FRENCH_REVIEW.md at the root (generated 2026-10-02 by scripts/Make-FrenchReview.ps1 at revision 8116a55, the last change to the shipped texts; flags in french-review-flags.json: FTO_TattooDesc and FTO_PreparedTooltip)."
   - "defect (done -> tested): scenarios red on the fourth run and the Shift Change pass: features 06, 07, 08 (no preparation record after Announce; the outfit stays unchanged; the raid step times out), feature 14 (the fixture ideoligion offers no ritual that takes a bare RitualSpot without a role), and the Shift Change reload ('ceremonial owners are [Belle], not Aurel'). Whether each is a mod defect or a test defect is not yet established from the reports. None has a green replay on a build that contains a fix."
   - "unverified (done -> tested): a French pass of the suite (every pass so far ran in English), the @review captures (only the hidden-shortcut capture was opened), and the pass `sans-odyssey` played to its end (it hit the watchdog)."
   - "resolved 2026-09-28 (options -> l10n): FTO_OfferingsConsumed now has .One and .Many in both languages, chosen by the count (commit 8116a55), with harness test 39, seen red on three mutations. The three translation fields are complete again. The 0.1.0 upload carries the earlier DLL."
@@ -37,8 +35,8 @@ remaining:
   - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_a8e85b69-f560-4fda-87b7-f8df5c6bc555
-updated:      2026-10-11, workflow audit against the 15-state chain: done -> writeTests[1.0.0]
-protocols_read_sha: fd36f4cf7eb9ef8acdef50a63323ed6f98cf6812
+updated:      2026-10-11, French review by Virginie applied; writeTests exit criteria met; stage playTests[1.0.0]
+protocols_read_sha: 71363b2e20b7f8457c78f8f5d87e2b01ae06d782
 ---
 
 # For the Occasion: status
@@ -71,3 +69,7 @@ Fix and replay red features 06, 07, 08, 14, the Shift Change reload and `sans-od
 - **code:** CHANGELOG heading renamed `## [Unreleased]` (it was `## [1.0.0] - unreleased`, 3.c). Build: 0 warnings, 0 errors; DLL not reproducible byte for byte (see `remaining`).
 - **declareDependencies, auditSettings, localize:** `Check-ModBasics` PASS (13 XML, 7 defs), `Check-Translations` PASS (25 Keyed calls, French injections), `Check-DefRefs` clean (7 defs). About.xml: Ideology and Harmony hard, optional providers in `loadAfter`.
 - **writeTests:** harness 39 passed; Pickle suite written. `TESTING.md` is the scenario file (AUDIT.md 7.a names `TEST_SCENARIOS.md`, other protocol lines say `TESTING.md`: not renamed). `PUBLICATION.md` does not exist yet (writeDocs). Exit blocked by 7.g only.
+
+### Translation audit, 2026-10-11: Virginie's review
+
+Reviewer: Virginie, 2026-10-11, revision 6f09caf plus the working tree before commit 685b646. English and French read in full. Corrections (applied verbatim, 685b646): FTO_Offering_Food, FTO_Offering_Drink, FTO_OfferingsDesc (the old Désactivé, la table... was incorrect), FTO_PreparationDesc, FTO_TattooDesc last sentence, FTO_PreparedFactor, FTO_PreparedTooltip, FTO_SetCeremonialOwnerDesc (gender-free wording), FTO_OfferingTable.description (marquent l'occasion), English FTO_SetCeremonialOwnerDesc opening, two CHANGELOG fixes, em dashes removed from French sources and docs. FTO_TattooDesc and FTO_PreparedTooltip participles agree with the tattoo, not the colonist: correct. Harness 39 of 39 and Check-Translations PASS after the edit. The French and English texts changed: the Pickle scenarios that display them are replayed in playTests (French pass included).

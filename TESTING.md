@@ -148,7 +148,7 @@ gear tab) and leave another under normal policy.
 **Expect:** they return to the stand, put their own clothes back on, and the garment that was
 force-worn **is force-worn again**, while the other is not.
 
-**Why it is delicate:** every apparel removal destroys that flag —
+**Why it is delicate:** every apparel removal destroys that flag:
 `Pawn_ApparelTracker.Notify_ApparelRemoved` calls `SetForced(ap, false)` unconditionally. The mod
 records forced-ness at check-in, the last moment the fact exists anywhere in the game, and
 restores it after `Wear`.
