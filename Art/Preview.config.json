@@ -24,7 +24,7 @@
   "backgroundPosition": "center",
   "backgroundSize": "cover",
   "echo": {
-    "file": "echo.png",
+    "file": "echo-preview.png",
     "preSized": true,
     "color": "var(--accent)",
     "width": 240,
