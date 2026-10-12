@@ -38,13 +38,13 @@
   },
   "iconBadge": {
     "file": "ModIcon-source.png",
-    "corner": "bottom-left",
+    "corner": "bottom-right",
     "width": 180,
-    "translate": "-12.5%, 12.5%",
+    "translate": "12.5%, 12.5%",
     "outline": false,
     "veil": "radial",
     "veilSize": 275,
-    "veilLeft": -55,
+    "veilRight": -55,
     "veilBottom": -61
   },
   "palette": {
