@@ -77,6 +77,30 @@ namespace ForTheOccasion.PickleSteps
         public void AssertWindowOpen(PickleContext ctx) =>
             ctx.Assert(ObligationWatch.WindowOpen(), "the anticipation window is closed although an obligation was announced");
 
+        /// <summary>
+        /// A diagnostic that names the first gate between an announced obligation and a dressing trip.
+        /// The StartJob prefix fails open and says nothing, so a scenario that ends "still wearing the
+        /// old clothes" cannot tell which of its gates closed; this step asserts them one by one.
+        /// </summary>
+        [Then("For the Occasion: {string} is ready to be sent to dress")]
+        public void ReadyToDress(PickleContext ctx, string name)
+        {
+            var pawn = Driver.Colonist(ctx, name);
+            string why = null;
+            if (!pawn.Spawned || pawn.Map == null) why = "not spawned";
+            else if (!pawn.IsFreeColonist) why = "not a free colonist";
+            else if (pawn.Drafted) why = "drafted";
+            else if (pawn.Downed) why = "downed";
+            else if (pawn.InMentalState) why = "in a mental state";
+            else if (pawn.GetPosture() != PawnPosture.Standing) why = "posture " + pawn.GetPosture();
+            else if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None) why = "map danger " + pawn.Map.dangerWatcher.DangerRating;
+            else if (PreparationTracker.RecordFor(pawn) != null) why = "already has a preparation record";
+            else if (!PreparationReason.WantsToDress(pawn, out float maxDistance)) why = "WantsToDress is false (preparationEnabled=" + ForTheOccasionMod.Settings.preparationEnabled
+                + ", prepareOnObligation=" + ForTheOccasionMod.Settings.prepareOnObligation + ", window open=" + ObligationWatch.WindowOpen() + ")";
+            else if (CeremonialWardrobe.TryPlan(pawn, maxDistance) == null) why = "TryPlan found no garment or stand (max distance " + maxDistance + ")";
+            ctx.Assert(why == null, $"{name} cannot be sent to dress: {why}");
+        }
+
         [Then("For the Occasion: the anticipation window is closed")]
         public void AssertWindowClosed(PickleContext ctx) =>
             ctx.Assert(!ObligationWatch.WindowOpen(), "the anticipation window is still open");
