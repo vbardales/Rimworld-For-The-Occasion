@@ -1,0 +1,57 @@
+{
+  "title": "For the Occasion",
+  "titleSize": 50,
+  "titleParts": [
+    {
+      "text": "For"
+    },
+    {
+      "text": " the ",
+      "scale": 0.55
+    },
+    {
+      "text": "Occasion"
+    }
+  ],
+  "suffix": "",
+  "tag": "",
+  "copyLines": [
+    "Ceremonial dress and an offering table the ritual actually consumes."
+  ],
+  "layout": "panel",
+  "panelAnchor": "top-left",
+  "backgroundFile": "Preview-source.png",
+  "backgroundPosition": "center",
+  "backgroundSize": "cover",
+  "echo": {
+    "file": "echo.png",
+    "preSized": true,
+    "color": "var(--accent)",
+    "width": 240,
+    "height": 180,
+    "opacity": 1,
+    "veil": false,
+    "panelTop": 16,
+    "panelRight": 0,
+    "panelWidth": 48,
+    "flipX": true
+  },
+  "iconBadge": {
+    "file": "ModIcon-source.png",
+    "corner": "bottom-left",
+    "width": 180,
+    "translate": "-12.5%, 12.5%",
+    "outline": false,
+    "veil": "radial",
+    "veilSize": 275,
+    "veilLeft": -55,
+    "veilBottom": -61
+  },
+  "palette": {
+    "veil": "#251D18",
+    "inkPrimary": "#F2ECE1",
+    "inkSecondary": "#DDB16F",
+    "accent": "#F4A62A",
+    "badgeInk": "#17120E"
+  }
+}
