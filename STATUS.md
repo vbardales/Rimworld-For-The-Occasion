@@ -15,7 +15,7 @@ licence_at:   written from scratch, MIT, sources shipped, and nothing is reused;
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
 dependencies: declared
 showcase:     complete
-social_preview_sha256: 8963dca088887f1db25b0cb9cf656b9ac37755e480d8f5fad28d759df01647ec   # uploaded 2026-10-11 to the GitHub social preview, og:image checked (same bytes)
+social_preview_sha256: 930ef19bfe3eede353c76ae3fa97d35c1b10b1970f46bfb586b514c519a7ca3b   # uploaded 2026-10-12 to the GitHub social preview, og:image checked (same bytes)
 tested_on:    2026-09-30, headless Pickle in the WSL, English only, partial and red (see pickle_suite); no French pass, nothing seen by a person in the Windows game
 workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
 settings_audit: complete
@@ -84,3 +84,5 @@ Ticket `20261011-222852-943-f2ea` (2026-10-11, exit 1, `Tests/Pickle/Evidence/20
 ### Preview refresh, 2026-10-12
 
 Art committed (`d021321`: ModIcon source and derivatives, Preview config, `echo-preview.png`, gallery; superseded cutout and old previews dropped). `Art/Preview.config.json` now takes `echo.file: echo-preview.png`; `node ../scripts/Render-Preview.cjs` regenerated `Mod/About/Preview.png` (896 x 504, 635,825 bytes) and `Art/Gallery/0-preview.png` (byte-identical, checked with `cmp`) (`d42a085`). Image opened: title, rule, summary, echo and 1.6 badge legible, nothing overlapping. GitHub social preview uploaded from that file; the repository `og:image` serves the same bytes (sha256 above, recorded in `social_preview_sha256`). Not done: `echo_review_sha` (the echo decision is the owner's; the linter will ask before `prepareRelease`). `Art/ModIcon-original.png` was untracked and outside the minimal set: committed (kept in history), then removed.
+
+2026-10-12: ModIcon badge moved to the bottom-right corner (`Art/Preview.config.json`: `corner`, `translate`, `veilRight`); Preview and `Art/Gallery/0-preview.png` regenerated (`145cbda`, identical bytes, 631,499), image opened and legible; social preview re-uploaded, `og:image` serves the same bytes, `social_preview_sha256` updated.
