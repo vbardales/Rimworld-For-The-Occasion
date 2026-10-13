@@ -5,7 +5,7 @@ namespace ForTheOccasion
 {
     /// <summary>
     /// One family of offerings: scent, food, drink, treasure. What a ritual rewards is not
-    /// quantity but **variety** — three hundred beers are not a feast. The quality comp therefore
+    /// quantity but **variety**: three hundred beers are not a feast. The quality comp therefore
     /// counts distinct categories, and this def is the unit of account.
     ///
     /// Categories are filled from XML through <c>filter</c>, with one <c>MayRequire</c> per

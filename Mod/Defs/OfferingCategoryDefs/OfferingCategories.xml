@@ -99,7 +99,7 @@
     <defName>FTO_Offering_Treasure</defName>
     <label>treasure</label>
     <description>Wealth laid out where everyone can see it. Unlike the rest, it is not burned or
-      drunk — but it is still handed over, and it does not come back.</description>
+      drunk, but it is still handed over, and it does not come back.</description>
     <uiOrder>40</uiOrder>
     <countRequired>50</countRequired>
     <filter>

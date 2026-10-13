@@ -1,4 +1,4 @@
-# Correction validation — 2026-09-13
+# Correction validation: 2026-09-13
 
 Baseline commit: `a5486e8b7418f06cd6fd677a609c44959669cd4b`, with uncommitted corrections
 in this workspace. Final distributed assembly SHA256:

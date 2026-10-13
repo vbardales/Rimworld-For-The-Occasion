@@ -7,7 +7,7 @@ This file serves the repository and the Steam release notes; RimWorld does not d
 
 First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 
-### Pre-release corrections — 2026-09-13
+### Pre-release corrections: 2026-09-13
 
 - Disabling preparation still allows borrowers to return clothes and remove temporary face
   paint at the next eligible job change, including during a ritual. A pending dressing trip
@@ -30,7 +30,7 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 ### Offerings
 
 - New building, the **offering table** (Ideology tab): a 1x2 `Building_Storage` to stand beside
-  the altar. No art produced — the vanilla `Table1x2` texture path is reused as it is.
+  the altar. No art produced: the vanilla `Table1x2` texture path is reused as it is.
 - What is laid out on it, inside the ritual's gathering area, raises the quality of the rite:
   0 → 0, 1 → 4 %, 2 → 7 %, 3 → 10 %, 4 → 12 %.
 - **What counts is the number of distinct categories, not the quantity.** Four categories ship:
@@ -53,24 +53,24 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 - Participants put on **ceremonial clothes**, and change back afterwards.
 - Preferred path, Odyssey's **outfit stand**: a "Set ceremonial owner" button makes it a
   colonist's wardrobe. They park their own clothes there and get everything back exactly as it
-  was, **force-worn flags included** — which vanilla's own stand driver does not do: it hands
+  was, **force-worn flags included**, which vanilla's own stand driver does not do: it hands
   everything to whoever arrives first and force-flags everything it returns, street clothes
   included.
 - Fallback path, no building: the colonist puts on the finest garment tagged `FTO_Ceremonial`
   they can reach. Their displaced clothes fall on the floor, exactly as they do when an apparel
   policy is changed by hand. Changing back on this path is **free**: dropping the force-worn flag
   is enough, and `JobGiver_OptimizeApparel` re-dresses the pawn on its own.
-- The tag is applied **by criterion**, on tags the game already ships — `Royal`, `RoyalRobe`,
+- The tag is applied **by criterion**, on tags the game already ships: `Royal`, `RoyalRobe`,
   `Robe`, `Cape`, `BestowerHood`, `HoraxianCeremonial`. No `defName` is named anywhere, and a mod
   can join in by adding `FTO_Ceremonial` to its garment's apparel tags.
 - **Adornment**: a colonist wearing no tattoo gets one drawn from their own ideoligion's style.
-  No art to produce — a `TattooDef` has no permanence in the engine, setting and clearing one is
+  No art to produce: a `TattooDef` has no permanence in the engine, setting and clearing one is
   instant. A colonist who already has a tattoo is left alone.
 - Two triggers, both configurable:
-  - **when an obligation is announced** — free, nothing is running yet. The window opens on the
+  - **when an obligation is announced**: free, nothing is running yet. The window opens on the
     announcement and lasts the configured number of hours (12 by default), not the obligation's
     full nine days of life: nobody stands around in evening dress for nine days;
-  - **when a ritual is launched** — a detour at the moment of departure, which **costs progress**
+  - **when a ritual is launched**: a detour at the moment of departure, which **costs progress**
     (`ProgressPerTick` is 1, `LordJobTick` advances unconditionally), hence a maximum distance.
 - A single comp counts clothes and adornment together: one comp is one number in the budget, and
   one figure for the player to read.
@@ -101,7 +101,7 @@ First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
   collides with the storage settings clipboard), no owner overlay.
 - No vanilla altar is modified.
 
-## [0.1.0] — 2026-09-23
+## [0.1.0] - 2026-09-23
 
 Creation of the `PublishedFileId.txt` file (`Mod/About/PublishedFileId.txt`). The Workshop item,
 3806761333, was created by the first upload from the game's own button, and it stays private until

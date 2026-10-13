@@ -2,9 +2,9 @@
 
 Moved verbatim from STATUS.md by the 2026-10-11 audit (AUDIT.md 14.c rule: STATUS.md keeps the current state only).
 
-# For the Occasion — status
+# For the Occasion: status
 
-## Workflow audit — 2026-10-02
+## Workflow audit: 2026-10-02
 
 **Previous stage: `done`. Retained stage: `done`** (`workflow_stage: done`). Revision `84a70dc` on `main`; the only local
 changes were untracked documents (`docs/translations-side-by-side.md`, written by an earlier session, kept as it was).
@@ -42,7 +42,7 @@ versions read are in [docs/PROTOCOLS-READ.md](docs/PROTOCOLS-READ.md).
 3. Fix the Shift Change reload and replay it; replay `sans-odyssey` to its end.
 4. A French pass; open the `@review` captures. The non-regression passes go last, on the final revision.
 
-## Update after the fix — 2026-09-28
+## Update after the fix: 2026-09-28
 
 **Stage: `preTest`, at that point.** The counted phrase was corrected the same day (commit `8116a55`): `FTO_OfferingsConsumed.One`
 and `.Many` in both languages, picked by the count, and harness test 39 pins them. The rebuilt DLL matches the
@@ -59,7 +59,7 @@ caught one undefined step while the suite was being written, `I save and reload`
 `preTest -> done` were already met: the scenarios are written, and the 39 automated tests and the XML tests are
 green on the delivered DLL. What is left is the `done -> tested` gates, listed in `remaining`.
 
-## Workflow audit — 2026-09-28
+## Workflow audit: 2026-09-28
 
 **Previous stage: `done` (2026-09-13). Retained stage: `options`.** The stage names are the workflow's own,
 used literally: `dansMonoRepo`, `horsMonoRepo`, ModIcon generated, Preview generated, `preOptions`, `options`,
@@ -126,7 +126,7 @@ Not needed and not done: running any test in game, generating any image, publish
 > The sections below are earlier audits, kept as history. Their statement that the stage is `done` is superseded by
 > this one.
 
-## Corrections and revalidation — 2026-09-13
+## Corrections and revalidation: 2026-09-13
 
 **Current stage: `done` = ready for final functional validation in game (superseded on 2026-09-28: see the audit above).** This is
 the supplied workflow's `done`, not `tested`. The previous audit below describes
@@ -173,7 +173,7 @@ logs, translated UI, persistence and integrations. No game test was executed her
 There is no remaining established defect from this audit. Source link and English
 XML-comment follow-ups were also corrected; no additional camera reservation.
 
-## Workflow audit — 2026-09-13
+## Workflow audit: 2026-09-13
 
 Audited revision: `a5486e8b7418f06cd6fd677a609c44959669cd4b`, also the live GitHub
 HEAD. Repository: `C:/Users/nelim/Documents/rimworld/ForTheOccasion`; distributed
@@ -322,21 +322,21 @@ root, never inside `Mod/`, so Steam never receives it.
 The fields above were read off the disk on 2026-09-12. Four cannot be, and wait for whoever
 holds this mod:
 
-- **`stage`** — one of `port`, `showcase`, `preTest`, `done`, `tested`, `published`. Filled in
+- **`stage`**: one of `port`, `showcase`, `preTest`, `done`, `tested`, `published`. Filled in
   from the session group where one exists; confirm it.
-- **`tested_on`** — the date of the last run in game. Empty means never.
-- **`dependencies`** — `declared` when every mod this one needs is named in the About's
+- **`tested_on`**: the date of the last run in game. Empty means never.
+- **`dependencies`**: `declared` when every mod this one needs is named in the About's
   `modDependencies`, `to check` when a non-vanilla `loadAfter` suggests a dependency that is not
   declared, `none` when the mod needs nothing. An undeclared dependency is not cosmetic: on
   2026-09-11 Reequilibrage animaux took 47 vanilla animals down with it, Muffalo included, because
   the class it injects belongs to a mod that was not declared and not loaded.
-- **`remaining`** — what is left, in three kinds: `feature` for something missing from a first
+- **`remaining`**: what is left, in three kinds: `feature` for something missing from a first
   release, `defect` for a known fault left unfixed, `unverified` for what could not be checked.
   The line already there is true of nearly the whole repository; replace it once it stops being.
 
 `licence` vocabulary: `open` an explicit licence, `silent` no licence and a dead source,
 `alive` no licence but a living source, `forbidden` a written refusal, `original` owing nothing
-to anyone — not a name, not an idea traceable to one mod, not a value derived from its assets.
+to anyone: not a name, not an idea traceable to one mod, not a value derived from its assets.
 
 ## What is known about this mod, and how
 
@@ -369,6 +369,6 @@ the file says so.
   by reflection rather than by property access.
 
 
-## Preview source migration — 2026-10-03
+## Preview source migration: 2026-10-03
 
 Copy, typography, layout and palette are consolidated in `Art/Preview.config.json`. Canonical inputs are `Art/Preview-source.png`, `Art/echo.png` and `Art/ModIcon-source.png`; temporary renderer diagnostics belong under ignored `Art/.render/`. Existing Preview, gallery and ICO outputs were preserved because they were present and coherent; no render was run. Superseded JSON files and generated QA intermediates were removed. Nothing published.

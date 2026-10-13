@@ -21,7 +21,7 @@ the design notes of one MIT mod, read and not reused (see Shift Change below).
 - **Author:** Ludeon Studios.
 - **Used how:** called, never copied.
 
-The mod builds on vanilla classes and defs — `RitualOutcomeComp_Quality`, `LordJob_Ritual`,
+The mod builds on vanilla classes and defs: `RitualOutcomeComp_Quality`, `LordJob_Ritual`,
 `RitualBehaviorWorker`, `Pawn_JobTracker`, `Building_OutfitStand`, `CompAssignableToPawn`,
 `Pawn_StyleTracker`, `PawnStyleItemChooser`, `GatheringsUtility`, `Building_Storage`. They are
 subclassed, patched with Harmony or read; none of their code is reproduced here.
