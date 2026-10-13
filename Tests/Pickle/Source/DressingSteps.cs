@@ -262,6 +262,22 @@ namespace ForTheOccasion.PickleSteps
             pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, true, true);
         }
 
+        /// <summary>
+        /// Diagnostic right after the new job is chosen: splits "the prefix never diverted" from "the trip
+        /// started and then ended". Names the current job, its forced flag, what is queued and the record.
+        /// </summary>
+        [Then("For the Occasion: {string} is on the dressing trip")]
+        public void OnDressingTrip(PickleContext ctx, string name)
+        {
+            var pawn = Driver.Colonist(ctx, name);
+            var cur = pawn.CurJob;
+            bool onTrip = cur != null && cur.def == FtoDefOf.FTO_PrepareForOccasion;
+            ctx.Assert(onTrip, $"{name} is not on the dressing trip: job={cur?.def?.defName ?? "none"} playerForced={cur?.playerForced} "
+                + $"workGiver={cur?.workGiverDef?.defName ?? "none"} emergency={cur?.workGiverDef?.emergency} "
+                + $"queued={pawn.jobs.jobQueue.Count} record={(PreparationTracker.RecordFor(pawn) != null)} "
+                + $"disabled={FtoLog.Disabled}");
+        }
+
         // ---------------------------------------------------------------- face paint
 
         [Given("For the Occasion: {string} has no tattoo")]

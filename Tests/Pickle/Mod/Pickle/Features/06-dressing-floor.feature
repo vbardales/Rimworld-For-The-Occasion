@@ -29,7 +29,8 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
     Then For the Occasion: the anticipation window is open
     And For the Occasion: "Aurel" is ready to be sent to dress
     When For the Occasion: "Aurel" is made to choose a new job
-    And I wait 600 ticks
+    Then For the Occasion: "Aurel" is on the dressing trip
+    When I wait 600 ticks
     Then "Aurel" is wearing "Apparel_Robe"
     And For the Occasion: "Aurel" wears a ceremonial garment
     And For the Occasion: "Aurel" is dressed for the occasion
