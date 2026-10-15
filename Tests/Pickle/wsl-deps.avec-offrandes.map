@@ -1,5 +1,5 @@
 # The optional providers of offerings, prerequisites above their consumers. Vanilla Plants Expanded is left out on purpose:
-# it opens only the cider gate, which the XML profiles of _tools/Check-Optional-Offerings.ps1 already cover.
+# it opens only the cider gate, which the XML profiles of scripts/Check-Optional-Offerings.ps1 already cover.
 Romyashi.Perfumes 3013711969
 romyashi.bunnyframework 3015333853
 Romyashi.AnimaExpansion 3532147582
