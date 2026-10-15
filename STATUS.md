@@ -98,3 +98,5 @@ Re-read the protocol changes since `71363b2e`: the state `auditSettings` is now 
 ### Gallery plan, 2026-10-15
 
 No gallery capture or scenario existed: `Art/Gallery/` holds only `0-preview.png`, and no story had been written. `PUBLICATION.md` now carries the story ("The feast day", one day at the Sanctuary, Nelim as protagonist), the wardrobe and faces of the three pawns, the eight-image plan mapped to `TESTING.md` scenarios, and the subtitle table (six scenes, interface captures 5 and 8 have none). Image 6 (offerings spent) is blocked until Pickle feature 14 has run; image 4 needs three dressed pawns, never played. Nothing was played or captured; the gallery scenarios are `shootGallery` work, after the green `playTests`.
+
+Ticket `20261015-222535-292-52aa` (2026-10-15): feature 06, one scenario, steps of `4c0a14f` (the steps DLL is the one built 2026-10-13); evidence `Tests/Pickle/Evidence/2026-10-15-announce-en`. It replaces the abandoned `20261014-111325-739-d83a`.
