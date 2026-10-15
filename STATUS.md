@@ -20,6 +20,7 @@ echo_review_sha: 145cbda5257b78d925577295800b758609e79c4d
 tested_on:    2026-09-30, headless Pickle in the WSL, English only, partial and red (see pickle_suite); no French pass, nothing seen by a person in the Windows game
 workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
 settings_audit: complete
+tested_1_7:   no   # not played: the 1.7 pass follows the green 1.6 playTests (AUDIT.md, Passe 1.7)
 audit_date:   2026-10-11
 audit_revision: c42b53d, tree dirty (Art migration, STATUS.md, documents); no file of Source/, Mod/Languages or Mod/Assemblies changed since 8116a55
 automated_tests: 39 passed, 0 failed, 0 skipped, 2026-10-02, replayed on 84a70dc with the DLL DD89BD90 (not rebuilt this time; the distributed file)
@@ -38,7 +39,7 @@ remaining:
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_a8e85b69-f560-4fda-87b7-f8df5c6bc555
 updated:      2026-10-11, French review by Virginie applied; writeTests exit criteria met; stage playTests[1.0.0]
-protocols_read_sha: b483dd6813cb9e000e9a71d4a0d631de555c7aac
+protocols_read_sha: e733386f133716f60efbad53c37602935eda7050
 ---
 
 # For the Occasion: status
@@ -89,3 +90,7 @@ Art committed (`d021321`: ModIcon source and derivatives, Preview config, `echo-
 2026-10-12: ModIcon badge moved to the bottom-right corner (`Art/Preview.config.json`: `corner`, `translate`, `veilRight`); Preview and `Art/Gallery/0-preview.png` regenerated (`145cbda`, identical bytes, 631,499), image opened and legible; social preview re-uploaded, `og:image` serves the same bytes, `social_preview_sha256` updated.
 
 Echo validated by Virginie, 2026-10-12: `Art/echo-preview.png` kept (colonist and brazier line-art, top-left panel); `echo_review_sha` = `145cbda`, the commit of the gallery and echo state she saw.
+
+### Audit replay, 2026-10-15 (protocols at e733386f)
+
+Re-read the protocol changes since `71363b2e`: the state `auditSettings` is now `settings`; session names carry no marker (the Workflow Board colours them); `Art/Gallery-clean/` and gallery subtitles (shootGallery, later); a full Pickle pass only for diagnostic and non-regression, a red scenario is replayed alone; no RimWorld version in reader-facing descriptions (`PUBLICATION.md` not written yet); `tested_1_7` field (set `no`, not played); echo path `echo-source.png` with the interim `echo-preview.png` invalidated by the first gallery capture (mountPreview). Replayed on the current tree: `Check-Status -Strict` 0 errors 0 warnings, `Check-ModBasics` PASS, `Check-Translations` PASS, harness 39 of 39. Stage unchanged, `playTests[1.0.0]`: the scenarios of feature 06, 07, 08, 14 and the Shift Change reload are still red or unplayed on the current steps; the ticket `20261014-111325-739-d83a` was abandoned by the queue (nothing played) and no ticket of this mod is queued.
