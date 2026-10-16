@@ -19,7 +19,7 @@ image is allowed, GALLERY.md 2026-10-14). Light is the story: cold dawn, warm br
 Mods staged for the series (a gallery `-DepMap` of its own: the Sanctuary map plus the offering providers):
 Facial Animation, EyeGenes3 (Nelim's brown eyes, the fixture's default), the four offering providers of
 `Tests/Pickle/wsl-deps.avec-offrandes.map` (RimScent incense, Perfumes, Vanilla Brewing Expanded, Rum and Shanties),
-Moving Vanilla Eyes if a smile is wanted (without it only `MouthNormal`, `BrowNormal`, `BrowThick`, `LidNormal` resolve).
+Vanilla Hair Expanded (the braid and the crop), Moving Vanilla Eyes if a smile is wanted (without it only `MouthNormal`, `BrowNormal`, `BrowThick`, `LidNormal` resolve).
 Animals: Shogun (labrador), facing the camera in image 3, then a thrumbo behind the glass in the rite. Not played.
 
 What each person wears and looks like, decided in advance (colours chosen against warm amber light, so the
@@ -36,8 +36,7 @@ Expression by image (only pieces that resolve without a mod: `BrowThick`, `BrowN
 Moving Vanilla Eyes): 1 Nelim sleepy, lids half down; 2 Nelim attentive, brows level; 3 Nelim curious, a smirk, eyes on the table;
 4 Nelim and Maelys calm, Tomas solemn; 6 Nelim tired, eyes lowered; 7 Nelim rested, a smirk. The guests need a bare face so the
 face paint shows (scenario 6); Nelim's own face carries none beforehand.
-The outfit stand needs Odyssey (scenario 3): the gallery pass lists Odyssey with the Sanctuary map. Hairstyles are named from the
-defs installed in the gallery pass (a hair mod may be staged for Maelys's braid) and checked on the capture, not assumed.
+The outfit stand needs Odyssey (scenario 3): the gallery pass lists Odyssey with the Sanctuary map. Hairstyles come from Vanilla Hair Expanded (`VanillaExpanded.VHE`, Workshop 1888705256, a 1.6 folder present): Maelys `VHE_SideBraid` (the one braid, hair colour grey-white), Tomas `VHE_Buzzcut` (cropped, dark), Nelim keeps her own style tied back. Staged in the gallery `-DepMap`; checked on the capture.
 
 Plan, one line per image (place, moment, subject, composition, life in the scene, what it says):
 
