@@ -40,7 +40,7 @@ namespace ForTheOccasion.PickleSteps
 
         /// <summary>
         /// A ritual spot takes many rituals. The ritual is picked, out of the player's ideoligion, as the first
-        /// that accepts this spot and needs no role to be filled: a rite that cannot start without a leader or a
+        /// that accepts this spot and needs no role that nobody can stand in for: a rite that cannot start without a leader or a
         /// convict would not start from a bare test colony, and that would say nothing about this mod.
         /// </summary>
         [Given("For the Occasion: a ritual spot stands at \\({int}, {int}\\)")]
@@ -57,7 +57,9 @@ namespace ForTheOccasion.PickleSteps
             foreach (var ritual in Faction.OfPlayer.ideos.AllIdeos.SelectMany(i => i.PreceptsListForReading).OfType<Precept_Ritual>())
             {
                 var roles = ritual.behavior?.def?.roles;
-                var needsRole = roles != null && roles.Any(r => r.required);
+                // A required role that is substitutable (the leader of a date ritual) is filled by anyone present when
+                // the window opens, so it does not stop a bare test colony from beginning the rite.
+                var needsRole = roles != null && roles.Any(r => r.required && !r.substitutable);
                 // A ritual built for a different kind of target (a corpse, a pawn) can throw when asked
                 // about a bare RitualSpot rather than answer false: that is not a candidate either.
                 bool accepts;
