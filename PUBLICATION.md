@@ -32,11 +32,18 @@ ceremonial garments read; clothes are the game's own ceremonial-tagged ones: `Ap
 | Tomas (guest) | forest-green robe, top hat | cropped, dark | solemn: `BrowThick`, `MouthNormal` |
 | Maelys (guest) | rust cape over a cream robe | long, grey-white, one braid | `BrowNormal`, a small smile only if Moving Vanilla Eyes is in the pass |
 
+Expression by image (only pieces that resolve without a mod: `BrowThick`, `BrowNormal`, `MouthNormal`, `LidNormal`; a smile needs
+Moving Vanilla Eyes): 1 Nelim sleepy, lids half down; 2 Nelim attentive, brows level; 3 Nelim curious, a smirk, eyes on the table;
+4 Nelim and Maelys calm, Tomas solemn; 6 Nelim tired, eyes lowered; 7 Nelim rested, a smirk. The guests need a bare face so the
+face paint shows (scenario 6); Nelim's own face carries none beforehand.
+The outfit stand needs Odyssey (scenario 3): the gallery pass lists Odyssey with the Sanctuary map. Hairstyles are named from the
+defs installed in the gallery pass (a hair mod may be staged for Maelys's braid) and checked on the capture, not assumed.
+
 Plan, one line per image (place, moment, subject, composition, life in the scene, what it says):
 
 | # | Place and moment | Subject and composition | What it says | Mod behaviour shown (TESTING.md) |
 | --- | --- | --- | --- | --- |
-| 1 | `ritual-hall`, 07:00 | Nelim in work clothes, wide shot, the empty outfit stand off-centre, Shogun asleep in the foreground | the day starts; nobody is dressed yet | scenario 8, anticipation |
+| 1 | `ritual-hall`, 07:00 | Nelim in work clothes, wide shot, the outfit stand off-centre with the robe and cape folded in it (Nelim's ceremonial owner stand, scenario 3), Shogun asleep in the foreground | the day starts; nobody is dressed yet | scenario 8, anticipation |
 | 2 | `ritual-hall`, 08:00 | Nelim at the stand, robe and cape on, face paint just drawn, medium shot, her old clothes folded on the stand | she walks to the stand and takes the robe | scenarios 3 and 6 |
 | 3 | `ritual-hall`, 11:00 | The offering table, close: incense, perfume, a meal, a cider or rum, a little gold; Shogun sniffs it, facing the camera | four kinds of offering, not four hundred beers | scenario 1 |
 | 4 | `hearth-hall`, 17:00 | Nelim, Tomas and Maelys round the central hearth in ceremonial dress, braziers lit, low camera | the whole colony dressed for the same rite | scenario 3 on three pawns, scenario 6 |
