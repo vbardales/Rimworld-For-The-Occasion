@@ -37,9 +37,9 @@ remaining:
   - "unverified: no customization mod has been tested in game, so no integration may be claimed. The shortcut is checked by its definition and by the native getter in the delivered code, not by a running RIMMSQOL."
   - "prepublished work still owed (tested -> prepublished): PUBLICATION.md does not exist; the description's THANKS credits only Ludeon, Harmony and Claude Code and does not thank the authors of the mods it names (Romyashi for Perfumes and Anima Expansion, Vanilla Brewing Expanded, Shift Change), nor link them; none of them is in WORKSHOP_COMMENTS.md yet. The page created by 0.1.0 carries the description as it stood on 2026-09-23."
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
-session:      local_a8e85b69-f560-4fda-87b7-f8df5c6bc555
+session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-10-11, French review by Virginie applied; writeTests exit criteria met; stage playTests[1.0.0]
-protocols_read_sha: e733386f133716f60efbad53c37602935eda7050
+protocols_read_sha: 005d9b2720a85d62a3a31b02c265f3133621ee72
 ---
 
 # For the Occasion: status
