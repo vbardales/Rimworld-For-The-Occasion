@@ -32,7 +32,7 @@ a translation resource or a reading of the game's compiled code can settle is in
 | 11, disabling with a borrower | `07-dressing-stand` | The outfit goes back when preparation is switched off mid-way. |
 | 12, the shortcut | `03-shortcut`, `04-rimmsqol-shortcut` | Hidden by default, opens THIS mod's settings, drawn and not greyed when revealed; and RIMMSQOL itself lists, reveals, hides and forgets it. |
 | Optional providers | `10-optional-offerings` | An item of each optional mod lands on the table and counts. |
-| Shift Change | `11-shift-change` | Two owners on one stand stay apart through a save and a reload. |
+| Shift Change | `11-shift-change` | An owner set through Shift Change is the ceremonial owner here too, through a save and a reload (Shift Change unifies owners). |
 | The DLC guard | `09-without-odyssey` | The mod loads without Odyssey, with no stand def. |
 
 ### Not covered here, with the reason

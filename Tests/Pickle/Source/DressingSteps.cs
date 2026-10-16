@@ -403,5 +403,18 @@ namespace ForTheOccasion.PickleSteps
             ctx.Assert(!ours.AssignedPawnsForReading.Any(p => p.LabelShort == other) || ceremonial == other,
                 "the other comp's owner leaked into the ceremonial list: the two share a save key");
         }
+
+        [Then("For the Occasion: both owner comps of the stand hold {string} alone")]
+        public void BothHold(PickleContext ctx, string name)
+        {
+            var stand = Stand(ctx);
+            var ours = stand.TryGetComp<CompAssignableToPawn_CeremonialStand>();
+            var theirs = stand.AllComps.OfType<CompAssignableToPawn>().FirstOrDefault(c => !(c is CompAssignableToPawn_CeremonialStand));
+            ctx.Require(ours != null && theirs != null, "the stand lacks one of the two owner comps");
+            ctx.Assert(ours.AssignedPawnsForReading.Count == 1 && ours.AssignedPawnsForReading[0].LabelShort == name,
+                $"the ceremonial owners are [{string.Join(", ", ours.AssignedPawnsForReading.Select(p => p.LabelShort))}], not {name} alone");
+            ctx.Assert(theirs.AssignedPawnsForReading.Count == 1 && theirs.AssignedPawnsForReading[0].LabelShort == name,
+                $"the other comp's owners are [{string.Join(", ", theirs.AssignedPawnsForReading.Select(p => p.LabelShort))}], not {name} alone");
+        }
     }
 }

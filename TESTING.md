@@ -251,8 +251,10 @@ scribes `FTO_`-prefixed keys so the two never read each other's owners, and drop
 hardcoded `Misc4` hotkey, which on a storage building collides with the settings clipboard. None
 of that can be exercised without Shift Change installed, and it is inert without it.
 
-To test it: install both, assign the same stand a work owner in Shift Change and a ceremonial
-owner here, save, reload, and check both assignments survived and are still distinct.
+Shift Change unifies the owners of a stand with every other assignable comp beside it, ours included
+(`ReconcileForeignOwners`, `SyncForeignOwners`, `CopyOwnersInto` in its code): there is ONE owner list,
+set by whichever comp was edited last. To test it: install both, assign a colonist through Shift Change,
+check that the same colonist is the ceremonial owner here, save, reload, and check it still is.
 
 ## Scenario 10: settings, defaults and persistence (English and French)
 
