@@ -34,6 +34,7 @@ a translation resource or a reading of the game's compiled code can settle is in
 | Optional providers | `10-optional-offerings` | An item of each optional mod lands on the table and counts. |
 | Shift Change | `11-shift-change` | An owner set through Shift Change is the ceremonial owner here too, through a save and a reload (Shift Change unifies owners). |
 | The DLC guard | `09-without-odyssey` | The mod loads without Odyssey, with no stand def. |
+| Gallery (not a test) | `15-gallery` | The pictures of "The feast day" (images 1, 2, 3, 4, 7), pass `galerie`, `@review`, never run. Images 5, 6, 8 are not written yet. |
 
 ### Not covered here, with the reason
 

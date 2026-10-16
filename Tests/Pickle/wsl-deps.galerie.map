@@ -1,0 +1,35 @@
+# Pass "galerie" of For the Occasion (2026-10-16, never run): the Sanctuary map of ACertainSeries' galerie pass (Backlot, PickleTools
+# studio tools, bodies, facial animation with EyeGenes3 and Moving Vanilla Eyes), plus Vanilla Hair Expanded for the guests' hairstyles
+# and the four offering providers of wsl-deps.avec-offrandes.map for the table of image 3. Odyssey is a DLC, not listed here.
+nelim.sanctuarybacklot path:SanctuaryBacklot/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor path:PickleTools/StageDecor/Mod
+nelim.pickletools.coatsteps path:PickleTools/CoatSteps/Mod
+nelim.pickletools.clearscreen path:PickleTools/ClearScreen/Mod
+nelim.pickletools.colonistrace path:PickleTools/ColonistRace/Mod
+nelim.pickletools.clickdiagnostics path:PickleTools/ClickDiagnostics/Mod
+nelim.pickletools   path:PickleTools/Tests/Pickle/StandaloneBase/Mod
+tiagocc0.FemaleBodyVariants 3798082132
+tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies 3527486510
+ab.vplrf 2986402536
+nelim.venustouch.waistlines path:VenusTouchWaistlines/Mod
+Nals.FacialAnimation 1635901197
+nals.facialanimationexperimentals 2581693737
+VanillaExpanded.VTEXE.FacialAnims 2816938779
+Newton.AKNExtras.FacialAnimations 2889716301
+lucius.eyegenes3 3745223213
+astryl.FacialAnimationPerformancePatch 3790129900
+sd.fa.movingvanillaeyes 3753978140
+VanillaExpanded.VHE 1888705256
+Romyashi.Perfumes 3013711969
+romyashi.bunnyframework 3015333853
+Romyashi.AnimaExpansion 3532147582
+OskarPotocki.VanillaFactionsExpanded.Core 2023507013
+VanillaExpanded.VBrewE 2186560858
+reo.RimScent 3645569466
+ocarina.rimscent.incense 3678830567
+nelim.rimscent.extended path:RimScentExtended/Mod
+nelim.rimscent.extended.incenseplus path:RimScentExtendedIncensePlusExpansion/Mod
+nelim.rumandshanties path:RumAndShanties/Mod
