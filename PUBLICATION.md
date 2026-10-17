@@ -36,7 +36,7 @@ Expression by image (only pieces that resolve without a mod: `BrowThick`, `BrowN
 Moving Vanilla Eyes): 1 Nelim sleepy, lids half down; 2 Nelim attentive, brows level; 3 Nelim curious, a smirk, eyes on the table;
 4 Nelim and Maelys calm, Tomas solemn; 6 Nelim tired, eyes lowered; 7 Nelim rested, a smirk. The guests need a bare face so the
 face paint shows (scenario 6); Nelim's own face carries none beforehand.
-The outfit stand needs Odyssey (scenario 3): the gallery pass lists Odyssey with the Sanctuary map. Hairstyles come from Vanilla Hair Expanded (`VanillaExpanded.VHE`, Workshop 1888705256, a 1.6 folder present): Maelys `VHE_SideBraid` (the one braid, hair colour grey-white), Tomas `VHE_Buzzcut` (cropped, dark), Nelim keeps her own style tied back. Staged in the gallery `-DepMap`; checked on the capture.
+The outfit stand needs Odyssey (scenario 3): the gallery pass lists Odyssey with the Sanctuary map. Hairstyles come from Vanilla Hair Expanded (`VanillaExpanded.VHE`, Workshop 1888705256, a 1.6 folder present): Maelys `VHE_SideBraid` (the one braid, hair colour grey-white), Tomas `VHE_Buzzcut` (cropped, dark), Nelim keeps her own style tied back. Staged in the gallery `-DepMap`; to be checked on the capture.
 
 Plan, one line per image (place, moment, subject, composition, life in the scene, what it says):
 
@@ -69,7 +69,7 @@ and the indexes are made contiguous.
 | 1 | `1-dawn.jpg` | The feast day is announced, and nobody has changed yet. |
 | 2 | `2-the-stand.jpg` | Nelim trades her work clothes for the stand's ceremonial robe. |
 | 3 | `3-the-table.jpg` | Incense, a fine meal, a drink and a little gold: four kinds, one table. |
-| 4 | `4-the-hearth.jpg` | Everyone with a robe wears one, and the paint goes on with it. |
+| 4 | `4-the-hearth.jpg` | Everyone is in ceremonial dress, and the paint goes on with it. |
 | 6 | `6-the-spent-table.jpg` | When the rite ends, what was offered is spent. |
 | 7 | `7-next-morning.jpg` | Next morning the robes are back on the stand and the paint is gone. |
 

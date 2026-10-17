@@ -18,7 +18,7 @@
   <FTO_PrepareOnObligationDesc>Quand une obligation apparaît (un décès, une date), les colons s'apprêtent dans les heures qui suivent. Rien n'a encore commencé : cela ne coûte aucune progression de rituel. C'est la façon prévue d'y jouer.</FTO_PrepareOnObligationDesc>
 
   <FTO_ObligationWindow>Fenêtre après l'annonce : {0} h</FTO_ObligationWindow>
-  <FTO_ObligationWindowDesc>Une obligation vit jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai les colons se rechangent, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
+  <FTO_ObligationWindowDesc>Une obligation vit jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai, les colons se rechangent, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
 
   <FTO_PrepareOnLaunch>Se préparer au lancement du rituel</FTO_PrepareOnLaunch>
   <FTO_PrepareOnLaunchDesc>Les participants passent par la garde-robe à l'instant du départ. L'horloge du rituel ne s'arrête pas pour eux : on échange de la progression contre de l'apparat.</FTO_PrepareOnLaunchDesc>
@@ -27,7 +27,7 @@
   <FTO_MaxDetourDesc>Ne concerne que le changement de dernière minute. Au-delà, le trajet coûte plus de progression que la tenue ne rapporte, et le colon file droit à la cérémonie.</FTO_MaxDetourDesc>
 
   <FTO_Tattoo>Peinture de visage pour l'occasion</FTO_Tattoo>
-  <FTO_TattooDesc>Les colons qui ne portent aucun tatouage d'habitude en reçoivent un, tiré du style de leur propre idéologie, effacé au moment où ils se rechangent. Les tatouages existants restent inchangés.</FTO_TattooDesc>
+  <FTO_TattooDesc>Les colons qui ne portent aucun tatouage d'habitude en reçoivent un, tiré du style de leur propre idéoligion, effacé au moment où ils se rechangent. Les tatouages existants restent inchangés.</FTO_TattooDesc>
 
   <!-- In game -->
   <FTO_OfferingsFactor>Offrandes</FTO_OfferingsFactor>
