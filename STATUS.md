@@ -42,7 +42,7 @@ remaining:
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-10-11, French review by Virginie applied; writeTests exit criteria met; stage playTests[1.0.0]
-protocols_read_sha: 2f60f605ba8f292dec63672a8b562473b846d6a7
+protocols_read_sha: c283fedfcc80166d175245f9553ab4095716c1fa
 ---
 # For the Occasion: status
 
@@ -112,3 +112,5 @@ Red step of `avec-shiftchange` (`the ceremonial owners are [Belle], not Aurel`) 
 
 Shift Change, second reading (2026-10-16): `Patch_ForeignOwnerGizmos` returns no gizmo for every other `CompAssignableToPawn` on stand with `CompShiftStand`, so our "Set ceremonial owner" button hidden there; owner set through Shift Change, mirrored into our comp by `SyncForeignOwners` (flag `ownersUnified`, set in `PostSpawnSetup`, saved under `shiftChangeOwnersUnified`). Unproven: what other comp holds after `TryAssignPawn(Belle)` when Aurel there first (feature 11, ticket `ba7b`, asserts both comps hold Belle alone).
 French text change, 2026-10-17: ChatGPT review (review-translation) proposed one change, applied at the owner's "applique ce qui est pertinent": `FTO_SetCeremonialOwnerDesc` now opens "Définir ce portant comme garde-robe de cérémonie." (infinitive, as its label "Attribuer la tenue de cérémonie" and the other action texts). Nothing else was flagged. The text changed, so the Pickle scenarios that display it are replayed in the French pass of `playTests`; Check-Translations PASS, harness 39 of 39.
+
+Protocols re-read 2026-10-17 (AGENTS.md rules of 2026-10-16/17): no grep in any form (ask Virginie first), full URLs only, gallery captures not before `shootGallery`, clear after a digested ticket report, French never addresses the player in tu or vous. Note: `Tests/Pickle/Mod/Pickle/Features/15-gallery.feature` and `wsl-deps.galerie.map` were written at `playTests` on the owner's "oui" (2026-10-16), never run and never to be run before `shootGallery`.
