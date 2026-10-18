@@ -35,7 +35,9 @@ desktop.ini
 # Test evidence: Pickle's -EvidenceDir target and any other report kept on disk for the session that
 # reads it. Screenshots, films and Player.log make it grow without bound, so git carries none of it.
 # What is worth keeping goes to docs/runs/ as text (see docs/runs/README.md).
+Tests/Pickle/Inbox/
 Tests/Pickle/Evidence/
+Tests/Pickle/Parked/
 evidence/
 
 # Reproducible Preview diagnostics generated locally by the shared renderer.
