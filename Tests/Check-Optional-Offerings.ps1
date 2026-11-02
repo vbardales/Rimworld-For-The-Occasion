@@ -10,9 +10,10 @@
 param(
     [string] $WorkshopDir = 'C:\Program Files (x86)\Steam\steamapps\workshop\content\294100',
     [hashtable] $SourcePaths,
-    [string] $OfferingsFile = (Join-Path $PSScriptRoot '..\Mod\Defs\OfferingCategoryDefs\OfferingCategories.xml')
+    [string] $OfferingsFile
 )
 $ErrorActionPreference = 'Stop'
+if (-not $OfferingsFile) { $OfferingsFile = Join-Path $PSScriptRoot '..\Mod\Defs\OfferingCategoryDefs\OfferingCategories.xml' }
 if (-not $SourcePaths) {
     $SourcePaths = @{
         'romyashi.perfumes' = Join-Path $WorkshopDir '3013711969'

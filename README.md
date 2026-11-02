@@ -245,7 +245,7 @@ preparation lets existing borrowers return their clothes at the next eligible jo
 When the optional content providers are installed locally, also run:
 
 ```powershell
-pwsh -File Tests/Check-Optional-Offerings.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Check-Optional-Offerings.ps1
 ```
 
 This checks eight combinations of the providers' actual 1.6 Defs and LoadFolders. Use
