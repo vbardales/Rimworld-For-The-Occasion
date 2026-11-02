@@ -219,16 +219,16 @@ dotnet build Source/ForTheOccasion.csproj
 
 ## Validating after a change
 
-Thirty-nine functional tests, which need RimWorld installed but never start it:
+Thirty-seven functional tests, which need RimWorld installed but never start it:
 
 ```
-powershell -ExecutionPolicy Bypass -File scripts\Run-Functional-Tests.ps1
+powershell -ExecutionPolicy Bypass -File Tests/Run-Functional-Tests.ps1
 ```
 
 They execute the mod's own C# and read the game's compiled code, so they catch what a compiler
 cannot: a vanilla method that stopped doing what this mod delegates to it, a patch operation that
-stopped matching, a save key that started colliding, a translation key with no translation. Run
-them before a release. `-ListTests` prints the list, `-Only 8,22` runs a few. What they do NOT do
+stopped matching, a save key that started colliding. Access to non-public game members and translation keys are checked by the shared `Check-HarmonyContract` and `Check-Translations`. Run
+them before a release. `-ListTests` prints the list, `-Only 8,21` runs a few. What they do NOT do
 is play the mod: `TESTING.md` holds the game scenarios for that, and neither half replaces the
 other.
 
@@ -245,7 +245,7 @@ preparation lets existing borrowers return their clothes at the next eligible jo
 When the optional content providers are installed locally, also run:
 
 ```powershell
-pwsh -File scripts/Check-Optional-Offerings.ps1
+pwsh -File Tests/Check-Optional-Offerings.ps1
 ```
 
 This checks eight combinations of the providers' actual 1.6 Defs and LoadFolders. Use

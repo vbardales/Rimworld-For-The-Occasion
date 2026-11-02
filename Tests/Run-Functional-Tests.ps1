@@ -278,30 +278,6 @@ function Get-TranslationKeys($method) {
     $out
 }
 
-# Whether the CLR would let this access through without IgnoresAccessChecksTo. Protected reaches
-# a subclass, which is how the mod writes the base comp's `label` and its assignedPawns lists
-# while remaining an ordinary, non-publicised assembly.
-function Test-AccessAllowed($accessingType, $declaringType, $isPublic, $isFamily) {
-    if ($isPublic) { return $true }
-    if (-not $isFamily) { return $false }
-    if (-not $declaringType -or -not $accessingType) { return $false }
-    $t = $accessingType
-    while ($t) {
-        if ($t -eq $declaringType) { return $true }
-        $t = $t.BaseType
-    }
-    # A lambda or an iterator lives in a type nested inside the one that owns the code.
-    $outer = $accessingType.DeclaringType
-    while ($outer) {
-        $t = $outer
-        while ($t) {
-            if ($t -eq $declaringType) { return $true }
-            $t = $t.BaseType
-        }
-        $outer = $outer.DeclaringType
-    }
-    return $false
-}
 
 # The compiler lifts an iterator or a lambda into a type named after its method. Those bodies
 # belong to the method as much as the stub does, so anything that asks "does this method call X"
@@ -831,36 +807,6 @@ Test-Case 'the game' 'face paint is still free, and still reachable' {
     }
 }
 
-Test-Case 'the game' 'the mod reaches nothing the game keeps to itself' {
-    # The csproj sets GenerateAssemblyInfo false. If a publicised reference ever crept in, the
-    # IgnoresAccessChecksTo attribute would NOT be emitted and every such access would throw
-    # FieldAccessException at runtime, behind a perfectly clean startup. The verdict here is the
-    # CLR's own accessibility flags, not a promise in a csproj.
-    $declared = @($script:Mod.GetCustomAttributesData() | Where-Object { $_.AttributeType.Name -cmatch 'IgnoresAccessChecksTo' })
-    $bad = @()
-    foreach ($t in $script:ModTypes) {
-        foreach ($m in (Get-AllMethods $t)) {
-            foreach ($s in (Get-FieldSites $m)) {
-                if (-not $s.Target.Module -or $s.Target.Module.Assembly -ne $script:Cs) { continue }
-                $ok = Test-AccessAllowed $t $s.Target.DeclaringType $s.Target.IsPublic ($s.Target.IsFamily -or $s.Target.IsFamilyOrAssembly)
-                if (-not $ok) { $bad += "$($t.Name).$($m.Name) reads $($s.Declares).$($s.Name)" }
-            }
-            foreach ($s in (Get-CallSites $m)) {
-                if (-not $s.Target.Module -or $s.Target.Module.Assembly -ne $script:Cs) { continue }
-                $ok = Test-AccessAllowed $t $s.Target.DeclaringType $s.Target.IsPublic ($s.Target.IsFamily -or $s.Target.IsFamilyOrAssembly)
-                if (-not $ok) { $bad += "$($t.Name).$($m.Name) calls $($s.Declares).$($s.Name)()" }
-            }
-        }
-    }
-    if ($bad.Count -gt 0 -and $declared.Count -eq 0) {
-        Fail ("the mod reaches game members it has no right to, and declares no IgnoresAccessChecksTo: " +
-              (($bad | Select-Object -Unique | Select-Object -First 4) -join '; '))
-    }
-    if ($declared.Count -gt 0) {
-        return "skip: the mod declares IgnoresAccessChecksTo, so a publiciser is in play and this test no longer decides anything"
-    }
-}
-
 # --- group 3: the XML does what it says --------------------------------------------------------
 
 Test-Case 'the xml' 'each outfit stand ends up with exactly one ceremonial owner' {
@@ -980,33 +926,6 @@ Test-Case 'content' 'every offering the mod can count without a gate really exis
     }
     if ($missing.Count -gt 0) { Fail "ungated offerings that no longer exist: $($missing -join ', ')" }
     if ($gated -eq 0) { Fail 'no offering is gated any more, so no modded item can be counted' }
-}
-
-Test-Case 'content' 'every key the code asks for is translated in both languages' {
-    # The keys are taken out of the compiled IL, not off a list kept by hand, and they are found
-    # by the call rather than by the prefix. FTO_assignedPawns is a save key, FTO_PrepareDelay a
-    # toil name and FTO_Ceremonial an apparel tag: all three share the prefix and none of them is
-    # translated, so a prefix test would demand three translations that must not exist.
-    $keys = New-Object 'System.Collections.Generic.HashSet[string]'
-    foreach ($t in $script:ModTypes) {
-        foreach ($m in (Get-AllMethods $t)) {
-            foreach ($k in (Get-TranslationKeys $m)) { [void]$keys.Add($k) }
-        }
-    }
-    if ($keys.Count -lt 10) { Fail "only $($keys.Count) translation keys found in the IL" }
-    foreach ($notAKey in 'FTO_assignedPawns', 'FTO_uninstalledAssignedPawns', 'FTO_PrepareDelay', 'FTO_Ceremonial') {
-        if ($keys.Contains($notAKey)) { Fail "$notAKey was taken for a translation key; it is not one" }
-    }
-
-    foreach ($lang in 'English', 'French') {
-        $x = Get-ModXml "Languages\$lang\Keyed\ForTheOccasion.xml"
-        $have = New-Object 'System.Collections.Generic.HashSet[string]'
-        foreach ($n in $x.SelectNodes('/LanguageData/*')) { [void]$have.Add($n.Name) }
-        $absent = @($keys | Where-Object { -not $have.Contains($_) })
-        if ($absent.Count -gt 0) { Fail "$lang is missing: $($absent -join ', ')" }
-        $orphan = @($have | Where-Object { $_ -cmatch '^FTO_' -and -not $keys.Contains($_) })
-        if ($orphan.Count -gt 0) { Fail "$lang translates keys nothing asks for: $($orphan -join ', ')" }
-    }
 }
 
 Test-Case 'content' 'the counts the player is told are the counts the mod uses' {

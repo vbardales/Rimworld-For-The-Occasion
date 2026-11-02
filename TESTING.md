@@ -44,11 +44,11 @@ cross-reference failed. Now name `Romyashi.Perfumes` and `Romyashi.AnimaExpansio
 
 ## The other half, which does not need a colony
 
-`scripts/Run-Functional-Tests.ps1` run thirty-nine tests without starting
+`Tests/Run-Functional-Tests.ps1` run thirty-seven tests without starting
 game. Run before playing any scenario below, and again before release:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts\Run-Functional-Tests.ps1
+powershell -ExecutionPolicy Bypass -File Tests/Run-Functional-Tests.ps1
 ```
 
 Ask different question from this file. Scenarios below ask whether mod
@@ -358,7 +358,7 @@ Change, with optional providers, and for restart pair.
    Rum and Shanties (both of this collection), Perfumes (3013711969) with Anima Expansion (3532147582),
    and Vanilla Brewing Expanded (2186560858) with Vanilla Plants Expanded. Vanilla Plants Expanded and
    its `_copy` package two separate ways of opening cider gate (two profiles of
-   `scripts/Check-Optional-Offerings.ps1`). Whether can be loaded together not established
+   `Tests/Check-Optional-Offerings.ps1`). Whether can be loaded together not established
    here, so each gets own pass until it is.
 4. **A pass per declared incompatibility:** none. `About.xml` declares no `incompatibleWith`.
 

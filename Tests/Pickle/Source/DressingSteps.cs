@@ -262,27 +262,6 @@ namespace ForTheOccasion.PickleSteps
             pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, true, true);
         }
 
-        /// <summary>
-        /// Diagnostic right after the new job is chosen: splits "the prefix never diverted" from "the trip
-        /// started and then ended". Names the current job, its forced flag, what is queued and the record.
-        /// </summary>
-        [Then("For the Occasion: the interception diverts a new job of {string}")]
-        public void InterceptionDiverts(PickleContext ctx, string name)
-        {
-            var pawn = Driver.Colonist(ctx, name);
-            var t = typeof(Patch_JobInterception);
-            var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static;
-            bool reentrant = (bool)t.GetField("reentrant", flags).GetValue(null);
-            var cooldown = (System.Collections.IDictionary)t.GetField("lastDivert", flags).GetValue(null);
-            var info = HarmonyLib.Harmony.GetPatchInfo(typeof(Verse.AI.Pawn_JobTracker).GetMethod("StartJob"));
-            string owners = info == null ? "no patch info" : string.Join(",", System.Linq.Enumerable.Select(info.Prefixes, p => p.owner));
-            // Decide diverts only when it returns false; the pawn is then really diverted.
-            var job = Verse.JobMaker.MakeJob(JobDefOf.Wait_Wander);
-            bool keep = (bool)t.GetMethod("Decide", flags).Invoke(null, new object[] { pawn.jobs, pawn, job, Verse.AI.JobCondition.InterruptForced, false, true });
-            ctx.Assert(!keep, $"Decide lets a new job through for {name}: reentrant={reentrant} cooldownEntry={cooldown.Contains(pawn)} prefixOwners=[{owners}] "
-                + $"settings(prep={ForTheOccasionMod.Settings.preparationEnabled}, obligation={ForTheOccasionMod.Settings.prepareOnObligation}) window={ObligationWatch.WindowOpen()}");
-        }
-
         [Then("For the Occasion: {string} is on the dressing trip")]
         public void OnDressingTrip(PickleContext ctx, string name)
         {
@@ -387,21 +366,6 @@ namespace ForTheOccasion.PickleSteps
             var other = Stand(ctx).AllComps.OfType<CompAssignableToPawn>().FirstOrDefault(c => !(c is CompAssignableToPawn_CeremonialStand));
             ctx.Require(other != null, "the stand has no assignable comp but ours");
             other.TryAssignPawn(Driver.Colonist(ctx, name));
-        }
-
-        [Then("For the Occasion: the stand's ceremonial owner is {string} and the other owner is {string}")]
-        public void BothOwners(PickleContext ctx, string ceremonial, string other)
-        {
-            var stand = Stand(ctx);
-            var ours = stand.TryGetComp<CompAssignableToPawn_CeremonialStand>();
-            var theirs = stand.AllComps.OfType<CompAssignableToPawn>().FirstOrDefault(c => !(c is CompAssignableToPawn_CeremonialStand));
-            ctx.Require(ours != null && theirs != null, "the stand lacks one of the two owner comps");
-            ctx.Assert(ours.AssignedPawnsForReading.Any(p => p.LabelShort == ceremonial),
-                $"the ceremonial owners are [{string.Join(", ", ours.AssignedPawnsForReading.Select(p => p.LabelShort))}], not {ceremonial}");
-            ctx.Assert(theirs.AssignedPawnsForReading.Any(p => p.LabelShort == other),
-                $"the other comp's owners are [{string.Join(", ", theirs.AssignedPawnsForReading.Select(p => p.LabelShort))}], not {other}");
-            ctx.Assert(!ours.AssignedPawnsForReading.Any(p => p.LabelShort == other) || ceremonial == other,
-                "the other comp's owner leaked into the ceremonial list: the two share a save key");
         }
 
         [Then("For the Occasion: both owner comps of the stand hold {string} alone")]
