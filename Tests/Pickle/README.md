@@ -5,7 +5,7 @@ The scenarios of [TESTING.md](../../TESTING.md) that only a running game can set
 
 **Played once per pass (2026-09-29/30), English only, not all green** (docs/runs/2026-09-30.md). The suite compiles, every step line resolves against
 Pickle's vocabulary and the companions its pass maps stage, and no expression is ambiguous
-(`Check-Steps.ps1`, below). That says the scenarios can be loaded. It does not say a step does what its
+(shared `Check-Steps.ps1`, below). That says the scenarios can be loaded. It does not say a step does what its
 sentence claims: only a run does, and the runs so far needed tuning. The coordinates, the number of
 ticks and the colony's colonists are guesses about the `test-colony` fixture until it has been played.
 
@@ -83,7 +83,7 @@ window is laid out well or that a colonist is wearing the robe in the picture.
 ## Checking the suite without a game
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File Tests/Pickle/Check-Steps.ps1
+powershell.exe -ExecutionPolicy Bypass -File ../scripts/Check-Steps.ps1 -Mod ForTheOccasion
 ```
 
 It compiles every step pattern with Pickle's own expression engine, and matches every step line of every
