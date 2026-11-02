@@ -23,6 +23,7 @@ namespace ForTheOccasion.PickleSteps
         {
             public Precept_Ritual Ritual;
             public Thing Spot;
+            public LordJob_Ritual Job;
         }
 
         private static Chosen State(PickleContext ctx)
@@ -101,13 +102,25 @@ namespace ForTheOccasion.PickleSteps
         /// and the method the mod patches. Waiting out a real ritual would take game hours.
         /// </summary>
         [When("For the Occasion: the running ritual ends")]
-        public void End(PickleContext ctx) => Running(ctx).ApplyOutcome(1f, false, false, false);
+        public void End(PickleContext ctx)
+        {
+            var job = Running(ctx);
+            // The first outcome ends the lord and removes it from the map: keep the job for a second call.
+            var chosen = State(ctx);
+            if (chosen != null) chosen.Job = job;
+            job.ApplyOutcome(1f, false, false, false);
+        }
 
         [When("For the Occasion: the running ritual is cancelled")]
         public void Cancel(PickleContext ctx) => Running(ctx).ApplyOutcome(0f, false, false, true);
 
         /// <summary>The game can call it twice: the second call must consume nothing more.</summary>
         [When("For the Occasion: the running ritual reports its outcome a second time")]
-        public void EndAgain(PickleContext ctx) => Running(ctx).ApplyOutcome(1f, false, false, false);
+        public void EndAgain(PickleContext ctx)
+        {
+            var job = State(ctx)?.Job;
+            ctx.Require(job != null, "the ritual was not ended by a step first: nothing to report a second time");
+            job.ApplyOutcome(1f, false, false, false);
+        }
     }
 }
