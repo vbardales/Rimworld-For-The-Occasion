@@ -24,7 +24,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
     And For the Occasion: the garment "Apparel_Duster" does not carry the ceremonial tag
 
   Scenario: an announced ritual sends a free colonist to the finest ceremonial garment
-    Given For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    Given For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     Then For the Occasion: the anticipation window is open
     And For the Occasion: "Aurel" is ready to be sent to dress
@@ -38,7 +38,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
     And no errors were logged
 
   Scenario: an ordinary garment lying about is left alone
-    Given For the Occasion: a "Apparel_Duster" lies at (147, 155)
+    Given For the Occasion: a "Apparel_Duster" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks
@@ -48,7 +48,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
 
   Scenario: nothing happens when preparation is switched off
     Given For the Occasion: setting "preparationEnabled" is set to "false"
-    And For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    And For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks
@@ -56,7 +56,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
     And For the Occasion: "Aurel" wears no ceremonial garment
 
   Scenario: when the window closes the colonist gives the preparation up
-    Given For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    Given For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks
@@ -70,7 +70,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
 
   Scenario: face paint follows the record, and goes with it
     Given For the Occasion: "Aurel" has no tattoo
-    And For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    And For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks
@@ -85,7 +85,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
   Scenario: with the paint switched off nobody is painted
     Given For the Occasion: setting "tattooEnabled" is set to "false"
     And For the Occasion: "Aurel" has no tattoo
-    And For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    And For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks

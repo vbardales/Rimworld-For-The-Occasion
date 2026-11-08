@@ -118,6 +118,21 @@ namespace ForTheOccasion.PickleSteps
         }
 
         /// <summary>
+        /// A garment a few steps from a colonist. The record only exists once the trip is over (walk,
+        /// then the equip delay), so a garment far away makes the scenario depend on the walking time.
+        /// </summary>
+        [Given("For the Occasion: a {string} lies beside {string}")]
+        public void GarmentLiesBeside(PickleContext ctx, string defName, string name)
+        {
+            var map = Driver.Map(ctx);
+            var pawn = Driver.Colonist(ctx, name);
+            var cell = CellFinder.RandomClosewalkCellNear(pawn.Position, map, 3);
+            var thing = Driver.Make(ctx, Driver.ThingDefNamed(ctx, defName));
+            GenSpawn.Spawn(thing, cell, map);
+            Made(ctx).Things.Add(thing);
+        }
+
+        /// <summary>
         /// The tag is put on the game's garments by an XML patch that runs before def inheritance, so it
         /// reaches a garment only if the patch really matched in this game and its heirs inherited it.
         /// </summary>
@@ -243,8 +258,12 @@ namespace ForTheOccasion.PickleSteps
         }
 
         [Then("For the Occasion: {string} is dressed for the occasion")]
-        public void IsPrepared(PickleContext ctx, string name) =>
-            ctx.Assert(PreparationTracker.IsPrepared(Driver.Colonist(ctx, name)), $"{name} has no preparation record");
+        public void IsPrepared(PickleContext ctx, string name)
+        {
+            var pawn = Driver.Colonist(ctx, name);
+            ctx.Assert(PreparationTracker.IsPrepared(pawn), $"{name} has no preparation record: job={pawn.CurJob?.def?.defName ?? "none"} "
+                + $"pos={pawn.Position} target={pawn.CurJob?.targetA.Cell.ToString() ?? "none"}");
+        }
 
         [Then("For the Occasion: {string} is not dressed for the occasion")]
         public void IsNotPrepared(PickleContext ctx, string name) =>
