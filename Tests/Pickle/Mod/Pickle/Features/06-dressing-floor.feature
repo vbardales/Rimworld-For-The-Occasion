@@ -64,6 +64,7 @@ Feature: colonists put on ceremonial clothes when a ritual is announced, and tak
     When I wait 700 ticks
     And I wait 700 ticks
     Then For the Occasion: the anticipation window is closed
+    And For the Occasion: "Aurel" is made to choose a new job
     And I wait 300 ticks
     Then For the Occasion: "Aurel" is not dressed for the occasion
     And For the Occasion: no hook has disabled the mod
