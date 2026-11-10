@@ -85,20 +85,25 @@ namespace ForTheOccasion.PickleSteps
         [Then("For the Occasion: {string} is ready to be sent to dress")]
         public void ReadyToDress(PickleContext ctx, string name)
         {
-            var pawn = Driver.Colonist(ctx, name);
-            string why = null;
-            if (!pawn.Spawned || pawn.Map == null) why = "not spawned";
-            else if (!pawn.IsFreeColonist) why = "not a free colonist";
-            else if (pawn.Drafted) why = "drafted";
-            else if (pawn.Downed) why = "downed";
-            else if (pawn.InMentalState) why = "in a mental state";
-            else if (pawn.GetPosture() != PawnPosture.Standing) why = "posture " + pawn.GetPosture();
-            else if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None) why = "map danger " + pawn.Map.dangerWatcher.DangerRating;
-            else if (PreparationTracker.RecordFor(pawn) != null) why = "already has a preparation record";
-            else if (!PreparationReason.WantsToDress(pawn, out float maxDistance)) why = "WantsToDress is false (preparationEnabled=" + ForTheOccasionMod.Settings.preparationEnabled
-                + ", prepareOnObligation=" + ForTheOccasionMod.Settings.prepareOnObligation + ", window open=" + ObligationWatch.WindowOpen() + ")";
-            else if (CeremonialWardrobe.TryPlan(pawn, maxDistance) == null) why = "TryPlan found no garment or stand (max distance " + maxDistance + ")";
+            string why = WhyNotSentToDress(Driver.Colonist(ctx, name));
             ctx.Assert(why == null, $"{name} cannot be sent to dress: {why}");
+        }
+
+        /// <summary>First closed gate between an announced obligation and a dressing trip, or null when all are open.</summary>
+        static string WhyNotSentToDress(Pawn pawn)
+        {
+            if (!pawn.Spawned || pawn.Map == null) return "not spawned";
+            if (!pawn.IsFreeColonist) return "not a free colonist";
+            if (pawn.Drafted) return "drafted";
+            if (pawn.Downed) return "downed";
+            if (pawn.InMentalState) return "in a mental state";
+            if (pawn.GetPosture() != PawnPosture.Standing) return "posture " + pawn.GetPosture();
+            if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None) return "map danger " + pawn.Map.dangerWatcher.DangerRating;
+            if (PreparationTracker.RecordFor(pawn) != null) return "already has a preparation record";
+            if (!PreparationReason.WantsToDress(pawn, out float maxDistance)) return "WantsToDress is false (preparationEnabled=" + ForTheOccasionMod.Settings.preparationEnabled
+                + ", prepareOnObligation=" + ForTheOccasionMod.Settings.prepareOnObligation + ", window open=" + ObligationWatch.WindowOpen() + ")";
+            if (CeremonialWardrobe.TryPlan(pawn, maxDistance) == null) return "TryPlan found no garment or stand (max distance " + maxDistance + ")";
+            return null;
         }
 
         [Then("For the Occasion: the anticipation window is closed")]
@@ -262,7 +267,8 @@ namespace ForTheOccasion.PickleSteps
         {
             var pawn = Driver.Colonist(ctx, name);
             ctx.Assert(PreparationTracker.IsPrepared(pawn), $"{name} has no preparation record: job={pawn.CurJob?.def?.defName ?? "none"} "
-                + $"pos={pawn.Position} target={pawn.CurJob?.targetA.Cell.ToString() ?? "none"}");
+                + $"pos={pawn.Position} target={pawn.CurJob?.targetA.Cell.ToString() ?? "none"} "
+                + $"gates={WhyNotSentToDress(pawn) ?? "all open"} disabled={FtoLog.Disabled}");
         }
 
         [Then("For the Occasion: {string} is not dressed for the occasion")]
