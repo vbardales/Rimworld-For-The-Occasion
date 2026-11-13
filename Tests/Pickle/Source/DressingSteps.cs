@@ -268,8 +268,15 @@ namespace ForTheOccasion.PickleSteps
             var pawn = Driver.Colonist(ctx, name);
             ctx.Assert(PreparationTracker.IsPrepared(pawn), $"{name} has no preparation record: job={pawn.CurJob?.def?.defName ?? "none"} "
                 + $"pos={pawn.Position} target={pawn.CurJob?.targetA.Cell.ToString() ?? "none"} "
-                + $"gates={WhyNotSentToDress(pawn) ?? "all open"} disabled={FtoLog.Disabled}");
+                + $"gates={WhyNotSentToDress(pawn) ?? "all open"} disabled={FtoLog.Disabled} "
+                + $"garments=[{GarmentState(ctx)}] carrying={pawn.carryTracker?.CarriedThing?.def?.defName ?? "nothing"}");
         }
+
+        /// <summary>Where each garment the scenario laid down is now: on the floor, in a hand, worn, or gone.</summary>
+        static string GarmentState(PickleContext ctx) =>
+            string.Join("; ", Made(ctx).Things.OfType<Apparel>().Select(a =>
+                $"{a.def.defName} spawned={a.Spawned} at={(a.Spawned ? a.Position.ToString() : "-")} holder={a.ParentHolder?.GetType().Name ?? "none"} "
+                + $"forbidden={(a.Spawned && a.IsForbidden(Faction.OfPlayer))}"));
 
         [Then("For the Occasion: {string} is not dressed for the occasion")]
         public void IsNotPrepared(PickleContext ctx, string name) =>
