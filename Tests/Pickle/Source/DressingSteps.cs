@@ -303,7 +303,8 @@ namespace ForTheOccasion.PickleSteps
             ctx.Assert(onTrip, $"{name} is not on the dressing trip: job={cur?.def?.defName ?? "none"} playerForced={cur?.playerForced} "
                 + $"workGiver={cur?.workGiverDef?.defName ?? "none"} emergency={cur?.workGiverDef?.emergency} "
                 + $"queued={pawn.jobs.jobQueue.Count} record={(PreparationTracker.RecordFor(pawn) != null)} "
-                + $"disabled={FtoLog.Disabled}");
+                + $"disabled={FtoLog.Disabled} gates={WhyNotSentToDress(pawn) ?? "all open"} garments=[{GarmentState(ctx)}] "
+                + $"carrying={pawn.carryTracker?.CarriedThing?.def?.defName ?? "nothing"} jobTarget={cur?.targetA.ToString() ?? "none"}");
         }
 
         // ---------------------------------------------------------------- face paint
