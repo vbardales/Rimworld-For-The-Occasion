@@ -15,7 +15,7 @@
   <FTO_PreparationDesc>Les colons enfilent une tenue de cérémonie pour le rituel, puis reprennent leurs vêtements habituels.</FTO_PreparationDesc>
 
   <FTO_PrepareOnObligation>Se préparer à l'annonce du rituel</FTO_PrepareOnObligation>
-  <FTO_PrepareOnObligationDesc>Quand une obligation apparaît (un décès, une date), les colons s'apprêtent dans les heures qui suivent. Rien n'a encore commencé : cela ne coûte aucune progression de rituel. C'est la façon prévue d'y jouer.</FTO_PrepareOnObligationDesc>
+  <FTO_PrepareOnObligationDesc>Quand une obligation apparaît (un décès, une date), les colons s'apprêtent dans les heures qui suivent. Rien n'a encore commencé : cela ne coûte aucune progression de rituel. Ce fonctionnement est prévu.</FTO_PrepareOnObligationDesc>
 
   <FTO_ObligationWindow>Fenêtre après l'annonce : {0} h</FTO_ObligationWindow>
   <FTO_ObligationWindowDesc>Une obligation vit jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai, les colons se rechangent, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
