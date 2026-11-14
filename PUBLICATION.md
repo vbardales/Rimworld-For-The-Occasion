@@ -7,8 +7,8 @@ Nothing in this file has been played: no gallery scenario exists and no capture 
 ## Gallery: the story, "The feast day"
 
 One day at Nelim's Sanctuary (Nelim is the colonist of the shared save, and the protagonist of every image).
-A death in the family of the sanctuary puts an obligation on the ideoligion's ritual. The colony hears about it at
-dawn, gets ready, lays an offering table, holds the rite at dusk, and is back in ordinary clothes the next morning.
+A death in the sanctuary family creates an obligation to hold an ideoligion ritual. The colony hears about it at
+dawn, gets ready, sets an offering table, holds the rite at dusk, and is back in ordinary clothes the next morning.
 Each image shows one thing the mod does, in the order the player meets it.
 
 Place: the house, mostly `ritual-hall` (206, 117) for the wardrobe and the table, `hearth-hall` (181, 115) for the

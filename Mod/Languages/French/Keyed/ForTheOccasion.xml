@@ -36,7 +36,7 @@
   <FTO_OfferingsConsumed.Many>La cérémonie a consommé {0} offrandes.</FTO_OfferingsConsumed.Many>
 
   <FTO_PreparedFactor>Tenues de cérémonie</FTO_PreparedFactor>
-  <FTO_PreparedTooltip>Colons en tenue de cérémonie pendant au moins la moitié du rituel. Le chiffre affiché indique combien portent déjà cette tenue : un rituel lancé sans préparation part de zéro.</FTO_PreparedTooltip>
+  <FTO_PreparedTooltip>Participants en tenue de cérémonie pendant au moins la moitié du rituel. Le chiffre affiché indique combien portent déjà cette tenue : un rituel lancé sans préparation part de zéro.</FTO_PreparedTooltip>
 
   <FTO_SetCeremonialOwner>Attribuer la tenue de cérémonie</FTO_SetCeremonialOwner>
   <FTO_SetCeremonialOwnerDesc>Définir ce portant comme garde-robe de cérémonie. Son contenu sert à s'habiller pour les rituels ; les vêtements habituels sont ensuite récupérés, en conservant les consignes de port forcé.</FTO_SetCeremonialOwnerDesc>
