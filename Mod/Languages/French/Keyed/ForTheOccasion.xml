@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <FTO_ModTitle>Pour l'occasion</FTO_ModTitle>
+  <FTO_ModTitle>For the Occasion (Pour l'occasion)</FTO_ModTitle>
 
   <!-- Settings -->
   <FTO_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les interrupteurs agissent sur les actions suivantes ; le budget de qualité s'applique à la fermeture de cette fenêtre. Désactiver la préparation restitue les vêtements empruntés et retire la peinture temporaire au prochain changement de tâche sans danger.</FTO_SettingsScope>
