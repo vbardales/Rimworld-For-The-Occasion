@@ -6,12 +6,18 @@
 
     allowOpportunisticPrefix is left false: a wardrobe trip that picks up a haul on the way would
     arrive at the stand carrying something, and the stand has no room for it.
+
+    casualInterruptible is false: the think tree re-checks its higher nodes while a job runs
+    (CheckForJobOverride) and starts any work job it finds with InterruptForced. A casually
+    interruptible trip was cut by the first haul job within a few ticks, before the garment was
+    worn (Pickle ticket 6225: "trip ended InterruptForced"). The trip is short, and the player
+    can still interrupt it.
   -->
   <JobDef>
     <defName>FTO_PrepareForOccasion</defName>
     <driverClass>ForTheOccasion.JobDriver_PrepareForOccasion</driverClass>
     <reportString>getting ready for the occasion.</reportString>
-    <casualInterruptible>true</casualInterruptible>
+    <casualInterruptible>false</casualInterruptible>
     <playerInterruptible>true</playerInterruptible>
     <suspendable>true</suspendable>
     <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
