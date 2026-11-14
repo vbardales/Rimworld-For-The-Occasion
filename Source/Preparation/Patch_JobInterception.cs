@@ -74,25 +74,37 @@ namespace ForTheOccasion
             }
         }
 
+        /// <summary>
+        /// Why the last <c>Decide</c> let a job through, for the test harness: one constant string
+        /// per exit, so it costs nothing. A prefix that fails open says nothing otherwise.
+        /// </summary>
+        public static string LastExit = "none";
+
+        static bool Pass(string why)
+        {
+            LastExit = why;
+            return true;
+        }
+
         static bool Decide(Pawn_JobTracker tracker, Pawn pawn, Job newJob,
             JobCondition lastJobEndCondition, bool resumeCurJobAfterwards, bool cancelBusyStances)
         {
-            if (newJob == null || pawn == null || !pawn.Spawned || pawn.Map == null) return true;
-            if (!pawn.RaceProps.Humanlike || pawn.Faction != Faction.OfPlayer) return true;
-            if (newJob.def == FtoDefOf.FTO_PrepareForOccasion) return true;
+            if (newJob == null || pawn == null || !pawn.Spawned || pawn.Map == null) return Pass("no pawn or job");
+            if (!pawn.RaceProps.Humanlike || pawn.Faction != Faction.OfPlayer) return Pass("not a colonist");
+            if (newJob.def == FtoDefOf.FTO_PrepareForOccasion) return Pass("own job");
 
             // The gates. Each one says: this pawn is in no state to be sent on a detour. Being
             // ordered about, being on the floor, not being themselves.
-            if (pawn.Drafted || pawn.Downed || pawn.InMentalState) return true;
+            if (pawn.Drafted || pawn.Downed || pawn.InMentalState) return Pass("gate: drafted, downed or mental state");
             // A direct order executes immediately, in both directions.
-            if (newJob.playerForced) return true;
+            if (newJob.playerForced) return Pass("gate: player forced");
             // Emergency work givers exist because something cannot wait.
-            if (newJob.workGiverDef != null && newJob.workGiverDef.emergency) return true;
+            if (newJob.workGiverDef != null && newJob.workGiverDef.emergency) return Pass("gate: emergency");
             // A pawn lying down is a pawn left lying down: vanilla issues in-bed jobs on purpose.
-            if (pawn.GetPosture() != PawnPosture.Standing) return true;
+            if (pawn.GetPosture() != PawnPosture.Standing) return Pass("gate: posture");
 
             PreparationRecord record = PreparationTracker.RecordFor(pawn);
-            if (OnCooldown(pawn)) return true;
+            if (OnCooldown(pawn)) return Pass("cooldown");
 
             // ---------------------------------------------------------------- return trip
             if (record != null && !PreparationReason.ShouldStayDressed(pawn))
@@ -120,14 +132,14 @@ namespace ForTheOccasion
             }
 
             // Turning preparation off must still let existing borrowers return their clothes.
-            if (!ForTheOccasionMod.Settings.preparationEnabled) return true;
+            if (!ForTheOccasionMod.Settings.preparationEnabled) return Pass("preparation disabled");
 
             // ---------------------------------------------------------------- danger
             // The danger gate sits **above the dress paths and below the return trip**. Placed
             // above both, a raid would freeze everyone in evening dress with no way to walk back
             // for their flak vest: that is the lesson Shift Change learned in play. Here it means
             // no changing *into* ceremonial clothes under threat, not no changing at all.
-            if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None) return true;
+            if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None) return Pass("gate: danger");
 
             // ---------------------------------------------------------------- dressing
             if (record == null && PreparationReason.WantsToDress(pawn, out float maxDistance))
@@ -137,7 +149,7 @@ namespace ForTheOccasion
                 {
                     // Nothing to wear: clear the mark so we do not replan on every single job.
                     PreparationTracker.ClearPending(pawn);
-                    return true;
+                    return Pass("TryPlan found nothing");
                 }
 
                 Job dress = JobMaker.MakeJob(FtoDefOf.FTO_PrepareForOccasion, plan.Target);
@@ -147,7 +159,7 @@ namespace ForTheOccasion
                     cancelBusyStances);
             }
 
-            return true;
+            return Pass("nothing to do (record or WantsToDress)");
         }
 
         /// <summary>
@@ -200,6 +212,7 @@ namespace ForTheOccasion
                     tracker.curDriver = savedDriver;
                 }
 
+                LastExit = "diverted (sameTarget=" + sameTarget + ")";
                 bool started = false;
                 try
                 {
@@ -213,7 +226,7 @@ namespace ForTheOccasion
                     FtoLog.Fail("Patch_JobInterception.Divert", e);
                     // The detour has started: letting the original start too would put one Job
                     // object in two places. We hand back without restarting it.
-                    if (!started) return true;
+                    if (!started) return Pass("Divert threw before the detour started");
                 }
                 return false;
             }
