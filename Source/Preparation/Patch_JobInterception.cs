@@ -172,13 +172,23 @@ namespace ForTheOccasion
             StampCooldown(pawn);
             try
             {
+                // The deferred job may be about the very garment or stand the detour is for (a haul of
+                // the loose robe). Reserving it for the deferred job would make the detour's own
+                // reservation fail, and the pawn would end up carrying the garment away instead. Such a
+                // job has no purpose once the pawn wears the garment: it is dropped, not deferred.
+                bool sameTarget = detour.targetA.HasThing && deferred != null
+                    && (deferred.targetA.Thing == detour.targetA.Thing || deferred.targetB.Thing == detour.targetA.Thing);
+
                 Job savedJob = tracker.curJob;
                 JobDriver savedDriver = tracker.curDriver;
                 try
                 {
-                    tracker.curJob = deferred;
-                    tracker.curDriver = deferred.MakeDriver(pawn);
-                    tracker.curDriver.TryMakePreToilReservations(false);
+                    if (!sameTarget)
+                    {
+                        tracker.curJob = deferred;
+                        tracker.curDriver = deferred.MakeDriver(pawn);
+                        tracker.curDriver.TryMakePreToilReservations(false);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -196,7 +206,7 @@ namespace ForTheOccasion
                     tracker.StartJob(detour, lastJobEndCondition, null, resumeCurJobAfterwards,
                         cancelBusyStances);
                     started = true;
-                    tracker.jobQueue.EnqueueFirst(deferred);
+                    if (!sameTarget) tracker.jobQueue.EnqueueFirst(deferred);
                 }
                 catch (Exception e)
                 {
