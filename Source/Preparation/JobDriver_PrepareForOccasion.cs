@@ -68,7 +68,11 @@ namespace ForTheOccasion
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnBurningImmobile(TargetIndex.A);
-            AddFinishAction(cond => Patch_JobInterception.Note("trip ended " + cond));
+            AddFinishAction(cond =>
+            {
+                Patch_JobInterception.Note("trip ended " + cond);
+                Patch_JobInterception.CaptureEndTrace();
+            });
 
             bool toStand = job.targetA.Thing is Building_OutfitStand;
             yield return Toils_Goto.GotoThing(TargetIndex.A,

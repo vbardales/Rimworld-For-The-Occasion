@@ -81,6 +81,23 @@ namespace ForTheOccasion
         public static string LastExit = "none";
 
         /// <summary>Appends to <see cref="LastExit"/> (newest last, capped) so a short sequence of events stays readable.</summary>
+        /// <summary>Compact call stack taken when the trip ends, to name what ended it. Temporary trace.</summary>
+        public static string EndTrace = "none";
+
+        public static void CaptureEndTrace()
+        {
+            var frames = new System.Diagnostics.StackTrace(1, false).GetFrames();
+            var parts = new System.Collections.Generic.List<string>();
+            foreach (var f in frames)
+            {
+                var m = f.GetMethod();
+                if (m == null) continue;
+                parts.Add((m.DeclaringType != null ? m.DeclaringType.Name : "?") + "." + m.Name);
+                if (parts.Count >= 14) break;
+            }
+            EndTrace = string.Join(" < ", parts);
+        }
+
         public static void Note(string what)
         {
             string joined = LastExit == "none" ? what : LastExit + " > " + what;

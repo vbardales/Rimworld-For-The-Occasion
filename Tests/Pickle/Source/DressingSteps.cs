@@ -303,7 +303,7 @@ namespace ForTheOccasion.PickleSteps
             ctx.Assert(onTrip, $"{name} is not on the dressing trip: job={cur?.def?.defName ?? "none"} playerForced={cur?.playerForced} "
                 + $"workGiver={cur?.workGiverDef?.defName ?? "none"} emergency={cur?.workGiverDef?.emergency} "
                 + $"queued={pawn.jobs.jobQueue.Count} record={(PreparationTracker.RecordFor(pawn) != null)} "
-                + $"lastExit={Patch_JobInterception.LastExit} disabled={FtoLog.Disabled} gates={WhyNotSentToDress(pawn) ?? "all open"} garments=[{GarmentState(ctx)}] "
+                + $"lastExit={Patch_JobInterception.LastExit} endTrace=[{Patch_JobInterception.EndTrace}] casualInterruptible={FtoDefOf.FTO_PrepareForOccasion.casualInterruptible} disabled={FtoLog.Disabled} gates={WhyNotSentToDress(pawn) ?? "all open"} garments=[{GarmentState(ctx)}] "
                 + $"carrying={pawn.carryTracker?.CarriedThing?.def?.defName ?? "nothing"} jobTarget={cur?.targetA.ToString() ?? "none"}");
         }
 
