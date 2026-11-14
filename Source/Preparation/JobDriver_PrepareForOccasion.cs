@@ -28,7 +28,9 @@ namespace ForTheOccasion
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.Reserve(job.targetA, job, 1, -1, null, errorOnFailed);
+            bool ok = pawn.Reserve(job.targetA, job, 1, -1, null, errorOnFailed);
+            Patch_JobInterception.Note("reserve " + (ok ? "ok" : "FAILED"));
+            return ok;
         }
 
         public override void Notify_Starting()
@@ -66,6 +68,7 @@ namespace ForTheOccasion
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnBurningImmobile(TargetIndex.A);
+            AddFinishAction(cond => Patch_JobInterception.Note("trip ended " + cond));
 
             bool toStand = job.targetA.Thing is Building_OutfitStand;
             yield return Toils_Goto.GotoThing(TargetIndex.A,

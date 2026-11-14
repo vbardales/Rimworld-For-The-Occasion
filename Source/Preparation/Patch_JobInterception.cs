@@ -80,9 +80,16 @@ namespace ForTheOccasion
         /// </summary>
         public static string LastExit = "none";
 
+        /// <summary>Appends to <see cref="LastExit"/> (newest last, capped) so a short sequence of events stays readable.</summary>
+        public static void Note(string what)
+        {
+            string joined = LastExit == "none" ? what : LastExit + " > " + what;
+            LastExit = joined.Length > 400 ? joined.Substring(joined.Length - 400) : joined;
+        }
+
         static bool Pass(string why)
         {
-            LastExit = why;
+            Note(why);
             return true;
         }
 
@@ -212,7 +219,7 @@ namespace ForTheOccasion
                     tracker.curDriver = savedDriver;
                 }
 
-                LastExit = "diverted (sameTarget=" + sameTarget + ")";
+                Note("diverted sameTarget=" + sameTarget);
                 bool started = false;
                 try
                 {
