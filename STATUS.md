@@ -128,3 +128,14 @@ Protocols re-read 2026-10-17 (AGENTS.md rules of 2026-10-16/17): no grep in any 
 French review 2 (review-translation, 2026-10-17), applied at the owner's "applique ce qui est pertinent": `FTO_TattooDesc` now says "idéoligion" (the game's term), `FTO_ObligationWindowDesc` gets the comma after "Passé ce délai", and two PUBLICATION.md lines (the hairstyle "to be checked on the capture", subtitle 4 "Everyone is in ceremonial dress"). Not applied: the proposed rewording of "consignes de port forcé" in `FTO_SetCeremonialOwnerDesc` (the owner's review of 2026-10-11 fixed that text). `FRENCH_REVIEW.md` regenerated; the Pickle scenarios that show these texts are replayed in the French pass.
 
 French review 3 (review-translation, 2026-10-17): two proposals, none applied at the owner's "applique ce qui est pertinent". `FTO_Offering_Treasure.description` has no `<br>` in its source (only an XML line break the game renders as a space). `FTO_SetCeremonialOwner` "Définir le colon affecté..." would invert the meaning (the button designates the stand as a colonist's wardrobe); the label stays "Attribuer la tenue de cérémonie". No French text changed.
+
+## Ecosystem
+
+Study by PiI, 2026-11-14 (22 searches), full file `Docs/inventory/ecosystem-steam/ForTheOccasion.md` in the rimworld root, PiI commit e09e95b. No original: own work.
+
+- Duplicates and replacements: none. No mod makes colonists dress for an Ideology ritual, none adds an offering building that raises ritual quality.
+- Patches and retextures of the original: not applicable.
+- Translations of the original: not applicable.
+- Links: Shift Change 3783456242 (MIT, Odyssey and Harmony, 1.6 and 1.7, v1.5.5 on 2026-11-06) swaps outfits per job, room or area at an outfit stand. No ritual mention in 131 comments. Our named design debt.
+- Overlaps to play in Pickle: (1) Shift Change and FtO both move pawns into outfits, decide who wins at a ritual (Odyssey on); (2) Night Change (sibling mod) overlaps Shift Change's sleepwear stand, plus Pajama Shift 3694943331 and Automatic Swap Outfit 3547991604; (3) the +0.25 quality cap with Ritual Size Attenuation, More Ritual Rewards, New Ritual Reward (all touch `RitualOutcomeEffectDef`).
+- Verdict: no rival. Overlaps are compatibility checks, not reasons to change the mod. If any Shift Change logic is taken, record it in ATTRIBUTION.md.
