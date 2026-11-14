@@ -71,6 +71,6 @@ and the indexes are made contiguous.
 | 3 | `3-the-table.jpg` | Incense, a fine meal, a drink and a little gold: four kinds, one table. |
 | 4 | `4-the-hearth.jpg` | Everyone is in ceremonial dress, and the paint goes on with it. |
 | 6 | `6-the-spent-table.jpg` | When the rite ends, what was offered is spent. |
-| 7 | `7-next-morning.jpg` | Next morning the robes are back on the stand and the paint is gone. |
+| 7 | `7-next-morning.jpg` | The next morning, the robes are back on the stand and the paint is gone. |
 
 Image 5 (`5-ritual-quality.jpg`) and image 8 (`8-settings.jpg`) are interface captures.

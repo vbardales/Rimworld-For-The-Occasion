@@ -5,7 +5,7 @@ This file serves the repository and the Steam release notes; RimWorld does not d
 
 ## [Unreleased]
 
-- The out-of-game harness is now 37 tests: the access check and the translation-key check moved to the shared `Check-HarmonyContract` and `Check-Translations`.
+- The out-of-game harness now has 37 tests: the access check and the translation-key check moved to the shared `Check-HarmonyContract` and `Check-Translations`.
 
 First release. RimWorld 1.6. Original work, Ideology required, Odyssey optional.
 
