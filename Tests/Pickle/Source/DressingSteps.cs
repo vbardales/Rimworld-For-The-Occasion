@@ -377,6 +377,7 @@ namespace ForTheOccasion.PickleSteps
             Faction enemy = Find.FactionManager.AllFactionsVisible
                 .FirstOrDefault(fac => fac.HostileTo(Faction.OfPlayer) && !fac.def.hidden && fac.def.humanlikeFaction);
             ctx.Require(enemy != null, "no hostile humanlike faction exists in this game: nobody can threaten the map");
+            var raiders = new System.Collections.Generic.List<Pawn>();
             for (int i = 0; i < 3; i++)
             {
                 PawnKindDef kind = null;
@@ -385,7 +386,10 @@ namespace ForTheOccasion.PickleSteps
                 var raider = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, enemy, PawnGenerationContext.NonPlayer, map.Tile));
                 GenSpawn.Spawn(raider, CellFinder.RandomClosewalkCellNear(map.Center, map, 12), map);
                 Made(ctx).Things.Add(raider);
+                raiders.Add(raider);
             }
+            // A hostile pawn with no lord is not an active threat to the danger watcher: give them one.
+            Verse.AI.Group.LordMaker.MakeNewLord(enemy, new RimWorld.LordJob_AssaultColony(enemy, false, false, false, false, false), map, raiders);
             Verse.Log.Message("[FtO test] raid: raiders spawned");
             var before = map.mapPawns.AllPawnsSpawned.Count(p => p.HostileTo(Faction.OfPlayer));
             ctx.Require(before > 0, "the spawned raiders are not hostile on the map: dangerWatcher has nothing to rate");
