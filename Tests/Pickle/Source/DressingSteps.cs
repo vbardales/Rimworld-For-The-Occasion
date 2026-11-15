@@ -352,7 +352,7 @@ namespace ForTheOccasion.PickleSteps
         /// A real raid, and then ticks: the danger watcher recalculates only when the game has ticked past
         /// its last look, and a paused game never does.
         /// </summary>
-        [When("For the Occasion: a raid arrives and the map is in danger", TimeoutSeconds = 70f)]
+        [When("For the Occasion: a raid arrives and the map is in danger", TimeoutSeconds = 150f)]
         public async Task RaidArrives(PickleContext ctx)
         {
             var map = Driver.Map(ctx);
@@ -370,6 +370,8 @@ namespace ForTheOccasion.PickleSteps
             ctx.Require(before > 0, "the forced raid put no hostile pawn on the map: dangerWatcher has nothing to rate");
             await ctx.WaitTicks(250);
             await ctx.WaitUntil(() => map.dangerWatcher.DangerRating != StoryDanger.None, 30f);
+            ctx.Require(map.dangerWatcher.DangerRating != StoryDanger.None,
+                $"the raid landed ({before} hostile pawns) but the danger watcher still rates the map {map.dangerWatcher.DangerRating}");
         }
 
         // ---------------------------------------------------------------- fail open

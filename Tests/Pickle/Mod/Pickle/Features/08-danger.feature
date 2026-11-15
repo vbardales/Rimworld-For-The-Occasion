@@ -29,11 +29,10 @@ Feature: the danger gate keeps its place between the return trip and the dress p
     Given For the Occasion: a "Apparel_Robe" lies at (147, 155)
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
-    And I wait 600 ticks
+    And I wait 900 ticks
     Then For the Occasion: "Aurel" is dressed for the occasion
-    When I wait 700 ticks
-    And I wait 700 ticks
     And For the Occasion: a raid arrives and the map is in danger
+    And I wait 400 ticks
     And For the Occasion: "Aurel" is made to choose a new job
     And I wait 300 ticks
     Then For the Occasion: "Aurel" is not dressed for the occasion

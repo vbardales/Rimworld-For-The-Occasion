@@ -8,6 +8,8 @@
 # leaves ONE ceremonial owner comp on each stand def once inheritance is resolved (the first version of the
 # patch left two, seen only by running the game's own patch engine out of the game), and that a record made
 # by a real dressing trip survives a save and a reload.
+# Timing: the window is 1200 ticks and the check of a dressed colonist comes at 900. A later check (1400) would
+# land after the window closed, when the return trip has already undressed the colonist at an idle boundary.
 @requires:ludeon.rimworld.odyssey
 Feature: an outfit stand as a ceremonial wardrobe
 
@@ -26,8 +28,7 @@ Feature: an outfit stand as a ceremonial wardrobe
     And For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
-    And I wait 700 ticks
-    And I wait 700 ticks
+    And I wait 900 ticks
     Then "Aurel" is wearing "Apparel_Robe"
     And For the Occasion: "Aurel" is dressed for the occasion
     And For the Occasion: the outfit stand does not hold "Apparel_Robe"
@@ -48,8 +49,7 @@ Feature: an outfit stand as a ceremonial wardrobe
     Given For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
-    And I wait 700 ticks
-    And I wait 700 ticks
+    And I wait 900 ticks
     Then "Aurel" is wearing "Apparel_Robe"
     When For the Occasion: setting "preparationEnabled" is set to "false"
     And For the Occasion: "Aurel" is made to choose a new job
@@ -63,8 +63,7 @@ Feature: an outfit stand as a ceremonial wardrobe
     Given For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
-    And I wait 700 ticks
-    And I wait 700 ticks
+    And I wait 900 ticks
     Then For the Occasion: "Aurel" is dressed for the occasion
     When I save and reload
     Then For the Occasion: "Aurel" is dressed for the occasion
