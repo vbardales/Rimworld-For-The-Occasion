@@ -17,7 +17,7 @@ Feature: the danger gate keeps its place between the return trip and the dress p
 
   Scenario: nobody starts dressing up while the map is in danger
     Given For the Occasion: a raid arrives and the map is in danger
-    And For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    And For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
     And I wait 600 ticks
@@ -26,7 +26,7 @@ Feature: the danger gate keeps its place between the return trip and the dress p
     And For the Occasion: no hook has disabled the mod
 
   Scenario: a colonist already dressed can still change back under threat
-    Given For the Occasion: a "Apparel_Robe" lies at (147, 155)
+    Given For the Occasion: a "Apparel_Robe" lies beside "Aurel"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
     And I wait 900 ticks

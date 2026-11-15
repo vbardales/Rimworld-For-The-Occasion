@@ -175,6 +175,20 @@ namespace ForTheOccasion.PickleSteps
             ctx.Assert(count == expected, $"{defName} carries {count} ceremonial owner comps once inheritance is resolved, expected {expected}");
         }
 
+        /// <summary>
+        /// A stand a few steps from its owner, for the same reason a garment is put beside a colonist:
+        /// the record only exists once the trip is over, and a stand across the map makes the scenario
+        /// depend on the walking time (Pickle tickets b68d and bde3: Aurel was still 15 cells away).
+        /// </summary>
+        [Given("For the Occasion: an outfit stand stands beside {string} holding {string}")]
+        public void PlaceStandBeside(PickleContext ctx, string owner, string garment)
+        {
+            var map = Driver.Map(ctx);
+            var pawn = Driver.Colonist(ctx, owner);
+            var cell = CellFinder.RandomClosewalkCellNear(pawn.Position, map, 4);
+            PlaceStand(ctx, cell.x, cell.z, garment, owner);
+        }
+
         [Given("For the Occasion: an outfit stand stands at \\({int}, {int}\\) holding {string} and owned by {string}")]
         public void PlaceStand(PickleContext ctx, int x, int z, string garment, string owner)
         {
@@ -358,6 +372,9 @@ namespace ForTheOccasion.PickleSteps
             var map = Driver.Map(ctx);
             var parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
             parms.forced = true;
+            // The colony is rich: the default points would drop a raid of hundreds, and generating it
+            // stalled the game for minutes (Pickle ticket bde3). A few raiders rate the map just as well.
+            parms.points = 120f;
             // The default arrival mode walks the raid in from the map edge, which can take far more ticks
             // to be noticed than a scenario's window: drop the raiders in instead, so the danger watcher
             // has something to rate on the very next recalculation. The default strategy can also pick a

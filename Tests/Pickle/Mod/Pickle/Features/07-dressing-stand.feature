@@ -25,7 +25,7 @@ Feature: an outfit stand as a ceremonial wardrobe
   Scenario: the owner walks to the stand, dresses, and gets their own clothes back as they were
     Given For the Occasion: "Aurel" has nothing forced
     And For the Occasion: "Aurel" wears "Apparel_Pants" and it is forced
-    And For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
+    And For the Occasion: an outfit stand stands beside "Aurel" holding "Apparel_Robe"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
     And I wait 900 ticks
@@ -46,7 +46,7 @@ Feature: an outfit stand as a ceremonial wardrobe
     And no errors were logged
 
   Scenario: switching preparation off with a borrower still dressed sends the outfit back
-    Given For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
+    Given For the Occasion: an outfit stand stands beside "Aurel" holding "Apparel_Robe"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
     And I wait 900 ticks
@@ -60,7 +60,7 @@ Feature: an outfit stand as a ceremonial wardrobe
     And For the Occasion: no hook has disabled the mod
 
   Scenario: a dressed colonist and the stand's owner survive a save and a reload
-    Given For the Occasion: an outfit stand stands at (150, 153) holding "Apparel_Robe" and owned by "Aurel"
+    Given For the Occasion: an outfit stand stands beside "Aurel" holding "Apparel_Robe"
     And For the Occasion: a ritual obligation is announced
     When For the Occasion: "Aurel" is made to choose a new job
     And I wait 900 ticks
