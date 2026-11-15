@@ -18,7 +18,7 @@
   <FTO_PrepareOnObligationDesc>Quand une obligation apparaît (un décès, une date), les colons s'apprêtent dans les heures qui suivent. Rien n'a encore commencé : cela ne coûte aucune progression de rituel. Ce fonctionnement est prévu.</FTO_PrepareOnObligationDesc>
 
   <FTO_ObligationWindow>Fenêtre après l'annonce : {0} h</FTO_ObligationWindow>
-  <FTO_ObligationWindowDesc>Une obligation dure jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai, les colons se rechangent, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
+  <FTO_ObligationWindowDesc>Une obligation dure jusqu'à neuf jours, mais personne ne reste neuf jours en tenue de soirée. Passé ce délai, les colons remettent leurs vêtements habituels, et un rituel lancé plus tard paiera un détour de dernière minute.</FTO_ObligationWindowDesc>
 
   <FTO_PrepareOnLaunch>Se préparer au lancement du rituel</FTO_PrepareOnLaunch>
   <FTO_PrepareOnLaunchDesc>Les participants passent par la garde-robe à l'instant du départ. L'horloge du rituel ne s'arrête pas pour eux : on échange de la progression contre de l'apparat.</FTO_PrepareOnLaunchDesc>

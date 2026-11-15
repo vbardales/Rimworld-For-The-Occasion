@@ -54,7 +54,7 @@ Plan, one line per image (place, moment, subject, composition, life in the scene
 Checks against the written scenarios (2026-10-15): images 1, 2, 3, 4 and 7 match scenarios 8, 3, 1, 3 and 4 of
 `TESTING.md`. Image 6 shows the consumption of scenario 2, which only a real rite begun from the game's own window
 can prove, and Pickle feature 14 (the ritual hook) has never run: the image waits for it, and no subtitle claims it
-before. Image 4 asks for three dressed pawns, which no scenario has played yet. Both are gallery risks, not
+beforehand. Image 4 asks for three dressed pawns, which no scenario has played yet. Both are gallery risks, not
 reasons to drop the image.
 
 ## Gallery subtitles
