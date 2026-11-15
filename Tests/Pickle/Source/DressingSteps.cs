@@ -291,6 +291,10 @@ namespace ForTheOccasion.PickleSteps
         public void ChooseNewJob(PickleContext ctx, string name)
         {
             var pawn = Driver.Colonist(ctx, name);
+            // The boundary may already have happened on its own (the announcement ended an idle job):
+            // the trip is then running, and ending it would be the scenario cutting the mod short
+            // (Pickle ticket ed47: endTrace ended in this step).
+            if (pawn.CurJob?.def == FtoDefOf.FTO_PrepareForOccasion) return;
             pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, true, true);
         }
 
