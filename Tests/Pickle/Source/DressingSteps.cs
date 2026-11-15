@@ -363,29 +363,34 @@ namespace ForTheOccasion.PickleSteps
         // ---------------------------------------------------------------- danger
 
         /// <summary>
-        /// A real raid, and then ticks: the danger watcher recalculates only when the game has ticked past
+        /// Hostile pawns on the map, and then ticks: the danger watcher recalculates only when the game has ticked past
         /// its last look, and a paused game never does.
         /// </summary>
         [When("For the Occasion: a raid arrives and the map is in danger", TimeoutSeconds = 150f)]
         public async Task RaidArrives(PickleContext ctx)
         {
             var map = Driver.Map(ctx);
-            var parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
-            parms.forced = true;
-            // The colony is rich: the default points would drop a raid of hundreds, and generating it
-            // stalled the game for minutes (Pickle ticket bde3). A few raiders rate the map just as well.
-            parms.points = 120f;
-            // The default arrival mode walks the raid in from the map edge, which can take far more ticks
-            // to be noticed than a scenario's window: drop the raiders in instead, so the danger watcher
-            // has something to rate on the very next recalculation. The default strategy can also pick a
-            // raid with no pawns on the map at all (a poison or a mortar barrage): force a strategy that
-            // always lands fighting colonists in melee/ranged range right away.
-            parms.raidArrivalMode = PawnsArrivalModeDefOf.CenterDrop;
-            parms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
-            ctx.Require(IncidentDefOf.RaidEnemy.Worker.TryExecute(parms), "the game would not run a RaidEnemy incident on this map");
+            // Not an incident. A RaidEnemy forced through the storyteller never returned in two runs, with
+            // nothing in the log (Pickle tickets bde3 and 7797), whatever its points. The danger watcher
+            // rates any active hostile pawn standing on the map, so a few are put there directly.
+            Verse.Log.Message("[FtO test] raid: start");
+            Faction enemy = Find.FactionManager.AllFactionsVisible
+                .FirstOrDefault(fac => fac.HostileTo(Faction.OfPlayer) && !fac.def.hidden && fac.def.humanlikeFaction);
+            ctx.Require(enemy != null, "no hostile humanlike faction exists in this game: nobody can threaten the map");
+            for (int i = 0; i < 3; i++)
+            {
+                PawnKindDef kind = null;
+                for (int t = 0; t < 30 && (kind == null || kind.combatPower <= 0f); t++) kind = enemy.RandomPawnKind();
+                ctx.Require(kind != null, "the hostile faction offers no pawn kind");
+                var raider = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, enemy, PawnGenerationContext.NonPlayer, map.Tile));
+                GenSpawn.Spawn(raider, CellFinder.RandomClosewalkCellNear(map.Center, map, 12), map);
+                Made(ctx).Things.Add(raider);
+            }
+            Verse.Log.Message("[FtO test] raid: raiders spawned");
             var before = map.mapPawns.AllPawnsSpawned.Count(p => p.HostileTo(Faction.OfPlayer));
-            ctx.Require(before > 0, "the forced raid put no hostile pawn on the map: dangerWatcher has nothing to rate");
+            ctx.Require(before > 0, "the spawned raiders are not hostile on the map: dangerWatcher has nothing to rate");
             await ctx.WaitTicks(250);
+            Verse.Log.Message("[FtO test] raid: 250 ticks run, rating " + map.dangerWatcher.DangerRating);
             await ctx.WaitUntil(() => map.dangerWatcher.DangerRating != StoryDanger.None, 30f);
             ctx.Require(map.dangerWatcher.DangerRating != StoryDanger.None,
                 $"the raid landed ({before} hostile pawns) but the danger watcher still rates the map {map.dangerWatcher.DangerRating}");
