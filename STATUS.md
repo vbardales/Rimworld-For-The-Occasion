@@ -54,7 +54,7 @@ remaining:
   - "reserve, optional, not blocking: the Preview was engraved on 2026-09-13, before the overlay standard of 2026-09-25, so it has no version badge and there is no Art/preview-palette.json; the dependent settings are hidden when their parent is off instead of being greyed with a reason. Neither is a criterion of the chain."
 session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-11-02, audit replay (stage unchanged), local Check-Steps.ps1 removed, feature 14 step fix 9556c77; stage playTests[1.0.0]
-protocols_read_sha: 93ac900a05ff86d3ee2e6138737658734bc5a63e
+protocols_read_sha: 38dcbfb5f7fcd0381875239f632e05c3664293b8
 ---
 # For the Occasion: status
 
