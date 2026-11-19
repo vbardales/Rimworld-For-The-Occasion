@@ -3,7 +3,7 @@
 The scenarios of [TESTING.md](../../TESTING.md) that only a running game can settle, written in Gherkin for
 [Pickle](https://github.com/RimWorks/Rimworld-Pickle) (`rimworks.pickle`, Workshop 3791648678).
 
-**Played once per pass (2026-09-29/30), English only, not all green** (docs/runs/2026-09-30.md). The suite compiles, every step line resolves against
+**Green 2026-11-15, English and French, 1.6** (Docs/runs/pickle.md). The suite compiles, every step line resolves against
 Pickle's vocabulary and the companions its pass maps stage, and no expression is ambiguous
 (shared `Check-Steps.ps1`, below). That says the scenarios can be loaded. It does not say a step does what its
 sentence claims: only a run does, and the runs so far needed tuning. The coordinates, the number of
@@ -114,4 +114,4 @@ dotnet build Tests/Pickle/Source/ForTheOccasion.PickleSteps.csproj -c Release
 Run each pass through the shared launcher, then read `exitReason` before the counts, compare the scenarios
 played with the features discovered, and open every `@review` capture: the settings window in each language
 (`settings window on its defaults`), the shortcut on the bar hidden and revealed, and RIMMSQOL's list and
-edit page. What to keep afterwards, and what to delete, is in [docs/runs/README.md](../../docs/runs/README.md).
+edit page. What to keep afterwards, and what to delete, is in `docs/TEST-EVIDENCE.md` of the protocols root.

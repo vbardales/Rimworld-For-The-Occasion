@@ -25,9 +25,9 @@ Log live at:
 |---|---|
 | Loads without error | **observed**, 2026-09-04 |
 | The out-of-game harness | **30 of 30 pass**, 2026-09-12 |
-| Settings correction harness | **38 of 38 pass**, 2026-09-13 and again 2026-09-28 on `e9b1bc7`, same DLL; see docs/runs/2026-09-13-validation.md and docs/runs/2026-09-28.md |
+| Settings correction harness | **38 of 38 pass**, 2026-09-13 and again 2026-09-28 on `e9b1bc7`, same DLL; 37 of 37 on 2026-11-02, see `STATUS.md` |
 | Workflow audit against `AUDIT.md` | 2026-09-28, stage `options`, then `preTest` after plural fix; see `STATUS.md` |
-| The Pickle suite | **played in WSL, English only**, 2026-09-29/30, all seven passes once: offerings, RIMMSQOL, restart green; features 06, 07, 08, 14 and Shift Change reload red; see docs/runs/2026-09-30.md |
+| The Pickle suite | **green 2026-11-15, English and French, 1.6**; one line per run in Docs/runs/pickle.md |
 | Every scenario below | **not yet seen as whole**; no person watched game |
 
 Load produced exactly three expected lines:
@@ -308,8 +308,8 @@ any other customization mod before claiming integration tested.
 
 Scenarios above what has to be watched. This section what has to be true before
 `STATUS.md` may say `tested`. Restates step `done -> tested` of `AUDIT.md` for this mod, with
-what each rule comes to here. Today not met: Pickle suite in `Tests/Pickle/` played once per pass (docs/runs/2026-09-30.md)
-and several features red, so those scenarios still to be replayed green.
+what each rule comes to here. Pickle suite in `Tests/Pickle/` is green since 2026-11-15 (Docs/runs/pickle.md);
+no person has watched the game on this build and the 1.7 pass is not played, so `tested` is not yet said.
 
 - **No scenario left in `@wip`.** Scenario set aside either repaired and replayed, or deleted with
   reason. One left standing is scenario waiting, not passed.
@@ -364,7 +364,7 @@ Change, with optional providers, and for restart pair.
 
 ## Evidence to keep
 
-Full rules, with reasons, in [docs/runs/README.md](docs/runs/README.md). In short, for
+Full rules, with reasons, in `docs/TEST-EVIDENCE.md` of the protocols root. In short, for
 Pickle run and harness:
 
 - **Keep**, for revision now in repository and per pass: `summary.json`, `summary.md`,
