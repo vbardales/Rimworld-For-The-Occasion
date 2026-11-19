@@ -29,10 +29,10 @@ audit_revision: c42b53d
 automated_tests: 37 passed, 0 failed, 0 skipped, 2026-11-19, Tests/Run-Functional-Tests.ps1, on the distributed DLL 23e4e3f4 (sha256 prefix; rebuilt identical)
 pickle_suite: 15 features (01 to 14 plus 15 gallery, `@review`, shootGallery only), five pass maps. Green 2026-11-15 on 1.6: full suite English `sans-facultatifs` 34 passed, 11 skipped, 0 failed (b4a3); French (3363); the 11 skips played in their own sets (`avec-offrandes` 5 of 5, `avec-rimmsqol` 4 of 4, `avec-shiftchange` 2 of 2, `sans-odyssey` 2 of 2). One line per run in Docs/runs/pickle.md; kept proofs in Tests/Pickle/Evidence/
 remaining:
-  - "8.m done 2026-11-19: three findings recorded in BACKLOG.md (Known defects): D1 remote outfit swap when the stand is unreachable or on another map (CONFIRMED, Patch_JobInterception.cs:108-113 and CeremonialWardrobe.Undress), D2 return trip to a forbidden or out-of-area stand may loop (PLAUSIBLE), D3 tattoo restore also reverts the body tattoo (CONFIRMED, low). Fix after ticket 8b30 ends (tree frozen), replay features 06 and 07, review the diff. 8.i: ticket 8b30 ended RED 2026-11-19 (feature 16 new colony, English, pass nouvelle-colonie, tree 0131ac6, Tests/Pickle/Inbox/new-colony-en): 0 of 1, step "the new colony's colonists have landed" failed after 90 s (Mie, Vedran, Rietje still in ActiveTransporterInfo, not spawned); looks like a Pickle landing-wait issue, not the mod: NPT told, refile after their answer. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
+  - "8.m done 2026-11-19: three findings recorded in BACKLOG.md (Known defects): D1 remote outfit swap when the stand is unreachable or on another map (CONFIRMED, Patch_JobInterception.cs:108-113 and CeremonialWardrobe.Undress), D2 return trip to a forbidden or out-of-area stand may loop (PLAUSIBLE), D3 tattoo restore also reverts the body tattoo (CONFIRMED, low). Fix after ticket 8b30 ends (tree frozen), replay features 06 and 07, review the diff. 8.i: ticket b2d9 GREEN 2026-11-19 (refile of 8b30, feature 16 new colony EN, tree c12aadb, 1 of 1, evidence Tests/Pickle/Evidence/new-colony-en); 8.i done. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
-updated:      2026-11-19, 8.i ticket 8b30 queued (feature 16 new colony); 8.m code review running
+updated:      2026-11-20, 8.i green (b2d9); D1 to D3 fixes next, then 1.7 pass
 protocols_read_sha: 7058cc281523968e3e76f541907b051e805ed558
 ---
 # For the Occasion: status

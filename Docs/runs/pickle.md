@@ -18,6 +18,7 @@ One line per run (AUDIT.md 8.l). All runs English unless stated, played in the W
 | 2026-11-15 | b4a3 | whole suite, without 09 and 15, English | 34 passed, 11 skipped, 0 failed | kept in `Evidence/full-en-2` |
 | 2026-11-15 | 3363 | whole suite, French | green | kept in `Evidence/full-fr` |
 | 2026-11-15 | b27f, 999f, a9ee, a255 | feature 10 `avec-offrandes`, 04 `avec-rimmsqol`, 11 `avec-shiftchange`, 09 `sans-odyssey` | 5 of 5, 4 of 4, 2 of 2, 2 of 2 passed | the 11 skips of b4a3 played in their own sets; kept in `Evidence/` |
+| 2026-11-19 | b2d9 (refile of 8b30 red: landing blocked by an open dialog) | feature 16 `nouvelle-colonie`, English, tree c12aadb | 1 of 1 passed | new colony starts with the mod, no error logged; kept in `Evidence/new-colony-en/` |
 
 Not covered: feature 15 (gallery, `@review`, `shootGallery`), the 1.7 pass, the floor path in a game really without Odyssey (no save without Odyssey).
 
