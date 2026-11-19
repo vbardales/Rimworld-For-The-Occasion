@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-workflow_stage: playTests[1.0.0]
+workflow_stage: declareDependencies[1.0.0]
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
@@ -26,16 +26,17 @@ audit_revision: c42b53d
 automated_tests: 37 passed, 0 failed, 0 skipped, 2026-11-02, Tests/Run-Functional-Tests.ps1, on the distributed DLL DD89BD90
 pickle_suite: 15 features (01 to 14 plus 15 gallery, `@review`, shootGallery only), five pass maps. Green 2026-11-15 on 1.6: full suite English `sans-facultatifs` 34 passed, 11 skipped, 0 failed (b4a3); French (3363); the 11 skips played in their own sets (`avec-offrandes` 5 of 5, `avec-rimmsqol` 4 of 4, `avec-shiftchange` 2 of 2, `sans-odyssey` 2 of 2). One line per run in Docs/runs/pickle.md; kept proofs in Tests/Pickle/Evidence/
 remaining:
+  - "4.g (declareDependencies): STATUS.md lacks the list of dependencies, optional integrations and DLC with date and revision, and the workshop_required_items field (About.xml has Harmony with steamWorkshopUrl; never published, so n/a, not released yet is the expected value). Then replay from 4.h, the work of playTests stays valid"
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
-updated:      2026-11-19, STATUS.md reduced, Docs migrated, BACKLOG.md and Docs/runs/pickle.md created; stage playTests[1.0.0]
-protocols_read_sha: b6dffae1771d4293af91253cfa700331460b42af
+updated:      2026-11-19, replay-audit: back to declareDependencies[1.0.0], 4.g open (dependency record and workshop_required_items missing)
+protocols_read_sha: 76c4b480788e0583cac3f19acc2174d65f16edcb
 ---
 # For the Occasion: status
 
 ## State, 2026-11-19
 
-`playTests[1.0.0]`: the suite is green in English and French on 1.6 (see `pickle_suite`). Open work is in [BACKLOG.md](BACKLOG.md): the stage exit check (`AUDIT.md`), then the 1.7 pass. The Inbox is empty and no run is queued.
+`declareDependencies[1.0.0]` since the replay of 2026-11-19 (4.g open: dependency record and `workshop_required_items`). The `playTests` work stays valid: the suite is green in English and French on 1.6 (see `pickle_suite`). After 4.g: settings, localize, writeTests and playTests are replayed from their proofs, then the 1.7 pass (BACKLOG.md). The Inbox is empty and no run is queued.
 
 Preview: `Art/Preview.config.json` and `Mod/About/Preview.png` redone 2026-11-03 after the `echo.width` and `echo.height` removal, validated by Virginie as rendered (echo robe hem touches the copy line, accepted). Echo `Art/echo-preview.png` validated by Virginie 2026-10-12 (`echo_review_sha`). ModIcon.png is 128 x 128 RGBA.
 
