@@ -12,6 +12,7 @@ Feature: For the Occasion in a new colony
     Given the main menu is open
     And Nelim's Pickle Tools: the new colony's seed is "fto-newcolony"
     When Nelim's Pickle Tools: a new colony is started
+    And Nelim's Pickle Tools: any open message dialog is accepted
     And Nelim's Pickle Tools: the new colony's colonists have landed
     Then Nelim's Pickle Tools: the load of the mod "nelim.fortheoccasion" is clean
     And no errors were logged
