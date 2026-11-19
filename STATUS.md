@@ -9,11 +9,12 @@ remote:       https://github.com/vbardales/Rimworld-For-The-Occasion.git
 local_path:   C:\Users\nelim\Documents\rimworld\ForTheOccasion
 visibility:   public
 detached:     yes
-workflow_stage: declareDependencies[1.0.0]
+workflow_stage: settings[1.0.0]
 licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
 dependencies: declared
+workshop_required_items: n/a, not released yet   # 2026-11-19; the mod was never published (private item 3806761333, 0.1.0 pre-publication only); Harmony 2009463077 is the one mandatory Workshop dependency, to set as a Required item by hand at the end of writeReleaseDocs or at publish
 showcase:     complete
 social_preview_sha256: 930ef19bfe3eede353c76ae3fa97d35c1b10b1970f46bfb586b514c519a7ca3b   # uploaded 2026-10-12 to the GitHub social preview, og:image checked (same bytes); Preview.png redone 2026-11-03, upload owed (BACKLOG.md)
 echo_review_sha: 145cbda5257b78d925577295800b758609e79c4d
@@ -26,17 +27,17 @@ audit_revision: c42b53d
 automated_tests: 37 passed, 0 failed, 0 skipped, 2026-11-02, Tests/Run-Functional-Tests.ps1, on the distributed DLL DD89BD90
 pickle_suite: 15 features (01 to 14 plus 15 gallery, `@review`, shootGallery only), five pass maps. Green 2026-11-15 on 1.6: full suite English `sans-facultatifs` 34 passed, 11 skipped, 0 failed (b4a3); French (3363); the 11 skips played in their own sets (`avec-offrandes` 5 of 5, `avec-rimmsqol` 4 of 4, `avec-shiftchange` 2 of 2, `sans-odyssey` 2 of 2). One line per run in Docs/runs/pickle.md; kept proofs in Tests/Pickle/Evidence/
 remaining:
-  - "4.g (declareDependencies): STATUS.md lacks the list of dependencies, optional integrations and DLC with date and revision, and the workshop_required_items field (About.xml has Harmony with steamWorkshopUrl; never published, so n/a, not released yet is the expected value). Then replay from 4.h, the work of playTests stays valid"
+  - "5.g (settings): STATUS.md has settings_audit complete but no Settings audit section (inventory of the eight options, application moments, versions, commands, results, proofs); write it. 5.e is a question for the owner: dependent controls are hidden without a reason and there is no reset to defaults (BACKLOG.md, optional). Then replay from 5.h"
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
-updated:      2026-11-19, replay-audit: back to declareDependencies[1.0.0], 4.g open (dependency record and workshop_required_items missing)
-protocols_read_sha: 76c4b480788e0583cac3f19acc2174d65f16edcb
+updated:      2026-11-19, replay-audit: 4.g written (Dependencies section, workshop_required_items), stage settings[1.0.0], 5.g open (no Settings audit section)
+protocols_read_sha: 60c3a8c58f3935f53a1e9cd8f5fc08c81602a822
 ---
 # For the Occasion: status
 
 ## State, 2026-11-19
 
-`declareDependencies[1.0.0]` since the replay of 2026-11-19 (4.g open: dependency record and `workshop_required_items`). The `playTests` work stays valid: the suite is green in English and French on 1.6 (see `pickle_suite`). After 4.g: settings, localize, writeTests and playTests are replayed from their proofs, then the 1.7 pass (BACKLOG.md). The Inbox is empty and no run is queued.
+`settings[1.0.0]` since the replay of 2026-11-19 (4.g written, 5.g open: no Settings audit section). The `playTests` work stays valid: the suite is green in English and French on 1.6 (see `pickle_suite`). After 5.g: localize, writeTests and playTests are replayed from their proofs, then the 1.7 pass (BACKLOG.md). The Inbox is empty and no run is queued.
 
 Preview: `Art/Preview.config.json` and `Mod/About/Preview.png` redone 2026-11-03 after the `echo.width` and `echo.height` removal, validated by Virginie as rendered (echo robe hem touches the copy line, accepted). Echo `Art/echo-preview.png` validated by Virginie 2026-10-12 (`echo_review_sha`). ModIcon.png is 128 x 128 RGBA.
 
@@ -45,6 +46,18 @@ French title decided 2026-11-14: "Pour l'occasion" (`Docs/review-names.md`).
 Decision 2026-10-16 (Virginie, go): Shift Change unifies stand owners with every other assignable comp (`ReconcileForeignOwners`, `SyncForeignOwners`) and hides our Set ceremonial owner button, so with both mods the owner is one list assigned through Shift Change; feature 11, TESTING.md and the Steam description follow it (no promise of two distinct owners or of our button).
 
 Local scripts (2026-11-02): `Run-Functional-Tests.ps1` and `Check-Optional-Offerings.ps1` live in `Tests/`; harness 37 of 37. Rows await Audit validation (BACKLOG.md).
+
+## Dependencies, 2026-11-19 (declareDependencies, revision 69772df)
+
+Read in `Mod/About/About.xml`, `Mod/Patches`, `Mod/Defs` and `Source`; `Check-ModBasics` PASS, `Check-OptionalCompat` OK (0 target to declare, 7 already ordered by `loadAfter` or `modDependencies`).
+
+- **Mandatory (`modDependencies`):** Ideology (`Ludeon.RimWorld.Ideology`, DLC, rituals and ideoligions) and Harmony (`brrainz.harmony`, Workshop 2009463077, `steamWorkshopUrl` and `downloadUrl` set; the job-start prefix needs it). Nothing else is required.
+- **DLC:** Ideology required. Odyssey is optional: `Patches/OutfitStand_CeremonialOwner.xml` adds the owner comp to its outfit stands with `MayRequire`, and without it the no-building path runs. Royalty, Biotech and Anomaly are in `loadAfter` only (their robes and ceremonial garb are found by vanilla apparel tags, no reference). `supportedVersions`: 1.6. No `LoadFolders.xml`.
+- **Optional integrations (offering providers, `MayRequire` on list items in `OfferingCategories.xml`, all in `loadAfter`):** Vanilla Brewing Expanded (`VanillaExpanded.VBrewE`), Vanilla Plants Expanded (`VanillaExpanded.VPlantsE` and `_copy`), Perfumes (`romyashi.perfumes`), Anima Expansion (`romyashi.animaexpansion`), RimScent Extended incense (`nelim.rimscent.extended.incenseplus`), Rum and Shanties (`nelim.rumandshanties`). None is required.
+- **`OptionalCompat.xml`:** none shipped. Every guarded target is in `loadAfter`, so the file would be empty (`Check-OptionalCompat` 0 to declare).
+- **Interactions with no declaration:** Shift Change (3783456242) and RIMMSQOL (the hidden MainButtons shortcut) are not referenced by code or patch (only comments name Shift Change); they are played in Pickle (features 11 and 04) and need no `loadAfter`, `MayRequire` or `OptionalCompat` entry.
+- **Animals:** the mod adds none, so the four animal integrations of `ANIMALS.md` do not apply.
+- **Required items on the Workshop page:** `workshop_required_items: n/a, not released yet` (front matter).
 
 ## Translation audit, 2026-10-11: Virginie's review
 
