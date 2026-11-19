@@ -4,7 +4,7 @@ Work not done and known defects of For the Occasion.
 
 ## Open
 
-- Close the `playTests` exit (8.b owner re-read of the changed texts, 8.i new colony scenario, 8.m code review), then file the 1.7 ticket (`tested_1_7: no`; `<li>1.7</li>` only after a green 1.7 run).
+- Close the `playTests` exit (8.i new colony scenario, 8.m code review), then file the 1.7 ticket (`tested_1_7: no`; `<li>1.7</li>` only after a green 1.7 run).
 - `Tests/Pickle/Mod/Pickle/Features/09-without-odyssey.feature` uses steps of ExpansionSteps without `@requires:nelim.pickletools.expansions` (`Check-Steps` REQUIRES line); the feature played green (a255), add the tag.
 - Local scripts: convert to the generated `Tests/Test-Mod.ps1` plus one `Tests/Rule-OwnValues.ps1` shape (`AGENTS.md`, "Local scripts and tests"); needs the `0.1.0` prepublication state (done: Workshop 3806761333, `PublishedFileId.txt` committed) and CI/CD. Rows of `Tests/Run-Functional-Tests.ps1` and `Tests/Check-Optional-Offerings.ps1` await Audit validation.
 - Not covered by any run: feature 15 (gallery, `@review`, `shootGallery`), the 1.7 pass, the floor path in a game really without Odyssey (needs a save without Odyssey or NewColony).
