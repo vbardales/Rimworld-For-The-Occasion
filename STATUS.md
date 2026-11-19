@@ -28,10 +28,10 @@ audit_revision: c42b53d
 automated_tests: 37 passed, 0 failed, 0 skipped, 2026-11-19, Tests/Run-Functional-Tests.ps1, on the distributed DLL 23e4e3f4 (sha256 prefix; rebuilt identical)
 pickle_suite: 15 features (01 to 14 plus 15 gallery, `@review`, shootGallery only), five pass maps. Green 2026-11-15 on 1.6: full suite English `sans-facultatifs` 34 passed, 11 skipped, 0 failed (b4a3); French (3363); the 11 skips played in their own sets (`avec-offrandes` 5 of 5, `avec-rimmsqol` 4 of 4, `avec-shiftchange` 2 of 2, `sans-odyssey` 2 of 2). One line per run in Docs/runs/pickle.md; kept proofs in Tests/Pickle/Evidence/
 remaining:
-  - "8.i: no scenario starts a new colony (fixture save only): file a NewColony ticket or justify. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
+  - "8.i: ticket 8b30 queued 2026-11-19 (feature 16 new colony, English, pass nouvelle-colonie, tree 0131ac6, EvidenceDir Tests/Pickle/Inbox/new-colony-en): on RUN_DONE read summary.json and junit.xml, triage. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
-updated:      2026-11-19, 8.b validated by Virginie (texts re-read), open in playTests: 8.i new colony, 8.m code review
+updated:      2026-11-19, 8.i ticket 8b30 queued (feature 16 new colony); 8.m code review running
 protocols_read_sha: c5366e853dd3a25a2e9c97cfed1c69ecb0357532
 ---
 # For the Occasion: status
