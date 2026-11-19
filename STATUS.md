@@ -14,6 +14,7 @@ licence:      open
 licence_at:   written from scratch, MIT, sources shipped, and nothing is reused; the wardrobe path was shaped by Shift Change's design document, a named debt, and that mod is MIT
 upstream_mod_remotes: N/A   # original work, nothing forked or based on; not `repo` (this mod's own repo) or `origin` (its git remote)
 dependencies: declared
+ecosystem_line: 1.0   # PiI study of 2026-11-14 (Docs/inventory/ecosystem-steam/ForTheOccasion.md), links block 2026-11-19; the 1.0 line is done
 workshop_required_items: n/a, not released yet   # 2026-11-19; the mod was never published (private item 3806761333, 0.1.0 pre-publication only); Harmony 2009463077 is the one mandatory Workshop dependency, to set as a Required item by hand at the end of writeReleaseDocs or at publish
 showcase:     complete
 social_preview_sha256: 930ef19bfe3eede353c76ae3fa97d35c1b10b1970f46bfb586b514c519a7ca3b   # uploaded 2026-10-12 to the GitHub social preview, og:image checked (same bytes); Preview.png redone 2026-11-03, upload owed (BACKLOG.md)
@@ -31,7 +32,7 @@ remaining:
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-11-19, replay-audit: 4.g written (Dependencies section, workshop_required_items), stage settings[1.0.0], 5.g open (no Settings audit section)
-protocols_read_sha: 60c3a8c58f3935f53a1e9cd8f5fc08c81602a822
+protocols_read_sha: 3791816069262e8ccd25932d115531ab5abc9350
 ---
 # For the Occasion: status
 
