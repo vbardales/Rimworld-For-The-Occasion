@@ -33,7 +33,7 @@ remaining:
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-11-19, 8.i ticket 8b30 queued (feature 16 new colony); 8.m code review running
-protocols_read_sha: c5366e853dd3a25a2e9c97cfed1c69ecb0357532
+protocols_read_sha: 71a58c94f32f6f37133e437e3693fd025c29b48c
 ---
 # For the Occasion: status
 
