@@ -17,4 +17,10 @@ Work not done and known defects of For the Occasion.
 
 ## Known defects
 
-None open. Fixed this stretch: Divert reservation conflict (4e7ead7), test-side timing and raid steps (features 06, 07, 08).
+Found by the code review of 2026-11-19 (Opus sub-agent, all of `Source/` and the gameplay XML), fix owed after ticket 8b30 (the tree stays frozen while it waits), then replay features 06 and 07 and review the diff:
+
+- **D1, confirmed:** `Patch_JobInterception.cs:108-113` calls `CeremonialWardrobe.Undress` when `CanReserveAndReach(stand)` fails. `Undress` swaps the apparel with the stand whenever it is spawned, without checking the pawn is on the same map or can reach it. A colonist who leaves by caravan or pod still in costume gets the street clothes from the stand on the other map; a stand walled in or reserved by a haul does the same on the spot. Fix: in that branch use the no-building path (drop the force-worn flag, keep the record or retry) unless the pawn is at the stand.
+- **D2, plausible:** the return-trip gate (`Patch_JobInterception.cs:102-119`) does not test `IsForbidden`, but the job toils use `FailOnDespawnedNullOrForbidden`: a stand forbidden or taken out of the area after dressing may fail the return trip every 300 ticks. Check `Thing.IsForbidden(pawn)` in the gate.
+- **D3, confirmed, low:** `CeremonialWardrobe.cs:265-276` saves the body tattoo with the face one and `RestoreTattoo` writes both back, so a body tattoo the player changed in between is lost. Fix: restore the face tattoo only.
+
+Fixed earlier: Divert reservation conflict (4e7ead7), test-side timing and raid steps (features 06, 07, 08).

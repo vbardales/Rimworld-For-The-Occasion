@@ -19,6 +19,7 @@ workshop_required_items: n/a, not released yet   # 2026-11-19; the mod was never
 showcase:     complete
 social_preview_sha256: 930ef19bfe3eede353c76ae3fa97d35c1b10b1970f46bfb586b514c519a7ca3b   # uploaded 2026-10-12 to the GitHub social preview, og:image checked (same bytes); Preview.png redone 2026-11-03, upload owed (BACKLOG.md)
 echo_review_sha: 145cbda5257b78d925577295800b758609e79c4d
+code_review_sha: 4282f30985c7c9318d673941bd0cb3570aad22dc   # 2026-11-19, Opus sub-agent review of all Source/ and gameplay XML since the first commit; 3 findings in BACKLOG.md (two confirmed by reading)
 tested_on:    2026-11-15, headless Pickle in the WSL, English and French, tree 8e4b9a3 plus STATUS commits; nothing seen by a person in the Windows game
 workshop:     3806761333, created private by the 0.1.0 pre-publication of 2026-09-23 (Steam creates every item private; its visibility was not checked by this audit). Mod/About/PublishedFileId.txt holds the id and is committed and pushed (0768d4d). The pre-publication is an act, not the prepublished state; the item is neither tested nor public.
 settings_audit: passed   # 2026-11-19: in game by Pickle in English (b4a3) and French (3363), the ten @review captures opened
@@ -28,7 +29,7 @@ audit_revision: c42b53d
 automated_tests: 37 passed, 0 failed, 0 skipped, 2026-11-19, Tests/Run-Functional-Tests.ps1, on the distributed DLL 23e4e3f4 (sha256 prefix; rebuilt identical)
 pickle_suite: 15 features (01 to 14 plus 15 gallery, `@review`, shootGallery only), five pass maps. Green 2026-11-15 on 1.6: full suite English `sans-facultatifs` 34 passed, 11 skipped, 0 failed (b4a3); French (3363); the 11 skips played in their own sets (`avec-offrandes` 5 of 5, `avec-rimmsqol` 4 of 4, `avec-shiftchange` 2 of 2, `sans-odyssey` 2 of 2). One line per run in Docs/runs/pickle.md; kept proofs in Tests/Pickle/Evidence/
 remaining:
-  - "8.i: ticket 8b30 queued 2026-11-19 (feature 16 new colony, English, pass nouvelle-colonie, tree 0131ac6, EvidenceDir Tests/Pickle/Inbox/new-colony-en): on RUN_DONE read summary.json and junit.xml, triage. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
+  - "8.m done 2026-11-19: three findings recorded in BACKLOG.md (Known defects): D1 remote outfit swap when the stand is unreachable or on another map (CONFIRMED, Patch_JobInterception.cs:108-113 and CeremonialWardrobe.Undress), D2 return trip to a forbidden or out-of-area stand may loop (PLAUSIBLE), D3 tattoo restore also reverts the body tattoo (CONFIRMED, low). Fix after ticket 8b30 ends (tree frozen), replay features 06 and 07, review the diff. 8.i: ticket 8b30 queued 2026-11-19 (feature 16 new colony, English, pass nouvelle-colonie, tree 0131ac6, EvidenceDir Tests/Pickle/Inbox/new-colony-en): on RUN_DONE read summary.json and junit.xml, triage. 8.m: no code_review_sha, review since 0.1.0 not done. Then 1.7 pass"
   - see BACKLOG.md
 session:      local_3985f501-9197-4120-a625-646747326435
 updated:      2026-11-19, 8.i ticket 8b30 queued (feature 16 new colony); 8.m code review running
