@@ -1,0 +1,3 @@
+# New colony pass (AUDIT.md 8.i): the game builds its components from nothing. Shared test vocabulary only.
+nelim.pickletools.loadaudit path:PickleTools/LoadAudit/Mod
+nelim.pickletools.newcolony path:PickleTools/NewColony/Mod

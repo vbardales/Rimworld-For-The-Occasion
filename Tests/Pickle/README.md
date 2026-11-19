@@ -70,6 +70,7 @@ language of a pass is fixed at launch, so each language is its own request.
 | With Shift Change | `wsl-deps.avec-shiftchange.map` | `11` | Filter `'11-shift-change'`. |
 | With the optional providers | `wsl-deps.avec-offrandes.map` | `10` | Filter `'10-optional-offerings'`. Vanilla Plants Expanded is not staged, on purpose: it only opens the cider gate, which the XML profiles cover. |
 | Restart | `wsl-deps.sans-facultatifs.map` | `12` then `13` | `-Filter '12-restart-write' -Then '13-restart-read'`, one request, one lock. Never play the writer alone. |
+| New colony | `wsl-deps.nouvelle-colonie.map` | `16` | Filter `'16-new-colony'`, one ticket of its own, `-Extra '-pickle-scenario-timeout=400'`. Played once (AUDIT.md 8.i), never chained. |
 
 The passes with optional mods are a first draft of their maps: the prerequisites of Incense Plus (RimScent and
 its incense framework) and of Anima Expansion (its bunny framework) are named from their `About.xml`, and none
